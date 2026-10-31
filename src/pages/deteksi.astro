@@ -3,7 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import Classifier from '../components/Classifier.astro';
 ---
 
-<Layout title="Deteksi Penyakit Daun Padi AI">
+<Layout title="Deteksi Penyakit Daun Padi AI" includeOnnx={true}>
   <div class="space-y-10">
     <div>
       <div class="flex items-center gap-2">
@@ -86,6 +86,8 @@ import Classifier from '../components/Classifier.astro';
           alt="Diagram Arsitektur Model CNN Color-Aware AgriAlert" 
           loading="lazy"
           decoding="async"
+          width="800"
+          height="450"
           class="max-w-full rounded-lg shadow-sm border border-soil-300 object-contain hover:scale-[1.02] transition-transform duration-300"
         />
         <p class="text-xs text-soil-500 mt-3 text-center">

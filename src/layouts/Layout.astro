@@ -2,9 +2,15 @@
 interface Props {
   title: string;
   description?: string;
+  includeOnnx?: boolean;
 }
 
-const { title, description = "AgriAlert - Sistem Peringatan Dini Pertanian & Deteksi Penyakit Padi Berbasis AI" } = Astro.props;
+const { 
+  title, 
+  description = "AgriAlert - Sistem Peringatan Dini Pertanian & Deteksi Penyakit Padi Berbasis AI On-Device",
+  includeOnnx = false 
+} = Astro.props;
+
 const currentPath = Astro.url.pathname;
 ---
 
@@ -13,18 +19,29 @@ const currentPath = Astro.url.pathname;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#1F3921" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <link rel="icon" type="image/png" href="/images/mascot.png" />
+    <link rel="apple-touch-icon" href="/images/mascot.png" />
+    <link rel="manifest" href="/manifest.json" />
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
     <title>{title} | AgriAlert</title>
 
-    <!-- Preload ONNX Runtime wasm helper -->
-    <script is:inline src="/ort/ort.min.js"></script>
-    <script is:inline>
-      if (window.ort) {
-        window.ort.env.wasm.wasmPaths = "/ort/";
-      }
-    </script>
+    <!-- Load ONNX Runtime only on pages that require AI inference to keep other pages blazing fast -->
+    {includeOnnx && (
+      <>
+        <script is:inline src="/ort/ort.min.js" defer></script>
+        <script is:inline>
+          window.addEventListener('DOMContentLoaded', () => {
+            if (window.ort) {
+              window.ort.env.wasm.wasmPaths = "/ort/";
+            }
+          });
+        </script>
+      </>
+    )}
   </head>
   <body class="min-h-full flex flex-col font-sans selection:bg-agro-200 selection:text-agro-900">
     <!-- Top Navigation Bar -->
@@ -33,7 +50,13 @@ const currentPath = Astro.url.pathname;
         <div class="flex items-center justify-between h-16">
           <!-- Logo & Brand -->
           <a href="/" class="flex items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-harvest-amber rounded-lg px-2 py-1">
-            <img src="/images/mascot.png" alt="AgriAlert Logo" class="w-9 h-9 object-contain drop-shadow" />
+            <img 
+              src="/images/mascot.png" 
+              alt="AgriAlert Logo" 
+              width="36" 
+              height="36" 
+              class="w-9 h-9 object-contain drop-shadow" 
+            />
             <div>
               <span class="text-xl font-bold tracking-tight text-white flex items-center gap-1.5">
                 AgriAlert
@@ -144,7 +167,13 @@ const currentPath = Astro.url.pathname;
     <footer class="mt-auto bg-agro-950 text-agro-200 border-t border-agro-900 py-8 px-4 sm:px-6 lg:px-8">
       <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-xs">
         <div class="flex items-center gap-3">
-          <img src="/images/mascot.png" alt="Logo" class="w-7 h-7 object-contain opacity-80" />
+          <img 
+            src="/images/mascot.png" 
+            alt="Logo AgriAlert" 
+            width="32" 
+            height="32" 
+            class="w-8 h-8 object-contain opacity-80" 
+          />
           <div>
             <p class="font-bold text-white text-sm">AgriAlert Indonesia</p>
             <p class="text-agro-400">Prakiraan OPT Pangan Ditjen Tanaman Pangan Kementan RI & BMKG</p>
@@ -164,5 +193,16 @@ const currentPath = Astro.url.pathname;
         </p>
       </div>
     </footer>
+
+    <!-- Offline Service Worker Registration -->
+    <script is:inline>
+      if ('serviceWorker' in navigator && window.location.protocol.startsWith('http')) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js').catch((err) => {
+            console.log('SW registration note:', err);
+          });
+        });
+      }
+    </script>
   </body>
 </html>
