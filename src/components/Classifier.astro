@@ -11,7 +11,7 @@ import { url } from '../utils/paths';
         <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold bg-agro-700 text-agro-200 border border-agro-600">
           Model AI CNN AgriWarn Asli
         </span>
-        <span class="text-xs text-agro-300 font-mono">Resolusi 128×128 (Keras Native)</span>
+        <span class="text-xs text-agro-300 font-mono">Resolusi 224×224 (AgriWarn Native)</span>
       </div>
       <h2 class="text-xl font-bold mt-1 tracking-tight">Deteksi Penyakit Daun Padi</h2>
       <p class="text-xs text-agro-200 mt-0.5">Unggah foto daun atau gunakan kamera langsung di pematang sawah</p>
@@ -571,10 +571,12 @@ import { url } from '../utils/paths';
     const compScanImg = document.getElementById('comp-scan-img') as HTMLImageElement;
     if (compScanImg) compScanImg.src = imgElement.src;
 
-    // Draw and resize to 128x128 (Native resolution of Model_CNN_Agriwarn_Final)
-    const TARGET_SIZE = 128;
+    // Draw and resize to 224x224 (Native resolution of model_agriwarn.onnx)
+    const TARGET_SIZE = 224;
     canvas.width = TARGET_SIZE;
     canvas.height = TARGET_SIZE;
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = 'high';
     ctx.drawImage(imgElement, 0, 0, TARGET_SIZE, TARGET_SIZE);
     const imgData = ctx.getImageData(0, 0, TARGET_SIZE, TARGET_SIZE);
 
@@ -595,7 +597,7 @@ import { url } from '../utils/paths';
       return;
     }
 
-    // 2. Prepare float32 tensor [1, 128, 128, 3] with raw 0..255 RGB (rescaling is handled by model graph)
+    // 2. Prepare float32 tensor [1, 224, 224, 3] with raw 0..255 RGB (rescaling is handled inside the ONNX model graph)
     const floatData = new Float32Array(1 * TARGET_SIZE * TARGET_SIZE * 3);
     let p = 0;
     for (let i = 0; i < imgData.data.length; i += 4) {
