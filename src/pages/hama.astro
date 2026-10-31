@@ -37,15 +37,33 @@ const hamaImageMap: Record<string, { primary: string; secondary?: string; second
         Katalog Hama & Penyakit Padi Utama
       </h1>
       <p class="text-xs sm:text-sm text-soil-600 mt-1">
-        Rujukan komprehensif morfologi, gejala serangan, foto lapangan resolusi tinggi, dan ambang batas pengendalian ekonomi.
+        Rujukan komprehensif morfologi, gejala serangan, foto lapangan resolusi tinggi, dan ambang batas pengendalian ekonomi terpadu.
       </p>
     </div>
 
-    <!-- Filter Toggle -->
-    <div class="flex flex-wrap items-center gap-2 text-xs font-semibold">
-      <button type="button" class="px-4 py-2 rounded-lg bg-agro-800 text-white shadow-xs opt-filter-btn" data-filter="all">Semua OPT (11)</button>
-      <button type="button" class="px-4 py-2 rounded-lg bg-white text-soil-700 border border-soil-300 hover:border-agro-600 opt-filter-btn" data-filter="hama">Hama (Serangga & Vertebrata)</button>
-      <button type="button" class="px-4 py-2 rounded-lg bg-white text-soil-700 border border-soil-300 hover:border-agro-600 opt-filter-btn" data-filter="penyakit">Penyakit (Jamur, Bakteri, Virus)</button>
+    <!-- Search Bar & Filter Controls -->
+    <div class="bg-white p-4 rounded-2xl border border-soil-200 shadow-xs space-y-3">
+      <div class="relative">
+        <input 
+          type="text" 
+          id="pest-search-input" 
+          placeholder="Cari hama atau penyakit (contoh: wereng, blas, sundep, bakteri, bercak)..." 
+          class="w-full text-xs sm:text-sm pl-9 pr-4 py-2.5 rounded-xl border border-soil-300 focus:outline-none focus:ring-2 focus:ring-agro-600 bg-soil-50/50"
+        />
+        <svg class="w-4 h-4 text-soil-400 absolute left-3 top-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+      </div>
+
+      <!-- Filter Category Buttons -->
+      <div class="flex flex-wrap items-center justify-between gap-2 text-xs font-semibold pt-1">
+        <div class="flex flex-wrap items-center gap-2">
+          <button type="button" class="cursor-pointer px-4 py-2 rounded-lg bg-agro-800 text-white shadow-xs opt-filter-btn" data-filter="all">Semua OPT (11)</button>
+          <button type="button" class="cursor-pointer px-4 py-2 rounded-lg bg-white text-soil-700 border border-soil-300 hover:border-agro-600 opt-filter-btn" data-filter="hama">Hama (Serangga & Vertebrata)</button>
+          <button type="button" class="cursor-pointer px-4 py-2 rounded-lg bg-white text-soil-700 border border-soil-300 hover:border-agro-600 opt-filter-btn" data-filter="penyakit">Penyakit (Jamur, Bakteri, Virus)</button>
+        </div>
+        <span id="pest-count-label" class="text-xs text-soil-500 font-normal">Menampilkan 11 OPT</span>
+      </div>
     </div>
 
     <!-- Catalog Cards Grid -->
@@ -56,6 +74,7 @@ const hamaImageMap: Record<string, { primary: string; secondary?: string; second
           <article 
             id={opt.id} 
             data-type={opt.tipe}
+            data-keywords={`${opt.nama_lokal.toLowerCase()} ${opt.nama_latin.toLowerCase()} ${opt.deskripsi.toLowerCase()} ${opt.gejala.toLowerCase()} ${opt.tipe.toLowerCase()}`}
             class="opt-card bg-white rounded-2xl border border-soil-200 overflow-hidden shadow-xs hover:border-agro-500 hover:shadow-md transition-all flex flex-col justify-between"
           >
             <div>
@@ -79,7 +98,7 @@ const hamaImageMap: Record<string, { primary: string; secondary?: string; second
                 <button 
                   type="button" 
                   aria-label="Perbesar Foto"
-                  class="absolute bottom-3 right-3 p-1.5 rounded-lg bg-black/60 text-white hover:bg-black/80 transition-colors opacity-80 hover:opacity-100 pest-zoom-btn"
+                  class="cursor-pointer absolute bottom-3 right-3 p-1.5 rounded-lg bg-black/60 text-white hover:bg-black/80 transition-colors opacity-80 hover:opacity-100 pest-zoom-btn"
                   data-src={imgData.primary}
                   data-title={opt.nama_lokal}
                 >
@@ -93,7 +112,7 @@ const hamaImageMap: Record<string, { primary: string; secondary?: string; second
                   <div class="absolute bottom-3 left-3 flex gap-1 bg-black/70 p-1 rounded-lg text-[10px] font-semibold text-white">
                     <button 
                       type="button" 
-                      class="px-2 py-0.5 rounded bg-agro-700 pbp-phase-btn active"
+                      class="px-2 py-0.5 rounded bg-agro-700 pbp-phase-btn active cursor-pointer"
                       data-target={`img-${opt.id}`}
                       data-src={imgData.primary}
                     >
@@ -101,7 +120,7 @@ const hamaImageMap: Record<string, { primary: string; secondary?: string; second
                     </button>
                     <button 
                       type="button" 
-                      class="px-2 py-0.5 rounded hover:bg-soil-800 pbp-phase-btn"
+                      class="px-2 py-0.5 rounded hover:bg-soil-800 pbp-phase-btn cursor-pointer"
                       data-target={`img-${opt.id}`}
                       data-src={imgData.secondary}
                     >
@@ -140,17 +159,29 @@ const hamaImageMap: Record<string, { primary: string; secondary?: string; second
               </div>
             </div>
 
-            <div class="p-5 pt-0">
+            <div class="p-5 pt-0 space-y-2">
               <a 
                 href={url(`/tanibot?opt=${opt.id}`)} 
-                class="w-full inline-flex items-center justify-center gap-1.5 py-2.5 px-4 rounded-xl bg-soil-100 hover:bg-agro-800 hover:text-white text-soil-800 text-xs font-semibold transition-colors border border-soil-200 shadow-xs"
+                class="w-full inline-flex items-center justify-center gap-1.5 py-2.5 px-4 rounded-xl bg-agro-800 hover:bg-agro-900 text-white text-xs font-semibold transition-colors shadow-xs"
               >
-                Lihat Panduan Dosis & Pengendalian &rarr;
+                Konsultasikan Hama Ini ke TaniBot &rarr;
+              </a>
+
+              <a 
+                href={url(`/pengaduan?opt=${encodeURIComponent(opt.nama_lokal)}`)} 
+                class="w-full inline-flex items-center justify-center gap-1.5 py-2 px-4 rounded-xl bg-soil-100 hover:bg-soil-200 text-soil-700 text-xs font-medium transition-colors border border-soil-200"
+              >
+                Buat Laporan Pengaduan &rarr;
               </a>
             </div>
           </article>
         );
       })}
+    </div>
+
+    <!-- Empty search result note -->
+    <div id="no-pest-found" class="hidden text-center py-12 bg-white rounded-2xl border border-soil-200">
+      <p class="text-soil-500 text-sm">Tidak ditemukan OPT yang cocok dengan kata kunci pencarian Anda.</p>
     </div>
   </div>
 
@@ -159,7 +190,7 @@ const hamaImageMap: Record<string, { primary: string; secondary?: string; second
     <div class="relative max-w-4xl w-full bg-soil-950 rounded-2xl overflow-hidden shadow-2xl border border-soil-800 flex flex-col items-center">
       <div class="w-full p-4 bg-soil-900/90 text-white flex items-center justify-between border-b border-soil-800">
         <h4 id="lightbox-title" class="font-bold text-sm text-agro-100"></h4>
-        <button type="button" id="lightbox-close-btn" class="p-1 rounded-lg text-soil-400 hover:text-white hover:bg-soil-800 transition-colors">
+        <button type="button" id="lightbox-close-btn" class="cursor-pointer p-1 rounded-lg text-soil-400 hover:text-white hover:bg-soil-800 transition-colors">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
           </svg>
@@ -173,30 +204,61 @@ const hamaImageMap: Record<string, { primary: string; secondary?: string; second
 </Layout>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    // Filter buttons logic
+  function initHamaCatalog() {
     const filterBtns = document.querySelectorAll('.opt-filter-btn');
-    const cards = document.querySelectorAll('.opt-card');
+    const cards = document.querySelectorAll<HTMLElement>('.opt-card');
+    const searchInput = document.getElementById('pest-search-input') as HTMLInputElement;
+    const countLabel = document.getElementById('pest-count-label');
+    const noResult = document.getElementById('no-pest-found');
+
+    let currentFilter = 'all';
+
+    function applyFilterAndSearch() {
+      const q = (searchInput?.value || '').trim().toLowerCase();
+      let visibleCount = 0;
+
+      cards.forEach(card => {
+        const type = card.getAttribute('data-type') || '';
+        const keywords = card.getAttribute('data-keywords') || '';
+
+        const matchesType = (currentFilter === 'all' || type === currentFilter);
+        const matchesSearch = !q || keywords.includes(q);
+
+        if (matchesType && matchesSearch) {
+          card.style.display = 'flex';
+          visibleCount++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      if (countLabel) {
+        countLabel.textContent = `Menampilkan ${visibleCount} dari ${cards.length} OPT`;
+      }
+
+      if (noResult) {
+        if (visibleCount === 0) {
+          noResult.classList.remove('hidden');
+        } else {
+          noResult.classList.add('hidden');
+        }
+      }
+    }
 
     filterBtns.forEach(btn => {
       btn.addEventListener('click', () => {
-        const targetFilter = btn.getAttribute('data-filter');
+        currentFilter = btn.getAttribute('data-filter') || 'all';
 
         filterBtns.forEach(b => {
-          b.className = "px-4 py-2 rounded-lg bg-white text-soil-700 border border-soil-300 hover:border-agro-600 opt-filter-btn";
+          b.className = "cursor-pointer px-4 py-2 rounded-lg bg-white text-soil-700 border border-soil-300 hover:border-agro-600 opt-filter-btn";
         });
-        btn.className = "px-4 py-2 rounded-lg bg-agro-800 text-white shadow-xs opt-filter-btn";
+        btn.className = "cursor-pointer px-4 py-2 rounded-lg bg-agro-800 text-white shadow-xs opt-filter-btn";
 
-        cards.forEach(card => {
-          const type = card.getAttribute('data-type');
-          if (targetFilter === 'all' || type === targetFilter) {
-            (card as HTMLElement).style.display = 'flex';
-          } else {
-            (card as HTMLElement).style.display = 'none';
-          }
-        });
+        applyFilterAndSearch();
       });
     });
+
+    searchInput?.addEventListener('input', applyFilterAndSearch);
 
     // PBP Sundep / Beluk dual image toggle
     const pbpBtns = document.querySelectorAll('.pbp-phase-btn');
@@ -268,5 +330,11 @@ const hamaImageMap: Record<string, { primary: string; secondary?: string; second
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') closeLightbox();
     });
-  });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initHamaCatalog);
+  } else {
+    initHamaCatalog();
+  }
 </script>

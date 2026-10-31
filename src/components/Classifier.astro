@@ -349,16 +349,28 @@ import { url } from '../utils/paths';
           <p id="result-rekomendasi" class="text-sm text-soil-800 leading-relaxed"></p>
 
           <div class="mt-4 pt-3 border-t border-soil-200/80 flex flex-wrap items-center justify-between gap-3">
-            <a 
-              id="btn-goto-tanibot" 
-              href={url('/tanibot')} 
-              class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-agro-800 hover:bg-agro-900 text-white text-xs font-semibold transition-colors shadow-sm"
-            >
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
-              </svg>
-              Konsultasikan ke TaniBot Sekarang
-            </a>
+            <div class="flex flex-wrap items-center gap-2">
+              <a 
+                id="btn-goto-tanibot" 
+                href={url('/tanibot')} 
+                class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-agro-800 hover:bg-agro-900 text-white text-xs font-semibold transition-colors shadow-sm"
+              >
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+                </svg>
+                Konsultasikan ke TaniBot
+              </a>
+              <a 
+                id="btn-goto-pengaduan" 
+                href={url('/pengaduan')} 
+                class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-semibold transition-colors shadow-sm"
+              >
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                Buat Laporan Pengaduan
+              </a>
+            </div>
             <span class="text-[11px] text-soil-500">Rujukan: BBPOPT Ditjen Tanaman Pangan</span>
           </div>
         </div>
@@ -733,6 +745,14 @@ import { url } from '../utils/paths';
       btnTanibot.href = `${cleanBase}tanibot?opt=${optParam}`;
     }
 
+    const btnPengaduan = document.getElementById('btn-goto-pengaduan') as HTMLAnchorElement;
+    if (btnPengaduan) {
+      const optName = NAMA_INDO[res.kelas] || res.kelas;
+      const confPct = (res.confidence * 100).toFixed(1);
+      const cleanBase = getCleanBase();
+      btnPengaduan.href = `${cleanBase}pengaduan?opt=${encodeURIComponent(optName)}&desc=${encodeURIComponent(`Terdeteksi oleh AI AgriAlert dengan keyakinan ${confPct}%. Gejala tampak pada sampel daun.`)}`;
+    }
+
     // Populate Probabilities Breakdown
     const container = document.getElementById('prob-breakdown-container');
     if (container && res.probs.length === NAMA_KELAS.length) {
@@ -753,8 +773,7 @@ import { url } from '../utils/paths';
     }
   }
 
-  // Event Listeners Setup
-  document.addEventListener('DOMContentLoaded', () => {
+  function initClassifier() {
     initModel();
 
     const cameraFileInput = document.getElementById('camera-file-input') as HTMLInputElement;
@@ -934,5 +953,11 @@ import { url } from '../utils/paths';
         }
       });
     });
-  });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initClassifier);
+  } else {
+    initClassifier();
+  }
 </script>
