@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Classifier from '../components/Classifier.astro';
+import { url } from '../utils/paths';
 ---
 
 <Layout title="Deteksi Penyakit Daun Padi AI" includeOnnx={true}>
@@ -82,7 +83,7 @@ import Classifier from '../components/Classifier.astro';
 
       <div class="bg-soil-50 p-4 rounded-xl border border-soil-200 flex flex-col items-center">
         <img 
-          src="/images/arsitektur_color_aware_v3.png" 
+          src={url('/images/arsitektur_color_aware_v3.png')} 
           alt="Diagram Arsitektur Model CNN Color-Aware AgriAlert" 
           loading="lazy"
           decoding="async"

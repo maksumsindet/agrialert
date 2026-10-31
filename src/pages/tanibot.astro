@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import TaniBotChat from '../components/TaniBotChat.astro';
+import { url } from '../utils/paths';
 ---
 
 <Layout title="TaniBot - Asisten Cerdas Pengendalian OPT">
@@ -23,16 +24,16 @@ import TaniBotChat from '../components/TaniBotChat.astro';
 
       <!-- Quick Topic Badges -->
       <div class="flex flex-wrap items-center gap-2">
-        <a href="/tanibot?opt=blas" class="px-2.5 py-1 rounded-md text-xs font-semibold bg-white border border-soil-300 text-soil-700 hover:border-agro-700 hover:text-agro-800 transition-colors">
+        <a href={url('/tanibot?opt=blas')} class="px-2.5 py-1 rounded-md text-xs font-semibold bg-white border border-soil-300 text-soil-700 hover:border-agro-700 hover:text-agro-800 transition-colors">
           🌾 Blas Daun
         </a>
-        <a href="/tanibot?opt=hdb" class="px-2.5 py-1 rounded-md text-xs font-semibold bg-white border border-soil-300 text-soil-700 hover:border-agro-700 hover:text-agro-800 transition-colors">
+        <a href={url('/tanibot?opt=hdb')} class="px-2.5 py-1 rounded-md text-xs font-semibold bg-white border border-soil-300 text-soil-700 hover:border-agro-700 hover:text-agro-800 transition-colors">
           🌿 Hawar Daun (HDB)
         </a>
-        <a href="/tanibot?opt=wbc" class="px-2.5 py-1 rounded-md text-xs font-semibold bg-white border border-soil-300 text-soil-700 hover:border-agro-700 hover:text-agro-800 transition-colors">
+        <a href={url('/tanibot?opt=wbc')} class="px-2.5 py-1 rounded-md text-xs font-semibold bg-white border border-soil-300 text-soil-700 hover:border-agro-700 hover:text-agro-800 transition-colors">
           🦗 Wereng Coklat
         </a>
-        <a href="/tanibot?opt=tikus" class="px-2.5 py-1 rounded-md text-xs font-semibold bg-white border border-soil-300 text-soil-700 hover:border-agro-700 hover:text-agro-800 transition-colors">
+        <a href={url('/tanibot?opt=tikus')} class="px-2.5 py-1 rounded-md text-xs font-semibold bg-white border border-soil-300 text-soil-700 hover:border-agro-700 hover:text-agro-800 transition-colors">
           🐀 Tikus Sawah
         </a>
       </div>
@@ -42,4 +43,3 @@ import TaniBotChat from '../components/TaniBotChat.astro';
     <TaniBotChat />
   </div>
 </Layout>
-

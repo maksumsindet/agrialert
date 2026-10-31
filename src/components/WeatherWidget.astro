@@ -1,5 +1,6 @@
 ---
 // WeatherWidget.astro - Live Geolocation & BMKG-calibrated Agricultural Weather
+import { url } from '../utils/paths';
 ---
 
 <div class="bg-white rounded-2xl shadow-sm border border-soil-200 overflow-hidden" id="weather-widget">
@@ -7,7 +8,7 @@
   <div class="p-5 bg-gradient-to-r from-soil-900 to-soil-800 text-white flex flex-wrap items-center justify-between gap-4">
     <div class="flex items-center gap-3">
       <div class="w-11 h-11 rounded-xl bg-soil-800/90 border border-soil-700 flex items-center justify-center p-1.5 shadow-inner">
-        <img src="/images/gps.png" alt="GPS" class="w-7 h-7 object-contain" />
+        <img src={url('/images/gps.png')} alt="GPS" width="28" height="28" class="w-7 h-7 object-contain" />
       </div>
       <div>
         <div class="flex items-center gap-2">
@@ -15,7 +16,7 @@
           <span id="gps-status-pill" class="text-[10px] font-bold px-2 py-0.5 rounded bg-agro-800 text-agro-200 border border-agro-700">GPS Standar</span>
         </div>
         <div class="flex items-center gap-2 text-xs text-soil-300 font-mono mt-0.5">
-          <img src="/images/maps.png" alt="Peta" class="w-3.5 h-3.5 object-contain opacity-80" />
+          <img src={url('/images/maps.png')} alt="Peta" width="14" height="14" class="w-3.5 h-3.5 object-contain opacity-80" />
           <span id="lokasi-koordinat">-6.3034° LS, 107.3069° BT &bull; Elevasi 18m dpl</span>
         </div>
       </div>
@@ -31,7 +32,7 @@
         <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
         <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
       </svg>
-      <img src="/images/gps.png" id="gps-icon" alt="GPS Icon" class="w-4 h-4 object-contain brightness-200" />
+      <img src={url('/images/gps.png')} id="gps-icon" alt="GPS Icon" width="16" height="16" class="w-4 h-4 object-contain brightness-200" />
       <span id="gps-btn-text">Perbarui dengan Lokasi Sawah Saya</span>
     </button>
   </div>
@@ -45,7 +46,7 @@
           <p id="cuaca-suhu" class="text-2xl font-black text-soil-900 mt-1">32.4<span class="text-sm font-semibold text-soil-500">°C</span></p>
           <span class="text-[11px] text-soil-500 mt-0.5 block">Ideal padi: 24°–32°C</span>
         </div>
-        <img src="/images/sun.png" alt="Matahari" class="w-10 h-10 object-contain drop-shadow-sm opacity-90" />
+        <img src={url('/images/sun.png')} alt="Matahari" width="40" height="40" class="w-10 h-10 object-contain drop-shadow-sm opacity-90" />
       </div>
     </div>
 

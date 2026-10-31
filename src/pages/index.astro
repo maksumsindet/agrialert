@@ -2,16 +2,17 @@
 import Layout from '../layouts/Layout.astro';
 import WeatherWidget from '../components/WeatherWidget.astro';
 import tanibotData from '../data/tanibot_data_v2.json';
+import { url } from '../utils/paths';
 
 const pests = tanibotData.opt.slice(0, 6);
 
 const hamaImages: Record<string, string> = {
-  'pbp': '/assets/hama/penggerek_batang_beluk.jpg',
-  'wbc': '/assets/hama/wereng_batang_coklat.jpg',
-  'tikus': '/assets/hama/tikus_sawah.jpg',
-  'blas': '/assets/hama/blas_daun.jpg',
-  'hdb': '/assets/hama/hdb.jpg',
-  'brown_spot': '/assets/hama/bercak_cokelat.jpg'
+  'pbp': url('/assets/hama/penggerek_batang_beluk.jpg'),
+  'wbc': url('/assets/hama/wereng_batang_coklat.jpg'),
+  'tikus': url('/assets/hama/tikus_sawah.jpg'),
+  'blas': url('/assets/hama/blas_daun.jpg'),
+  'hdb': url('/assets/hama/hdb.jpg'),
+  'brown_spot': url('/assets/hama/bercak_cokelat.jpg')
 };
 ---
 
@@ -37,7 +38,7 @@ const hamaImages: Record<string, string> = {
 
           <div class="pt-2 flex flex-wrap items-center gap-3">
             <a 
-              href="/deteksi" 
+              href={url('/deteksi')} 
               class="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl bg-harvest-gold hover:bg-harvest-dark text-white font-bold text-sm shadow-md hover:shadow-lg transition-all focus:outline-none focus:ring-2 focus:ring-harvest-amber"
             >
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -48,7 +49,7 @@ const hamaImages: Record<string, string> = {
             </a>
 
             <a 
-              href="/tanibot" 
+              href={url('/tanibot')} 
               class="inline-flex items-center gap-2 px-5 py-3.5 rounded-xl bg-agro-800/80 hover:bg-agro-700 text-white font-semibold text-sm border border-agro-700 transition-all shadow-sm"
             >
               <svg class="w-5 h-5 text-agro-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -86,7 +87,7 @@ const hamaImages: Record<string, string> = {
           <div class="relative w-full max-w-sm rounded-2xl bg-gradient-to-b from-agro-800/90 to-agro-900/90 p-6 border border-agro-700/80 shadow-xl backdrop-blur-sm">
             <div class="flex items-center justify-between mb-4 pb-3 border-b border-agro-700/60">
               <div class="flex items-center gap-2">
-                <img src="/images/gps.png" alt="GPS" class="w-5 h-5 object-contain" />
+                <img src={url('/images/gps.png')} alt="GPS" width="20" height="20" class="w-5 h-5 object-contain" />
                 <span class="text-xs font-bold text-agro-100 uppercase tracking-wider">Sistem Siaga Lapangan</span>
               </div>
               <span class="flex items-center gap-1.5 text-[11px] font-semibold text-emerald-300 bg-emerald-950/80 border border-emerald-700 px-2 py-0.5 rounded-full">
@@ -99,21 +100,23 @@ const hamaImages: Record<string, string> = {
             <div class="relative flex justify-center py-2">
               <div class="absolute inset-0 bg-agro-700/20 rounded-full blur-2xl"></div>
               <img 
-                src="/images/mascot.png" 
+                src={url('/images/mascot.png')} 
                 alt="Maskot AgriAlert" 
+                width="224"
+                height="224"
                 class="relative w-48 h-48 sm:w-56 sm:h-56 object-contain drop-shadow-2xl hover:scale-105 transition-transform duration-300"
               />
             </div>
 
             <div class="mt-4 p-3 rounded-xl bg-agro-950/70 border border-agro-800/80 text-xs text-agro-200 flex items-center justify-between">
               <div class="flex items-center gap-2.5">
-                <img src="/images/sun.png" alt="Cuaca" class="w-7 h-7 object-contain" />
+                <img src={url('/images/sun.png')} alt="Cuaca" width="28" height="28" class="w-7 h-7 object-contain" />
                 <div>
                   <p class="font-bold text-white text-xs">Peringatan Agroklimat</p>
                   <p class="text-[11px] text-agro-300">Pola Tanam MT-1 Rendengan</p>
                 </div>
               </div>
-              <a href="/cuaca" class="text-[11px] font-bold text-harvest-amber hover:text-white transition-colors">
+              <a href={url('/cuaca')} class="text-[11px] font-bold text-harvest-amber hover:text-white transition-colors">
                 Detail &rarr;
               </a>
             </div>
@@ -129,7 +132,7 @@ const hamaImages: Record<string, string> = {
           <h2 class="text-lg font-bold text-soil-900 tracking-tight">Kondisi Cuaca & Kalender Tanam</h2>
           <p class="text-xs text-soil-500">Kalkulasi mikro agroklimat berdasarkan titik lokasi GPS sawah</p>
         </div>
-        <a href="/cuaca" class="text-xs text-agro-700 hover:text-agro-900 font-semibold flex items-center gap-1">
+        <a href={url('/cuaca')} class="text-xs text-agro-700 hover:text-agro-900 font-semibold flex items-center gap-1">
           Analisis Iklim Lengkap &rarr;
         </a>
       </div>
@@ -148,7 +151,7 @@ const hamaImages: Record<string, string> = {
         <p class="text-xs text-soil-600 leading-relaxed">
           Mencegah salah klasifikasi dari foto non-tanaman dengan memverifikasi spektrum warna hijau klorofil, kuning blast, lesi cokelat, dan desaturasi hawar pelepah.
         </p>
-        <a href="/deteksi" class="inline-block text-xs font-bold text-agro-700 hover:text-agro-900">Uji Deteksi Kamera &rarr;</a>
+        <a href={url('/deteksi')} class="inline-block text-xs font-bold text-agro-700 hover:text-agro-900">Uji Deteksi Kamera &rarr;</a>
       </div>
 
       <div class="p-6 rounded-2xl bg-white border border-soil-200 shadow-sm space-y-3 hover:border-agro-500 transition-colors">
@@ -161,7 +164,7 @@ const hamaImages: Record<string, string> = {
         <p class="text-xs text-soil-600 leading-relaxed">
           Pemantauan pertumbuhan padi nasional via indeks vegetasi optik NDVI dan radar gelombang mikro SAR VH/VV yang mampu menembus awan tebal.
         </p>
-        <a href="/cuaca" class="inline-block text-xs font-bold text-agro-700 hover:text-agro-900">Buka Grafik Satelit &rarr;</a>
+        <a href={url('/cuaca')} class="inline-block text-xs font-bold text-agro-700 hover:text-agro-900">Buka Grafik Satelit &rarr;</a>
       </div>
 
       <div class="p-6 rounded-2xl bg-white border border-soil-200 shadow-sm space-y-3 hover:border-agro-500 transition-colors">
@@ -174,7 +177,7 @@ const hamaImages: Record<string, string> = {
         <p class="text-xs text-soil-600 leading-relaxed">
           Panduan dosis pemupukan dan penanganan penyakit berfase (pra-tanam, pesemaian, pertanaman) dari buku prakiraan resmi BBPOPT Ditjen Tanaman Pangan.
         </p>
-        <a href="/tanibot" class="inline-block text-xs font-bold text-agro-700 hover:text-agro-900">Konsultasi Mandiri &rarr;</a>
+        <a href={url('/tanibot')} class="inline-block text-xs font-bold text-agro-700 hover:text-agro-900">Konsultasi Mandiri &rarr;</a>
       </div>
     </section>
 
@@ -185,7 +188,7 @@ const hamaImages: Record<string, string> = {
           <h2 class="text-lg font-bold text-soil-900 tracking-tight">Katalog Hama & Penyakit Utama</h2>
           <p class="text-xs text-soil-500">Mengenali gejala dini untuk mencegah kerugian panen</p>
         </div>
-        <a href="/hama" class="text-xs font-bold text-agro-700 hover:text-agro-900">
+        <a href={url('/hama')} class="text-xs font-bold text-agro-700 hover:text-agro-900">
           Lihat Semua 11 OPT &rarr;
         </a>
       </div>
@@ -193,12 +196,12 @@ const hamaImages: Record<string, string> = {
       <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
         {pests.map((opt) => (
           <a 
-            href={`/hama#${opt.id}`} 
+            href={url(`/hama#${opt.id}`)} 
             class="group bg-white rounded-xl border border-soil-200 overflow-hidden shadow-xs hover:border-agro-600 hover:shadow-md transition-all flex flex-col justify-between"
           >
             <div class="relative w-full aspect-[4/3] bg-soil-100 overflow-hidden">
               <img 
-                src={hamaImages[opt.id] || '/assets/hama/sehat.jpg'} 
+                src={hamaImages[opt.id] || url('/assets/hama/sehat.jpg')} 
                 alt={opt.nama_lokal} 
                 loading="lazy"
                 decoding="async"

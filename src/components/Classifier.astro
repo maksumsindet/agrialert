@@ -1,5 +1,6 @@
 ---
 // Classifier.astro - In-browser Native ONNX Rice Leaf Disease Classification
+import { url } from '../utils/paths';
 ---
 
 <div class="bg-white rounded-2xl shadow-sm border border-soil-200 overflow-hidden" id="classifier-root">
@@ -79,66 +80,66 @@
         <div class="grid grid-cols-3 gap-2">
           <button 
             type="button" 
-            data-sample="/assets/hama/blas_daun.jpg" 
+            data-sample={url('/assets/hama/blas_daun.jpg')} 
             class="sample-btn text-left p-1.5 rounded-lg border border-soil-200 bg-white hover:border-agro-600 hover:bg-agro-50 transition-all text-[11px] group"
           >
             <div class="aspect-[4/3] rounded overflow-hidden mb-1">
-              <img src="/assets/hama/blas_daun.jpg" alt="Blas" class="w-full h-full object-cover group-hover:scale-105 transition-transform" />
+              <img src={url('/assets/hama/blas_daun.jpg')} alt="Blas" class="w-full h-full object-cover group-hover:scale-105 transition-transform" />
             </div>
             <span class="font-bold text-soil-800 group-hover:text-agro-800 block truncate">Blas Daun</span>
           </button>
 
           <button 
             type="button" 
-            data-sample="/assets/hama/hdb.jpg" 
+            data-sample={url('/assets/hama/hdb.jpg')} 
             class="sample-btn text-left p-1.5 rounded-lg border border-soil-200 bg-white hover:border-agro-600 hover:bg-agro-50 transition-all text-[11px] group"
           >
             <div class="aspect-[4/3] rounded overflow-hidden mb-1">
-              <img src="/assets/hama/hdb.jpg" alt="HDB" class="w-full h-full object-cover group-hover:scale-105 transition-transform" />
+              <img src={url('/assets/hama/hdb.jpg')} alt="HDB" class="w-full h-full object-cover group-hover:scale-105 transition-transform" />
             </div>
             <span class="font-bold text-soil-800 group-hover:text-agro-800 block truncate">HDB / Kresek</span>
           </button>
 
           <button 
             type="button" 
-            data-sample="/assets/hama/sehat.jpg" 
+            data-sample={url('/assets/hama/sehat.jpg')} 
             class="sample-btn text-left p-1.5 rounded-lg border border-soil-200 bg-white hover:border-agro-600 hover:bg-agro-50 transition-all text-[11px] group"
           >
             <div class="aspect-[4/3] rounded overflow-hidden mb-1">
-              <img src="/assets/hama/sehat.jpg" alt="Sehat" class="w-full h-full object-cover group-hover:scale-105 transition-transform" />
+              <img src={url('/assets/hama/sehat.jpg')} alt="Sehat" class="w-full h-full object-cover group-hover:scale-105 transition-transform" />
             </div>
             <span class="font-bold text-soil-800 group-hover:text-agro-800 block truncate">Daun Sehat</span>
           </button>
 
           <button 
             type="button" 
-            data-sample="/assets/hama/bercak_cokelat.jpg" 
+            data-sample={url('/assets/hama/bercak_cokelat.jpg')} 
             class="sample-btn text-left p-1.5 rounded-lg border border-soil-200 bg-white hover:border-agro-600 hover:bg-agro-50 transition-all text-[11px] group"
           >
             <div class="aspect-[4/3] rounded overflow-hidden mb-1">
-              <img src="/assets/hama/bercak_cokelat.jpg" alt="Bercak Cokelat" class="w-full h-full object-cover group-hover:scale-105 transition-transform" />
+              <img src={url('/assets/hama/bercak_cokelat.jpg')} alt="Bercak Cokelat" class="w-full h-full object-cover group-hover:scale-105 transition-transform" />
             </div>
             <span class="font-bold text-soil-800 group-hover:text-agro-800 block truncate">Bercak Cokelat</span>
           </button>
 
           <button 
             type="button" 
-            data-sample="/assets/hama/bercak_cokelat_sempit.jpg" 
+            data-sample={url('/assets/hama/bercak_cokelat_sempit.jpg')} 
             class="sample-btn text-left p-1.5 rounded-lg border border-soil-200 bg-white hover:border-agro-600 hover:bg-agro-50 transition-all text-[11px] group"
           >
             <div class="aspect-[4/3] rounded overflow-hidden mb-1">
-              <img src="/assets/hama/bercak_cokelat_sempit.jpg" alt="Bercak Sempit" class="w-full h-full object-cover group-hover:scale-105 transition-transform" />
+              <img src={url('/assets/hama/bercak_cokelat_sempit.jpg')} alt="Bercak Sempit" class="w-full h-full object-cover group-hover:scale-105 transition-transform" />
             </div>
             <span class="font-bold text-soil-800 group-hover:text-agro-800 block truncate">Bercak Sempit</span>
           </button>
 
           <button 
             type="button" 
-            data-sample="/assets/hama/hawar_pelepah.jpg" 
+            data-sample={url('/assets/hama/hawar_pelepah.jpg')} 
             class="sample-btn text-left p-1.5 rounded-lg border border-soil-200 bg-white hover:border-agro-600 hover:bg-agro-50 transition-all text-[11px] group"
           >
             <div class="aspect-[4/3] rounded overflow-hidden mb-1">
-              <img src="/assets/hama/hawar_pelepah.jpg" alt="Hawar Pelepah" class="w-full h-full object-cover group-hover:scale-105 transition-transform" />
+              <img src={url('/assets/hama/hawar_pelepah.jpg')} alt="Hawar Pelepah" class="w-full h-full object-cover group-hover:scale-105 transition-transform" />
             </div>
             <span class="font-bold text-soil-800 group-hover:text-agro-800 block truncate">Hawar Pelepah</span>
           </button>
@@ -231,7 +232,7 @@
           <div class="mt-4 pt-3 border-t border-soil-200/80 flex flex-wrap items-center justify-between gap-3">
             <a 
               id="btn-goto-tanibot" 
-              href="/tanibot" 
+              href={url('/tanibot')} 
               class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-agro-800 hover:bg-agro-900 text-white text-xs font-semibold transition-colors shadow-sm"
             >
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -257,6 +258,12 @@
 
 <script>
   // Client-side Inference & HSV Vegetation Filter Logic
+  const getAppBase = () => (window as any).__AGRI_BASE_URL__ || '/';
+  const getCleanBase = () => {
+    const b = getAppBase();
+    return b.endsWith('/') ? b : b + '/';
+  };
+
   const NAMA_KELAS = [
     'bacterial_leaf_blight', 'brown_spot', 'healthy', 'leaf_blast',
     'leaf_scald', 'narrow_brown_spot'
@@ -273,13 +280,13 @@
   };
 
   const SPECIMEN_MAP: Record<string, string> = {
-    'bacterial_leaf_blight': '/assets/hama/hdb.jpg',
-    'brown_spot': '/assets/hama/bercak_cokelat.jpg',
-    'healthy': '/assets/hama/sehat.jpg',
-    'leaf_blast': '/assets/hama/blas_daun.jpg',
-    'leaf_scald': '/assets/hama/hawar_pelepah.jpg',
-    'narrow_brown_spot': '/assets/hama/bercak_cokelat_sempit.jpg',
-    'unknown': '/assets/hama/sehat.jpg'
+    'bacterial_leaf_blight': 'assets/hama/hdb.jpg',
+    'brown_spot': 'assets/hama/bercak_cokelat.jpg',
+    'healthy': 'assets/hama/sehat.jpg',
+    'leaf_blast': 'assets/hama/blas_daun.jpg',
+    'leaf_scald': 'assets/hama/hawar_pelepah.jpg',
+    'narrow_brown_spot': 'assets/hama/bercak_cokelat_sempit.jpg',
+    'unknown': 'assets/hama/sehat.jpg'
   };
 
   const REKOMENDASI: Record<string, string> = {
@@ -307,8 +314,9 @@
     const badge = document.getElementById('model-status-badge');
     try {
       if ((window as any).ort) {
-        (window as any).ort.env.wasm.wasmPaths = "/ort/";
-        ortSession = await (window as any).ort.InferenceSession.create('/models/model_agriwarn.onnx', {
+        const cleanBase = getCleanBase();
+        (window as any).ort.env.wasm.wasmPaths = cleanBase + "ort/";
+        ortSession = await (window as any).ort.InferenceSession.create(cleanBase + 'models/model_agriwarn.onnx', {
           executionProviders: ['wasm']
         });
         if (badge) {
@@ -554,7 +562,9 @@
     if (recElem) recElem.textContent = REKOMENDASI[res.kelas] || REKOMENDASI['unknown'];
 
     if (compRefImg) {
-      compRefImg.src = SPECIMEN_MAP[res.kelas] || '/assets/hama/sehat.jpg';
+      const cleanBase = getCleanBase();
+      const specRel = SPECIMEN_MAP[res.kelas] || 'assets/hama/sehat.jpg';
+      compRefImg.src = cleanBase + specRel;
     }
 
     if (gateElem) {
@@ -594,7 +604,8 @@
 
     if (btnTanibot) {
       const optParam = OPT_MAP[res.kelas] || 'hdb';
-      btnTanibot.href = `/tanibot?opt=${optParam}`;
+      const cleanBase = getCleanBase();
+      btnTanibot.href = `${cleanBase}tanibot?opt=${optParam}`;
     }
 
     // Populate Probabilities Breakdown
