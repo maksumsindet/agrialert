@@ -228,17 +228,21 @@ function isActive(path: string) {
       </div>
     </footer>
 
-    <!-- Offline Service Worker Registration with Auto-Update -->
+    <!-- Offline Service Worker Cleanup to prevent ERR_FAILED in strict browsers -->
     <script is:inline>
-      if ('serviceWorker' in navigator && window.location.protocol.startsWith('http')) {
-        window.addEventListener('load', () => {
-          const swPath = (window.__AGRI_BASE_URL__ || '/').replace(/\/$/, '') + '/sw.js';
-          navigator.serviceWorker.register(swPath).then((reg) => {
-            reg.update().catch(() => {});
-          }).catch((err) => {
-            console.log('SW registration note:', err);
-          });
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistrations().then(function(registrations) {
+          for (var reg of registrations) {
+            reg.unregister().catch(function() {});
+          }
         });
+        if ('caches' in window) {
+          caches.keys().then(function(keys) {
+            for (var key of keys) {
+              caches.delete(key);
+            }
+          });
+        }
       }
     </script>
   </body>

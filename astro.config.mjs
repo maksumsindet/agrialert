@@ -5,6 +5,7 @@ import tailwind from '@astrojs/tailwind';
 export default defineConfig({
   site: 'https://maksumsindet.github.io',
   base: process.env.CI ? '/agrialert' : '/',
+  trailingSlash: 'always',
   integrations: [tailwind()],
   vite: {
     optimizeDeps: {
