@@ -39,6 +39,11 @@ function isActive(path: string) {
     <meta name="description" content={description} />
     <title>{title} | AgriAlert</title>
 
+    <!-- Google Fonts Jost for One-Motif Direction -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
     <!-- Base URL definition for client-side scripts -->
     <script is:inline define:vars={{ clientBaseUrl: import.meta.env.BASE_URL }}>
       window.__AGRI_BASE_URL__ = clientBaseUrl;

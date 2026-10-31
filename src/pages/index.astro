@@ -16,41 +16,44 @@ const hamaImages: Record<string, string> = {
 };
 ---
 
-<Layout title="Beranda">
-  <div class="space-y-10">
-    <!-- Hero Section: High-craft 2-Column Banner -->
-    <section class="relative rounded-3xl bg-gradient-to-br from-agro-950 via-agro-900 to-agro-850 text-white p-6 sm:p-10 lg:p-12 overflow-hidden shadow-md border border-agro-800">
+<Layout title="Sistem Siaga Padi & Deteksi Penyakit Daun">
+  <div class="space-y-12">
+    <!-- Hero Section: One-Motif Rice Field Command Center -->
+    <section class="relative rounded-grain bg-agro-950 text-white p-6 sm:p-10 lg:p-12 overflow-hidden border border-agro-800/80">
+      <!-- Decorative Rice Grain Curve Silhouette Backdrop -->
+      <div class="absolute -right-24 -bottom-24 w-96 h-96 rounded-full bg-agro-900/60 pointer-events-none blur-3xl"></div>
+      
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
-        <!-- Left: Copy & Call-to-actions -->
-        <div class="lg:col-span-7 space-y-5">
-          <div class="inline-flex items-center gap-2.5 px-3 py-1.5 rounded-full bg-agro-800/90 border border-agro-700/80 text-agro-200 text-xs font-semibold shadow-inner">
-            <span class="w-2.5 h-2.5 rounded-full bg-harvest-amber animate-pulse"></span>
-            <span>AgriAlert &bull; Standar BBPOPT Ditjen Tanaman Pangan</span>
+        <!-- Left: Crisp Technical Copy & Concrete Actions -->
+        <div class="lg:col-span-7 space-y-6">
+          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-agro-900 border border-agro-700/80 text-agro-200 text-xs font-semibold">
+            <span class="w-2 h-2 rounded-full bg-harvest-amber animate-pulse"></span>
+            <span>Standar Teknis BBPOPT Ditjen Tanaman Pangan RI</span>
           </div>
 
-          <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-[1.15] text-white">
-            Peringatan Dini Padi Berbasis AI & Satelit
+          <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-[1.1] text-white">
+            Peringatan Dini Padi Sawah
           </h1>
 
-          <p class="text-agro-200 text-sm sm:text-base leading-relaxed max-w-xl">
-            Deteksi penyakit daun padi secara instan via kamera on-device, pantau anomali iklim El Niño/La Niña dengan model peramalan LSTM, dan dapatkan rekomendasi pengendalian terpadu secara langsung tanpa kuota internet.
+          <p class="text-agro-200 text-sm sm:text-base leading-relaxed max-w-xl font-normal">
+            Klasifikasi 6 penyakit daun padi langsung di pematang sawah via kamera ponsel pintar tanpa kuota internet, pantau anomali iklim El Niño/La Niña dengan model LSTM, dan terapkan dosis PHT berimbang.
           </p>
 
-          <div class="pt-2 flex flex-wrap items-center gap-3">
+          <div class="pt-1 flex flex-wrap items-center gap-3">
             <a 
               href={url('/deteksi')} 
-              class="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl bg-harvest-gold hover:bg-harvest-dark text-white font-bold text-sm shadow-md hover:shadow-lg transition-all focus:outline-none focus:ring-2 focus:ring-harvest-amber"
+              class="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl bg-harvest-gold hover:bg-harvest-dark text-white font-bold text-sm transition-all focus:outline-none focus:ring-2 focus:ring-harvest-amber active:scale-95"
             >
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="w-5 h-5 text-amber-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg>
-              <span>Pindai Daun Padi Sekarang</span>
+              <span>Pindai Daun Padi</span>
             </a>
 
             <a 
               href={url('/tanibot')} 
-              class="inline-flex items-center gap-2 px-5 py-3.5 rounded-xl bg-agro-800/80 hover:bg-agro-700 text-white font-semibold text-sm border border-agro-700 transition-all shadow-sm"
+              class="inline-flex items-center gap-2 px-5 py-3.5 rounded-xl bg-agro-900 hover:bg-agro-850 text-white font-semibold text-sm border border-agro-700 transition-all"
             >
               <svg class="w-5 h-5 text-agro-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
@@ -59,21 +62,21 @@ const hamaImages: Record<string, string> = {
             </a>
           </div>
 
-          <!-- Feature badges -->
-          <div class="pt-3 flex flex-wrap items-center gap-4 text-xs text-agro-300 border-t border-agro-800/80">
-            <span class="flex items-center gap-1.5">
+          <!-- Solid Hardware & Offline Proof Badges -->
+          <div class="pt-4 flex flex-wrap items-center gap-5 text-xs text-agro-300 border-t border-agro-800/80">
+            <span class="flex items-center gap-1.5 font-medium">
               <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
               </svg>
               100% On-Device WebAssembly
             </span>
-            <span class="flex items-center gap-1.5">
+            <span class="flex items-center gap-1.5 font-medium">
               <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
               </svg>
-              Filter Vegetasi HSV 4-Layer
+              Model CNN AgriWarn Native 224×224
             </span>
-            <span class="flex items-center gap-1.5">
+            <span class="flex items-center gap-1.5 font-medium">
               <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
               </svg>
@@ -82,64 +85,57 @@ const hamaImages: Record<string, string> = {
           </div>
         </div>
 
-        <!-- Right: Vibrant Mascot Spotlight Card -->
+        <!-- Right: Character Mascot Card with Clear Framing -->
         <div class="lg:col-span-5 flex justify-center">
-          <div class="relative w-full max-w-sm rounded-2xl bg-gradient-to-b from-agro-800/90 to-agro-900/90 p-6 border border-agro-700/80 shadow-xl backdrop-blur-sm">
-            <div class="flex items-center justify-between mb-4 pb-3 border-b border-agro-700/60">
+          <div class="relative w-full max-w-sm rounded-grain-sm bg-agro-900 p-6 border border-agro-700/80">
+            <div class="flex items-center justify-between mb-4 pb-3 border-b border-agro-800">
               <div class="flex items-center gap-2">
                 <img src={url('/images/gps.png')} alt="GPS" width="20" height="20" class="w-5 h-5 object-contain" />
-                <span class="text-xs font-bold text-agro-100 uppercase tracking-wider">Sistem Siaga Lapangan</span>
+                <span class="text-xs font-bold text-agro-100 uppercase tracking-wider">Status Lapangan</span>
               </div>
-              <span class="flex items-center gap-1.5 text-[11px] font-semibold text-emerald-300 bg-emerald-950/80 border border-emerald-700 px-2 py-0.5 rounded-full">
+              <span class="flex items-center gap-1.5 text-xs font-semibold text-emerald-300 bg-emerald-950/80 border border-emerald-700 px-2.5 py-0.5 rounded-full">
                 <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-                Online / Offline Ready
+                Siap Offline
               </span>
             </div>
 
-            <!-- Mascot Interactive Speech Pill (Cleanly above mascot, no overlapping!) -->
-            <div class="flex justify-center mb-1">
+            <!-- Mascot Interactive Speech Capsule -->
+            <div class="flex justify-center mb-2">
               <div 
                 id="mascot-bubble" 
-                class="animate-bubble-pop inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-950/90 text-agro-100 shadow-md border border-emerald-500/50 text-xs cursor-pointer select-none transition-all hover:bg-emerald-900/90 hover:border-emerald-400 active:scale-95"
+                class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-950 text-agro-100 border border-emerald-500/50 text-xs cursor-pointer select-none transition-all hover:bg-emerald-900 active:scale-95"
                 title="Klik untuk sapaan lainnya"
               >
                 <span class="text-base inline-block animate-wave origin-bottom-right" aria-hidden="true">👋</span>
                 <span id="bubble-title" class="font-bold text-white text-xs">Halo Sobat Tani!</span>
-                <span class="text-agro-400 text-[11px]">&bull;</span>
-                <span id="bubble-subtitle" class="text-agro-200 text-[11px]">Siap cek padi hari ini?</span>
+                <span class="text-agro-400 text-xs">&bull;</span>
+                <span id="bubble-subtitle" class="text-agro-200 text-xs">Siap cek padi hari ini?</span>
               </div>
             </div>
 
-            <!-- Mascot Spotlight with Animated Waving Greeting (Completely Unobstructed) -->
-            <div class="relative flex justify-center items-center py-1">
-              <div class="absolute inset-0 bg-agro-700/20 rounded-full blur-2xl"></div>
-
-              <!-- Sparkle Accents (Blink/Happy Expression) on the sides -->
-              <span class="absolute top-2 left-6 text-base animate-sparkle-1 pointer-events-none select-none opacity-70" aria-hidden="true">✨</span>
-              <span class="absolute top-4 right-6 text-sm animate-sparkle-2 pointer-events-none select-none opacity-70" aria-hidden="true">🌟</span>
-
-              <!-- Mascot Character with Entrance Wave Animation -->
+            <!-- Mascot Character -->
+            <div class="relative flex justify-center items-center py-2">
               <div id="mascot-wrapper" class="relative cursor-pointer group" title="Klik maskot untuk menyapa!">
                 <img 
                   id="mascot-img"
                   src={url('/images/mascot.png')} 
-                  alt="Maskot AgriAlert Melambai" 
-                  width="224"
-                  height="224"
-                  class="animate-mascot-greet relative w-44 h-44 sm:w-52 sm:h-52 object-contain drop-shadow-2xl transition-transform duration-300 group-hover:scale-105"
+                  alt="Maskot AgriAlert" 
+                  width="220"
+                  height="220"
+                  class="relative w-44 h-44 sm:w-48 sm:h-48 object-contain transition-transform duration-300 group-hover:scale-105"
                 />
               </div>
             </div>
 
-            <div class="mt-4 p-3 rounded-xl bg-agro-950/70 border border-agro-800/80 text-xs text-agro-200 flex items-center justify-between">
+            <div class="mt-4 p-3.5 rounded-xl bg-agro-950 border border-agro-800 text-xs text-agro-200 flex items-center justify-between">
               <div class="flex items-center gap-2.5">
                 <img src={url('/images/sun.png')} alt="Cuaca" width="28" height="28" class="w-7 h-7 object-contain" />
                 <div>
                   <p class="font-bold text-white text-xs">Peringatan Agroklimat</p>
-                  <p class="text-[11px] text-agro-300">Pola Tanam MT-1 Rendengan</p>
+                  <p class="text-xs text-agro-300">Pola Tanam MT-1 Rendengan</p>
                 </div>
               </div>
-              <a href={url('/cuaca')} class="text-[11px] font-bold text-harvest-amber hover:text-white transition-colors">
+              <a href={url('/cuaca')} class="text-xs font-bold text-harvest-amber hover:text-white transition-colors">
                 Detail &rarr;
               </a>
             </div>
@@ -148,70 +144,70 @@ const hamaImages: Record<string, string> = {
       </div>
     </section>
 
-    <!-- Live Weather Widget Section -->
-    <section>
-      <div class="mb-3 flex items-center justify-between">
+    <!-- Real-time Hourly Weather Forecast Section -->
+    <section class="space-y-3">
+      <div class="flex items-center justify-between">
         <div>
-          <h2 class="text-lg font-bold text-soil-900 tracking-tight">Kondisi Cuaca & Kalender Tanam</h2>
-          <p class="text-xs text-soil-500">Kalkulasi mikro agroklimat berdasarkan titik lokasi GPS sawah</p>
+          <h2 class="text-xl font-bold text-soil-900 tracking-tight">Kondisi Cuaca Sawah & Kalender Tanam</h2>
+          <p class="text-xs text-soil-600">Prakiraan 24 jam real-time Open-Meteo & BMKG berdasarkan koordinat GPS sawah Anda</p>
         </div>
-        <a href={url('/cuaca')} class="text-xs text-agro-700 hover:text-agro-900 font-semibold flex items-center gap-1">
+        <a href={url('/cuaca')} class="text-xs text-agro-800 hover:text-agro-950 font-bold flex items-center gap-1">
           Analisis Iklim Lengkap &rarr;
         </a>
       </div>
       <WeatherWidget />
     </section>
 
-    <!-- Key Feature Tiles -->
+    <!-- Three Architectural Field Pillars -->
     <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <div class="p-6 rounded-2xl bg-white border border-soil-200 shadow-sm space-y-3 hover:border-agro-500 transition-colors">
-        <div class="w-11 h-11 rounded-xl bg-agro-100 text-agro-800 flex items-center justify-center font-bold">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <div class="p-6 rounded-2xl bg-white border border-soil-200/90 space-y-3 hover:border-agro-600 transition-colors">
+        <div class="w-10 h-10 rounded-xl bg-agro-100 text-agro-800 flex items-center justify-center font-bold">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
           </svg>
         </div>
         <h3 class="font-bold text-soil-900 text-base">Filter Vegetasi HSV 4-Layer</h3>
         <p class="text-xs text-soil-600 leading-relaxed">
-          Mencegah salah klasifikasi dari foto non-tanaman dengan memverifikasi spektrum warna hijau klorofil, kuning blast, lesi cokelat, dan desaturasi hawar pelepah.
+          Memverifikasi spektral hijau klorofil, kuning blast, lesi cokelat, dan desaturasi hawar pelepah untuk menolak foto non-tanaman dengan akurat.
         </p>
-        <a href={url('/deteksi')} class="inline-block text-xs font-bold text-agro-700 hover:text-agro-900">Uji Deteksi Kamera &rarr;</a>
+        <a href={url('/deteksi')} class="inline-block text-xs font-bold text-agro-800 hover:text-agro-950">Buka Kamera Deteksi &rarr;</a>
       </div>
 
-      <div class="p-6 rounded-2xl bg-white border border-soil-200 shadow-sm space-y-3 hover:border-agro-500 transition-colors">
-        <div class="w-11 h-11 rounded-xl bg-blue-100 text-blue-800 flex items-center justify-center font-bold">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <div class="p-6 rounded-2xl bg-white border border-soil-200/90 space-y-3 hover:border-agro-600 transition-colors">
+        <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-800 flex items-center justify-center font-bold">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
           </svg>
         </div>
         <h3 class="font-bold text-soil-900 text-base">Satelit Sentinel-1 & 2</h3>
         <p class="text-xs text-soil-600 leading-relaxed">
-          Pemantauan pertumbuhan padi nasional via indeks vegetasi optik NDVI dan radar gelombang mikro SAR VH/VV yang mampu menembus awan tebal.
+          Pemantauan kesehatan kanopi dan biomassa sawah nasional via indeks vegetasi optik NDVI serta radar gelombang mikro SAR penembus awan tebal.
         </p>
-        <a href={url('/cuaca')} class="inline-block text-xs font-bold text-agro-700 hover:text-agro-900">Buka Grafik Satelit &rarr;</a>
+        <a href={url('/cuaca')} class="inline-block text-xs font-bold text-agro-800 hover:text-agro-950">Lihat Grafik Satelit &rarr;</a>
       </div>
 
-      <div class="p-6 rounded-2xl bg-white border border-soil-200 shadow-sm space-y-3 hover:border-agro-500 transition-colors">
-        <div class="w-11 h-11 rounded-xl bg-harvest-light text-harvest-dark flex items-center justify-center font-bold">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <div class="p-6 rounded-2xl bg-white border border-soil-200/90 space-y-3 hover:border-agro-600 transition-colors">
+        <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center font-bold">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
           </svg>
         </div>
-        <h3 class="font-bold text-soil-900 text-base">Pohon Keputusan Kementan</h3>
+        <h3 class="font-bold text-soil-900 text-base">Pohon Keputusan POPT</h3>
         <p class="text-xs text-soil-600 leading-relaxed">
-          Panduan dosis pemupukan dan penanganan penyakit berfase (pra-tanam, pesemaian, pertanaman) dari buku prakiraan resmi BBPOPT Ditjen Tanaman Pangan.
+          SOP pengendalian terpadu berfase (pra-tanam, pesemaian, pertanaman) dan dosis bahan aktif resmi dari balai proteksi tanaman pangan.
         </p>
-        <a href={url('/tanibot')} class="inline-block text-xs font-bold text-agro-700 hover:text-agro-900">Konsultasi Mandiri &rarr;</a>
+        <a href={url('/tanibot')} class="inline-block text-xs font-bold text-agro-800 hover:text-agro-950">Mulai Konsultasi &rarr;</a>
       </div>
     </section>
 
-    <!-- Rice Pest Preview Showcase with Sharp Photography -->
+    <!-- Rice Pest Preview Showcase with Real High-Res Field Specimens -->
     <section class="space-y-4">
       <div class="flex items-center justify-between">
         <div>
-          <h2 class="text-lg font-bold text-soil-900 tracking-tight">Katalog Hama & Penyakit Utama</h2>
-          <p class="text-xs text-soil-500">Mengenali gejala dini untuk mencegah kerugian panen</p>
+          <h2 class="text-xl font-bold text-soil-900 tracking-tight">Katalog Hama & Penyakit Utama</h2>
+          <p class="text-xs text-soil-600">Mengenali morfologi dan gejala dini untuk mencegah kegagalan panen</p>
         </div>
-        <a href={url('/hama')} class="text-xs font-bold text-agro-700 hover:text-agro-900">
+        <a href={url('/hama')} class="text-xs font-bold text-agro-800 hover:text-agro-950">
           Lihat Semua 11 OPT &rarr;
         </a>
       </div>
@@ -220,7 +216,7 @@ const hamaImages: Record<string, string> = {
         {pests.map((opt) => (
           <a 
             href={url(`/hama#${opt.id}`)} 
-            class="group bg-white rounded-xl border border-soil-200 overflow-hidden shadow-xs hover:border-agro-600 hover:shadow-md transition-all flex flex-col justify-between"
+            class="group bg-white rounded-xl border border-soil-200 overflow-hidden hover:border-agro-600 transition-all flex flex-col justify-between"
           >
             <div class="relative w-full aspect-[4/3] bg-soil-100 overflow-hidden">
               <img 
@@ -228,9 +224,9 @@ const hamaImages: Record<string, string> = {
                 alt={opt.nama_lokal} 
                 loading="lazy"
                 decoding="async"
-                class="w-full h-full object-cover group-hover:scale-108 transition-transform duration-300" 
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" 
               />
-              <span class={`absolute top-2 left-2 text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded shadow-xs text-white ${opt.tipe === 'hama' ? 'bg-amber-600' : 'bg-red-700'}`}>
+              <span class={`absolute top-2 left-2 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded text-white ${opt.tipe === 'hama' ? 'bg-amber-600' : 'bg-red-700'}`}>
                 {opt.tipe}
               </span>
             </div>
@@ -238,7 +234,7 @@ const hamaImages: Record<string, string> = {
               <p class="font-bold text-soil-900 text-xs truncate group-hover:text-agro-800 transition-colors">
                 {opt.nama_lokal}
               </p>
-              <p class="text-[10px] text-soil-500 italic truncate font-serif mt-0.5">{opt.nama_latin}</p>
+              <p class="text-[11px] text-soil-500 italic truncate font-serif mt-0.5">{opt.nama_latin}</p>
             </div>
           </a>
         ))}
@@ -247,123 +243,7 @@ const hamaImages: Record<string, string> = {
   </div>
 </Layout>
 
-<style>
-  @keyframes mascotEntranceWave {
-    0% {
-      transform: scale(0.8) translateY(28px) rotate(0deg);
-      opacity: 0;
-    }
-    20% {
-      transform: scale(1.08) translateY(-12px) rotate(-11deg);
-      opacity: 1;
-    }
-    35% {
-      transform: scale(1.03) translateY(0) rotate(12deg);
-    }
-    50% {
-      transform: scale(1) translateY(-6px) rotate(-8deg);
-    }
-    65% {
-      transform: scale(1) translateY(0) rotate(6deg);
-    }
-    80% {
-      transform: scale(1) translateY(-2px) rotate(-3deg);
-    }
-    100% {
-      transform: scale(1) translateY(0) rotate(0deg);
-    }
-  }
-
-  @keyframes mascotGentleIdle {
-    0%, 100% {
-      transform: translateY(0px) rotate(0deg);
-    }
-    50% {
-      transform: translateY(-6px) rotate(1.2deg);
-    }
-  }
-
-  @keyframes handWave {
-    0%, 100% {
-      transform: rotate(0deg);
-    }
-    20%, 60% {
-      transform: rotate(22deg);
-    }
-    40%, 80% {
-      transform: rotate(-16deg);
-    }
-  }
-
-  @keyframes bubblePopIn {
-    0% {
-      transform: scale(0.3) translateY(20px);
-      opacity: 0;
-    }
-    70% {
-      transform: scale(1.08) translateY(-4px);
-      opacity: 1;
-    }
-    100% {
-      transform: scale(1) translateY(0);
-      opacity: 1;
-    }
-  }
-
-  @keyframes sparkleGlow {
-    0%, 100% {
-      opacity: 0.1;
-      transform: scale(0.5) rotate(0deg);
-    }
-    50% {
-      opacity: 1;
-      transform: scale(1.3) rotate(25deg);
-    }
-  }
-
-  .animate-mascot-greet {
-    animation: mascotEntranceWave 2.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-    transform-origin: 50% 90%;
-  }
-
-  .animate-mascot-idle {
-    animation: mascotGentleIdle 3.6s ease-in-out infinite;
-    transform-origin: 50% 90%;
-  }
-
-  .animate-wave {
-    animation: handWave 1.3s ease-in-out infinite;
-    transform-origin: 75% 75%;
-  }
-
-  .animate-bubble-pop {
-    animation: bubblePopIn 0.65s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.4s both;
-  }
-
-  .animate-sparkle-1 {
-    animation: sparkleGlow 2.2s ease-in-out infinite 0.2s;
-  }
-
-  .animate-sparkle-2 {
-    animation: sparkleGlow 2.6s ease-in-out infinite 0.9s;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .animate-mascot-greet,
-    .animate-mascot-idle,
-    .animate-wave,
-    .animate-bubble-pop,
-    .animate-sparkle-1,
-    .animate-sparkle-2 {
-      animation: none !important;
-      opacity: 1 !important;
-      transform: none !important;
-    }
-  }
-</style>
-
 <script>
-  // Dynamic Greetings on mascot interaction
   const greetings = [
     { title: "Halo Sobat Tani!", subtitle: "Yuk cek kesehatan padi hari ini!" },
     { title: "Padi Sehat, Panen Melimpah! 🌾", subtitle: "Waspada gejala sundep dan blast daun." },
@@ -380,35 +260,19 @@ const hamaImages: Record<string, string> = {
   const bubbleSubtitle = document.getElementById('bubble-subtitle');
   const mascotWrapper = document.getElementById('mascot-wrapper');
 
-  // Once entrance waving finishes, smoothly switch to gentle idle float
-  if (mascotImg) {
-    setTimeout(() => {
-      mascotImg.classList.remove('animate-mascot-greet');
-      mascotImg.classList.add('animate-mascot-idle');
-    }, 2300);
-  }
-
   function triggerGreetingReaction() {
     if (!bubbleTitle || !bubbleSubtitle || !mascotImg) return;
 
     currentGreetingIdx = (currentGreetingIdx + 1) % greetings.length;
     const next = greetings[currentGreetingIdx];
 
-    // Play energetic waving bounce again
-    mascotImg.classList.remove('animate-mascot-idle');
-    mascotImg.classList.remove('animate-mascot-greet');
-    // Force reflow
-    void mascotImg.offsetWidth;
-    mascotImg.classList.add('animate-mascot-greet');
-
+    mascotImg.style.transform = 'scale(1.08)';
     setTimeout(() => {
-      mascotImg.classList.remove('animate-mascot-greet');
-      mascotImg.classList.add('animate-mascot-idle');
-    }, 2300);
+      mascotImg.style.transform = '';
+    }, 200);
 
-    // Update text with soft pulse
     if (mascotBubble) {
-      mascotBubble.style.transform = 'scale(0.95)';
+      mascotBubble.style.transform = 'scale(0.96)';
       setTimeout(() => {
         bubbleTitle.textContent = next.title;
         bubbleSubtitle.textContent = next.subtitle;

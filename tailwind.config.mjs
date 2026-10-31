@@ -28,6 +28,7 @@ export default {
           700: '#795D4A',
           800: '#634D3F',
           900: '#524136',
+          950: '#1B140E',
         },
         harvest: {
           gold: '#D97706',
@@ -37,10 +38,14 @@ export default {
         }
       },
       fontFamily: {
-        sans: ['system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+        sans: ['Jost', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+        display: ['Jost', 'sans-serif'],
+      },
+      borderRadius: {
+        'grain': '2rem',
+        'grain-sm': '1.25rem',
       }
     },
   },
   plugins: [],
 };
-
