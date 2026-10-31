@@ -70,7 +70,7 @@ const isLaNina = lastPoint.anom <= -0.5;
 
   Chart.register(LineController, LineElement, PointElement, LinearScale, CategoryScale, Tooltip, Legend, Filler);
 
-  document.addEventListener('DOMContentLoaded', () => {
+  function initEnsoChart() {
     const data: any[] = ensoData || [];
 
     const canvas = document.getElementById('enso-canvas') as HTMLCanvasElement;
@@ -161,6 +161,12 @@ const isLaNina = lastPoint.anom <= -0.5;
         }
       }
     });
-  });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initEnsoChart);
+  } else {
+    initEnsoChart();
+  }
 </script>
 

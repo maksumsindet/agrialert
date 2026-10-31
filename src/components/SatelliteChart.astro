@@ -26,14 +26,14 @@ const latestSar = s1Data[s1Data.length - 1] || { vh: -15.2, vv: -9.8, tanggal: "
       <button 
         type="button" 
         id="btn-tab-ndvi" 
-        class="px-3 py-1.5 rounded-md bg-white text-agro-900 shadow-xs transition-all"
+        class="cursor-pointer px-3.5 py-1.5 rounded-md bg-white text-agro-900 font-bold shadow-xs transition-all border border-soil-200"
       >
         Optik Sentinel-2 (NDVI)
       </button>
       <button 
         type="button" 
         id="btn-tab-sar" 
-        class="px-3 py-1.5 rounded-md text-soil-600 hover:text-soil-900 transition-all"
+        class="cursor-pointer px-3.5 py-1.5 rounded-md text-soil-600 hover:text-soil-900 font-semibold transition-all hover:bg-soil-200/60"
       >
         Radar Sentinel-1 (SAR)
       </button>
@@ -78,7 +78,7 @@ const latestSar = s1Data[s1Data.length - 1] || { vh: -15.2, vv: -9.8, tanggal: "
 
   Chart.register(LineController, LineElement, PointElement, LinearScale, CategoryScale, Tooltip, Legend, Filler);
 
-  document.addEventListener('DOMContentLoaded', () => {
+  function initSatelliteChart() {
     const canvas = document.getElementById('satellite-canvas') as HTMLCanvasElement;
     if (!canvas) return;
 
@@ -140,8 +140,8 @@ const latestSar = s1Data[s1Data.length - 1] || { vh: -15.2, vv: -9.8, tanggal: "
     btnNdvi?.addEventListener('click', () => {
       if (currentMode === 'ndvi') return;
       currentMode = 'ndvi';
-      btnNdvi.className = "px-3 py-1.5 rounded-md bg-white text-agro-900 shadow-xs transition-all";
-      btnSar!.className = "px-3 py-1.5 rounded-md text-soil-600 hover:text-soil-900 transition-all";
+      btnNdvi.className = "cursor-pointer px-3.5 py-1.5 rounded-md bg-white text-agro-900 font-bold shadow-xs transition-all border border-soil-200";
+      btnSar!.className = "cursor-pointer px-3.5 py-1.5 rounded-md text-soil-600 hover:text-soil-900 font-semibold transition-all hover:bg-soil-200/60";
 
       satChart.data.labels = ndviLabels;
       satChart.data.datasets = [
@@ -167,8 +167,8 @@ const latestSar = s1Data[s1Data.length - 1] || { vh: -15.2, vv: -9.8, tanggal: "
     btnSar?.addEventListener('click', () => {
       if (currentMode === 'sar') return;
       currentMode = 'sar';
-      btnSar.className = "px-3 py-1.5 rounded-md bg-white text-agro-900 shadow-xs transition-all";
-      btnNdvi!.className = "px-3 py-1.5 rounded-md text-soil-600 hover:text-soil-900 transition-all";
+      btnSar.className = "cursor-pointer px-3.5 py-1.5 rounded-md bg-white text-agro-900 font-bold shadow-xs transition-all border border-soil-200";
+      btnNdvi!.className = "cursor-pointer px-3.5 py-1.5 rounded-md text-soil-600 hover:text-soil-900 font-semibold transition-all hover:bg-soil-200/60";
 
       satChart.data.labels = sarLabels;
       satChart.data.datasets = [
@@ -201,6 +201,12 @@ const latestSar = s1Data[s1Data.length - 1] || { vh: -15.2, vv: -9.8, tanggal: "
       }
       satChart.update();
     });
-  });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initSatelliteChart);
+  } else {
+    initSatelliteChart();
+  }
 </script>
 
