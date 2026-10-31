@@ -1,0 +1,44 @@
+---
+import Layout from '../layouts/Layout.astro';
+import TaniBotChat from '../components/TaniBotChat.astro';
+---
+
+<Layout title="TaniBot - Asisten Cerdas Pengendalian OPT">
+  <div class="space-y-6">
+    <div class="flex flex-wrap items-center justify-between gap-4">
+      <div>
+        <div class="flex items-center gap-2">
+          <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold bg-agro-100 text-agro-800 border border-agro-300">
+            Decision Tree Offline
+          </span>
+          <span class="text-xs text-soil-500 font-mono">Knowledge Base v2</span>
+        </div>
+        <h1 class="text-2xl sm:text-3xl font-black text-soil-900 mt-1 tracking-tight">
+          TaniBot &bull; Konsultasi Ahli Padi
+        </h1>
+        <p class="text-xs sm:text-sm text-soil-600 mt-0.5">
+          Panduan langkah demi langkah penanganan OPT per fase tanam bersumber resmi dari Ditjen Tanaman Pangan Kementan RI.
+        </p>
+      </div>
+
+      <!-- Quick Topic Badges -->
+      <div class="flex flex-wrap items-center gap-2">
+        <a href="/tanibot?opt=blas" class="px-2.5 py-1 rounded-md text-xs font-semibold bg-white border border-soil-300 text-soil-700 hover:border-agro-700 hover:text-agro-800 transition-colors">
+          🌾 Blas Daun
+        </a>
+        <a href="/tanibot?opt=hdb" class="px-2.5 py-1 rounded-md text-xs font-semibold bg-white border border-soil-300 text-soil-700 hover:border-agro-700 hover:text-agro-800 transition-colors">
+          🌿 Hawar Daun (HDB)
+        </a>
+        <a href="/tanibot?opt=wbc" class="px-2.5 py-1 rounded-md text-xs font-semibold bg-white border border-soil-300 text-soil-700 hover:border-agro-700 hover:text-agro-800 transition-colors">
+          🦗 Wereng Coklat
+        </a>
+        <a href="/tanibot?opt=tikus" class="px-2.5 py-1 rounded-md text-xs font-semibold bg-white border border-soil-300 text-soil-700 hover:border-agro-700 hover:text-agro-800 transition-colors">
+          🐀 Tikus Sawah
+        </a>
+      </div>
+    </div>
+
+    <!-- TaniBot Core Component -->
+    <TaniBotChat />
+  </div>
+</Layout>

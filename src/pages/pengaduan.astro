@@ -1,0 +1,284 @@
+---
+import Layout from '../layouts/Layout.astro';
+import tanibotData from '../data/tanibot_data_v2.json';
+
+const optList = tanibotData.opt;
+---
+
+<Layout title="Pengaduan & Pelaporan Serangan OPT">
+  <div class="space-y-8 max-w-4xl mx-auto">
+    <div>
+      <div class="flex items-center gap-2">
+        <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold bg-agro-100 text-agro-800 border border-agro-300">
+          Layanan Pelaporan Lapangan
+        </span>
+        <span class="text-xs text-soil-500">Penyuluh Pertanian Lapangan (PPL)</span>
+      </div>
+      <h1 class="text-2xl sm:text-3xl font-black text-soil-900 mt-1 tracking-tight">
+        Formulir Pengaduan Serangan Hama & Penyakit
+      </h1>
+      <p class="text-xs sm:text-sm text-soil-600 mt-1">
+        Sampaikan laporan insiden ledakan hama di hamparan sawah kelompok tani Anda agar segera diverifikasi oleh petugas POPT/BPTP setempat.
+      </p>
+    </div>
+
+    <!-- The Report Form Card -->
+    <div class="bg-white rounded-2xl shadow-sm border border-soil-200 p-6 sm:p-8">
+      <form id="pengaduan-form" class="space-y-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div>
+            <label for="nama_pelapor" class="block text-xs font-bold uppercase tracking-wider text-soil-700 mb-1.5">
+              Nama Lengkap Pelapor / Poktan *
+            </label>
+            <input 
+              type="text" 
+              id="nama_pelapor" 
+              name="nama_pelapor" 
+              required
+              placeholder="Contoh: Pak Maryono (Kelompok Tani Makmur)" 
+              class="w-full text-xs px-3.5 py-2.5 rounded-lg border border-soil-300 focus:outline-none focus:ring-2 focus:ring-agro-600 bg-white"
+            />
+          </div>
+
+          <div>
+            <label for="kontak_hp" class="block text-xs font-bold uppercase tracking-wider text-soil-700 mb-1.5">
+              Nomor WhatsApp / HP Aktif *
+            </label>
+            <input 
+              type="tel" 
+              id="kontak_hp" 
+              name="kontak_hp" 
+              required
+              placeholder="0812-xxxx-xxxx" 
+              class="w-full text-xs px-3.5 py-2.5 rounded-lg border border-soil-300 focus:outline-none focus:ring-2 focus:ring-agro-600 bg-white"
+            />
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+          <div>
+            <label for="jenis_opt" class="block text-xs font-bold uppercase tracking-wider text-soil-700 mb-1.5">
+              Jenis Hama / Penyakit *
+            </label>
+            <select 
+              id="jenis_opt" 
+              name="jenis_opt" 
+              required
+              class="w-full text-xs px-3.5 py-2.5 rounded-lg border border-soil-300 focus:outline-none focus:ring-2 focus:ring-agro-600 bg-white"
+            >
+              <option value="">Pilih OPT...</option>
+              {optList.map((o) => (
+                <option value={o.id}>{o.nama_lokal} ({o.tipe})</option>
+              ))}
+              <option value="lainnya">Lainnya / Belum Diketahui</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="luas_serangan" class="block text-xs font-bold uppercase tracking-wider text-soil-700 mb-1.5">
+              Taksiran Luas Serangan (Hektar) *
+            </label>
+            <input 
+              type="number" 
+              step="0.1" 
+              min="0.1" 
+              id="luas_serangan" 
+              name="luas_serangan" 
+              required
+              placeholder="Contoh: 2.5" 
+              class="w-full text-xs px-3.5 py-2.5 rounded-lg border border-soil-300 focus:outline-none focus:ring-2 focus:ring-agro-600 bg-white"
+            />
+          </div>
+
+          <div>
+            <label for="intensitas_serangan" class="block text-xs font-bold uppercase tracking-wider text-soil-700 mb-1.5">
+              Intensitas Kerusakan *
+            </label>
+            <select 
+              id="intensitas_serangan" 
+              name="intensitas_serangan" 
+              required
+              class="w-full text-xs px-3.5 py-2.5 rounded-lg border border-soil-300 focus:outline-none focus:ring-2 focus:ring-agro-600 bg-white"
+            >
+              <option value="ringan">Ringan (kerusakan &lt; 25%)</option>
+              <option value="sedang">Sedang (kerusakan 25 - 50%)</option>
+              <option value="berat">Berat (kerusakan 51 - 85%)</option>
+              <option value="puso">Puso / Patah Malai (&gt; 85%)</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label for="lokasi_desa" class="block text-xs font-bold uppercase tracking-wider text-soil-700 mb-1.5">
+            Lokasi Hamparan (Desa, Kecamatan, Kabupaten) *
+          </label>
+          <input 
+            type="text" 
+            id="lokasi_desa" 
+            name="lokasi_desa" 
+            required
+            placeholder="Contoh: Desa Tanjungmekar, Kec. Pakisjaya, Kab. Karawang" 
+            class="w-full text-xs px-3.5 py-2.5 rounded-lg border border-soil-300 focus:outline-none focus:ring-2 focus:ring-agro-600 bg-white"
+          />
+        </div>
+
+        <div>
+          <label for="keterangan_gejala" class="block text-xs font-bold uppercase tracking-wider text-soil-700 mb-1.5">
+            Keterangan Tambahan / Gejala Khusus
+          </label>
+          <textarea 
+            id="keterangan_gejala" 
+            name="keterangan_gejala" 
+            rows="3" 
+            placeholder="Jelaskan kondisi tanaman, varietas yang ditanam, umur HST, atau tindakan penyemprotan yang sudah pernah dicoba..." 
+            class="w-full text-xs px-3.5 py-2.5 rounded-lg border border-soil-300 focus:outline-none focus:ring-2 focus:ring-agro-600 bg-white"
+          ></textarea>
+        </div>
+
+        <div class="pt-2 flex items-center justify-between">
+          <button 
+            type="submit" 
+            class="px-6 py-3 rounded-xl bg-agro-800 hover:bg-agro-900 text-white font-bold text-xs shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-agro-600"
+          >
+            Kirimkan Laporan Pengaduan
+          </button>
+          <span class="text-[11px] text-soil-500">Tersimpan aman di pangkalan data lokal</span>
+        </div>
+      </form>
+
+      <!-- Success Notification Box -->
+      <div id="notif-sukses" class="hidden mt-6 p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-900 text-xs flex items-start gap-3">
+        <svg class="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <div>
+          <p class="font-bold text-sm">Laporan Berhasil Disimpan!</p>
+          <p class="mt-0.5 text-emerald-800">Data laporan telah dicatat secara lokal dan nomor tiket laporan telah dibuat. Hubungi petugas POPT terdekat untuk tindak lanjut penyemprotan massal.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Local Reports History -->
+    <div class="bg-white rounded-2xl shadow-sm border border-soil-200 p-6 space-y-4">
+      <div class="flex items-center justify-between">
+        <h3 class="font-bold text-base text-soil-900">Riwayat Laporan Tersimpan di Perangkat</h3>
+        <button type="button" id="btn-export-csv" class="text-xs text-agro-700 hover:text-agro-900 font-semibold">
+          Ekspor ke CSV &darr;
+        </button>
+      </div>
+
+      <div id="daftar-laporan" class="space-y-2 text-xs">
+        <p class="text-soil-500 italic py-4 text-center">Belum ada laporan pengaduan yang dicatat di perangkat ini.</p>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  interface ReportRecord {
+    id: string;
+    tanggal: string;
+    nama: string;
+    kontak: string;
+    opt: string;
+    luas: string;
+    intensitas: string;
+    lokasi: string;
+    keterangan: string;
+  }
+
+  const STORAGE_KEY = 'agrialert_laporan_list';
+
+  function getStoredReports(): ReportRecord[] {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      return raw ? JSON.parse(raw) : [];
+    } catch {
+      return [];
+    }
+  }
+
+  function saveReports(list: ReportRecord[]) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+    renderReportList();
+  }
+
+  function renderReportList() {
+    const container = document.getElementById('daftar-laporan');
+    if (!container) return;
+
+    const list = getStoredReports();
+    if (list.length === 0) {
+      container.innerHTML = '<p class="text-soil-500 italic py-4 text-center">Belum ada laporan pengaduan yang dicatat di perangkat ini.</p>';
+      return;
+    }
+
+    container.innerHTML = list.map(item => `
+      <div class="p-3.5 rounded-xl border border-soil-200 bg-soil-50/50 flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <div class="flex items-center gap-2">
+            <strong class="text-soil-900 font-bold">${item.opt.toUpperCase()}</strong>
+            <span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-soil-200 text-soil-800">${item.intensitas}</span>
+            <span class="text-soil-500 text-[11px]">${item.luas} Ha</span>
+          </div>
+          <p class="text-soil-600 mt-0.5">${item.lokasi} &bull; Oleh: ${item.nama} (${item.kontak})</p>
+        </div>
+        <span class="text-[10px] text-soil-400 font-mono">${item.tanggal}</span>
+      </div>
+    `).join('');
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    renderReportList();
+
+    const form = document.getElementById('pengaduan-form') as HTMLFormElement;
+    const notif = document.getElementById('notif-sukses');
+
+    form?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const formData = new FormData(form);
+
+      const record: ReportRecord = {
+        id: 'LAP-' + Date.now(),
+        tanggal: new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }),
+        nama: formData.get('nama_pelapor') as string,
+        kontak: formData.get('kontak_hp') as string,
+        opt: formData.get('jenis_opt') as string,
+        luas: formData.get('luas_serangan') as string,
+        intensitas: formData.get('intensitas_serangan') as string,
+        lokasi: formData.get('lokasi_desa') as string,
+        keterangan: (formData.get('keterangan_gejala') as string) || '-'
+      };
+
+      const existing = getStoredReports();
+      existing.unshift(record);
+      saveReports(existing);
+
+      form.reset();
+      notif?.classList.remove('hidden');
+      setTimeout(() => {
+        notif?.classList.add('hidden');
+      }, 6000);
+    });
+
+    document.getElementById('btn-export-csv')?.addEventListener('click', () => {
+      const list = getStoredReports();
+      if (list.length === 0) {
+        alert("Tidak ada data laporan untuk diekspor.");
+        return;
+      }
+
+      let csv = "ID,Tanggal,Nama,Kontak,OPT,Luas_Ha,Intensitas,Lokasi,Keterangan\n";
+      list.forEach(item => {
+        csv += `"${item.id}","${item.tanggal}","${item.nama}","${item.kontak}","${item.opt}","${item.luas}","${item.intensitas}","${item.lokasi}","${item.keterangan.replace(/"/g, '""')}"\n`;
+      });
+
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `laporan_opt_${Date.now()}.csv`;
+      a.click();
+    });
+  });
+</script>

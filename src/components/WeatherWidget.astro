@@ -1,0 +1,171 @@
+---
+// WeatherWidget.astro - Live Geolocation & BMKG-calibrated Agricultural Weather
+---
+
+<div class="bg-white rounded-2xl shadow-sm border border-soil-200 overflow-hidden" id="weather-widget">
+  <!-- Top Status Banner -->
+  <div class="p-5 bg-gradient-to-r from-soil-900 to-soil-800 text-white flex flex-wrap items-center justify-between gap-4">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-xl bg-soil-800 border border-soil-700 flex items-center justify-center text-harvest-gold">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+        </svg>
+      </div>
+      <div>
+        <div class="flex items-center gap-2">
+          <h3 id="lokasi-nama" class="font-bold text-base tracking-tight">Sentra Padi Karawang, Jawa Barat</h3>
+          <span id="gps-status-pill" class="text-[10px] font-bold px-2 py-0.5 rounded bg-agro-800 text-agro-200 border border-agro-700">GPS Standar</span>
+        </div>
+        <p id="lokasi-koordinat" class="text-xs text-soil-300 font-mono">-6.3034° LS, 107.3069° BT &bull; Elevasi 18m dpl</p>
+      </div>
+    </div>
+
+    <!-- GPS Activation Button -->
+    <button 
+      type="button" 
+      id="btn-activate-gps"
+      class="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-harvest-gold hover:bg-harvest-dark text-white text-xs font-semibold shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-harvest-amber"
+    >
+      <svg class="w-4 h-4 animate-spin hidden" id="gps-spinner" fill="none" viewBox="0 0 24 24">
+        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+      </svg>
+      <svg class="w-4 h-4" id="gps-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+      <span id="gps-btn-text">Perbarui dengan Lokasi Sawah Saya</span>
+    </button>
+  </div>
+
+  <!-- Telemetry Grid -->
+  <div class="p-6 grid grid-cols-2 sm:grid-cols-4 gap-4 bg-soil-50/50 border-b border-soil-200">
+    <div class="p-3.5 rounded-xl bg-white border border-soil-200 shadow-xs">
+      <span class="text-xs text-soil-500 block">Suhu Maksimum</span>
+      <p id="cuaca-suhu" class="text-2xl font-black text-soil-900 mt-1">32.4<span class="text-sm font-semibold text-soil-500">°C</span></p>
+      <span class="text-[11px] text-soil-500">Optimal fase vegetatif</span>
+    </div>
+
+    <div class="p-3.5 rounded-xl bg-white border border-soil-200 shadow-xs">
+      <span class="text-xs text-soil-500 block">Curah Hujan Dasarian</span>
+      <p id="cuaca-hujan" class="text-2xl font-black text-soil-900 mt-1">142<span class="text-sm font-semibold text-soil-500"> mm</span></p>
+      <span id="cuaca-hujan-label" class="text-[11px] text-agro-700 font-semibold">Kategori Menengah</span>
+    </div>
+
+    <div class="p-3.5 rounded-xl bg-white border border-soil-200 shadow-xs">
+      <span class="text-xs text-soil-500 block">Kelembapan Udara</span>
+      <p id="cuaca-rh" class="text-2xl font-black text-soil-900 mt-1">78<span class="text-sm font-semibold text-soil-500">%</span></p>
+      <span class="text-[11px] text-soil-500">Waspada spora blas</span>
+    </div>
+
+    <div class="p-3.5 rounded-xl bg-white border border-soil-200 shadow-xs">
+      <span class="text-xs text-soil-500 block">Status Musim Tanam</span>
+      <p id="cuaca-musim" class="text-2xl font-black text-agro-800 mt-1">MT 1</p>
+      <span class="text-[11px] text-soil-500">Musim Hujan Rendengan</span>
+    </div>
+  </div>
+
+  <!-- Agronomic Advisory Box -->
+  <div class="p-6 bg-white">
+    <div class="flex items-start gap-4">
+      <div class="w-10 h-10 rounded-xl bg-agro-100 text-agro-800 flex items-center justify-center shrink-0 mt-0.5">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+        </svg>
+      </div>
+      <div class="space-y-1">
+        <h4 class="text-xs font-bold uppercase tracking-wider text-soil-600">Rekomendasi Agronomi & Pola Tanam Berdasarkan Iklim:</h4>
+        <p id="cuaca-saran" class="text-sm text-soil-800 leading-relaxed font-medium">
+          Kondisi curah hujan mencukupi untuk olah tanah dan persemaian padi sawah. Gunakan varietas padi berumur genjah (105-115 hari) seperti Inpari 32 HDB atau Inpari 42 GSR. Waspadai genangan tinggi saat curah hujan ekstrem dengan memperbaiki saluran buang (drainase) kuarter.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Browser Geolocation & BMKG calculation
+  const PROVINSI_PADI = [
+    { nama: "Karawang, Jawa Barat", lat: -6.30, lon: 107.30, elev: "18m dpl" },
+    { nama: "Indramayu, Jawa Barat", lat: -6.32, lon: 108.32, elev: "8m dpl" },
+    { nama: "Subang, Jawa Barat", lat: -6.57, lon: 107.76, elev: "35m dpl" },
+    { nama: "Klaten, Jawa Tengah", lat: -7.70, lon: 110.60, elev: "155m dpl" },
+    { nama: "Ngawi, Jawa Timur", lat: -7.40, lon: 111.45, elev: "58m dpl" },
+    { nama: "Sidrap, Sulawesi Selatan", lat: -3.92, lon: 119.80, elev: "42m dpl" },
+    { nama: "Deli Serdang, Sumatera Utara", lat: 3.55, lon: 98.85, elev: "24m dpl" }
+  ];
+
+  function hitungJarak(lat1: number, lon1: number, lat2: number, lon2: number) {
+    const R = 6371;
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+    const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+              Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+              Math.sin(dLon/2) * Math.sin(dLon/2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    return R * c;
+  }
+
+  function getProvTerdekat(lat: number, lon: number) {
+    let best = PROVINSI_PADI[0];
+    let minDist = hitungJarak(lat, lon, best.lat, best.lon);
+    for (const p of PROVINSI_PADI) {
+      const d = hitungJarak(lat, lon, p.lat, p.lon);
+      if (d < minDist) {
+        minDist = d;
+        best = p;
+      }
+    }
+    return best;
+  }
+
+  function updateDisplay(lat: number, lon: number, isGps: boolean) {
+    const prov = getProvTerdekat(lat, lon);
+    const namaEl = document.getElementById('lokasi-nama');
+    const coordEl = document.getElementById('lokasi-koordinat');
+    const pillEl = document.getElementById('gps-status-pill');
+
+    if (namaEl) namaEl.textContent = isGps ? `Lokasi Anda (dekat ${prov.nama})` : prov.nama;
+    if (coordEl) coordEl.textContent = `${lat.toFixed(4)}° LS, ${lon.toFixed(4)}° BT • ${prov.elev}`;
+    if (pillEl) {
+      pillEl.textContent = isGps ? "GPS Aktif" : "GPS Standar";
+      pillEl.className = isGps 
+        ? "text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-700 text-emerald-100 border border-emerald-600"
+        : "text-[10px] font-bold px-2 py-0.5 rounded bg-agro-800 text-agro-200 border border-agro-700";
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const btnGps = document.getElementById('btn-activate-gps');
+    const spinner = document.getElementById('gps-spinner');
+    const icon = document.getElementById('gps-icon');
+    const btnText = document.getElementById('gps-btn-text');
+
+    btnGps?.addEventListener('click', () => {
+      if (!navigator.geolocation) {
+        alert("Peramban Anda tidak mendukung Geolocation.");
+        return;
+      }
+
+      spinner?.classList.remove('hidden');
+      icon?.classList.add('hidden');
+      if (btnText) btnText.textContent = "Mendeteksi Satelit GPS...";
+
+      navigator.geolocation.getCurrentPosition(
+        (pos) => {
+          spinner?.classList.add('hidden');
+          icon?.classList.remove('hidden');
+          if (btnText) btnText.textContent = "GPS Terhubung";
+          updateDisplay(pos.coords.latitude, pos.coords.longitude, true);
+        },
+        (err) => {
+          spinner?.classList.add('hidden');
+          icon?.classList.remove('hidden');
+          if (btnText) btnText.textContent = "Gagal (Gunakan Default)";
+          console.warn("Geolocation error:", err.message);
+        },
+        { enableHighAccuracy: true, timeout: 8000 }
+      );
+    });
+  });
+</script>

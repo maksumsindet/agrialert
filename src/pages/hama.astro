@@ -1,0 +1,135 @@
+---
+import Layout from '../layouts/Layout.astro';
+import tanibotData from '../data/tanibot_data_v2.json';
+
+const optList = tanibotData.opt;
+
+const hamaImageMap: Record<string, string> = {
+  'pbp': '/assets/hama/penggerek_batang_beluk.jpg',
+  'wbc': '/assets/hama/wereng_batang_coklat.jpg',
+  'tikus': '/assets/hama/tikus_sawah.jpg',
+  'blas': '/assets/hama/blas_daun.jpg',
+  'hdb': '/assets/hama/hdb.jpg',
+  'brown_spot': '/assets/hama/bercak_cokelat.jpg',
+  'narrow_brown_spot': '/assets/hama/bercak_cokelat_sempit.jpg',
+  'leaf_scald': '/assets/hama/hawar_pelepah.jpg',
+  'sheath_blight': '/assets/hama/busuk_pelepah.jpg',
+  'tungro': '/assets/hama/tungro.jpg',
+  'rice_hispa': '/assets/hama/hispa.jpg'
+};
+---
+
+<Layout title="Katalog Organisme Pengganggu Tanaman (OPT)">
+  <div class="space-y-8">
+    <div>
+      <div class="flex items-center gap-2">
+        <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold bg-agro-100 text-agro-800 border border-agro-300">
+          Ensiklopedia OPT Resmi
+        </span>
+        <span class="text-xs text-soil-500">BBPOPT Kementan RI</span>
+      </div>
+      <h1 class="text-2xl sm:text-3xl font-black text-soil-900 mt-1 tracking-tight">
+        Katalog Hama & Penyakit Padi Utama
+      </h1>
+      <p class="text-xs sm:text-sm text-soil-600 mt-1">
+        Rujukan komprehensif morfologi, gejala serangan, ambang pengendalian ekonomi, dan taksiran kehilangan hasil panen.
+      </p>
+    </div>
+
+    <!-- Filter Toggle -->
+    <div class="flex items-center gap-2 text-xs font-semibold">
+      <button type="button" class="px-4 py-2 rounded-lg bg-agro-800 text-white shadow-xs opt-filter-btn" data-filter="all">Semua OPT (11)</button>
+      <button type="button" class="px-4 py-2 rounded-lg bg-white text-soil-700 border border-soil-300 hover:border-agro-600 opt-filter-btn" data-filter="hama">Hama (Serangga & Vertebrata)</button>
+      <button type="button" class="px-4 py-2 rounded-lg bg-white text-soil-700 border border-soil-300 hover:border-agro-600 opt-filter-btn" data-filter="penyakit">Penyakit (Jamur, Bakteri, Virus)</button>
+    </div>
+
+    <!-- Catalog Cards Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="opt-grid">
+      {optList.map((opt) => (
+        <article 
+          id={opt.id} 
+          data-type={opt.tipe}
+          class="opt-card bg-white rounded-2xl border border-soil-200 overflow-hidden shadow-xs hover:border-agro-500 transition-all flex flex-col justify-between"
+        >
+          <div>
+            <!-- High-Res Field Photo -->
+            <div class="relative h-48 w-full bg-soil-100 overflow-hidden">
+              <img 
+                src={hamaImageMap[opt.id] || '/assets/hama/sehat.jpg'} 
+                alt={opt.nama_lokal} 
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" 
+              />
+              <span class={`absolute top-3 left-3 text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full shadow-sm ${opt.tipe === 'hama' ? 'bg-amber-600 text-white' : 'bg-red-700 text-white'}`}>
+                {opt.tipe.toUpperCase()}
+              </span>
+            </div>
+
+            <div class="p-5 space-y-3">
+              <div>
+                <h3 class="font-bold text-lg text-soil-900 leading-snug">{opt.nama_lokal}</h3>
+                <p class="text-xs italic text-soil-500 font-serif">{opt.nama_latin}</p>
+              </div>
+
+              <p class="text-xs text-soil-700 leading-relaxed line-clamp-3">
+                {opt.deskripsi}
+              </p>
+
+              <div class="space-y-2 pt-2 border-t border-soil-100 text-xs">
+                <div>
+                  <strong class="text-soil-900 block font-semibold">Gejala Serangan:</strong>
+                  <p class="text-soil-600 leading-normal line-clamp-2">{opt.gejala}</p>
+                </div>
+                <div>
+                  <strong class="text-soil-900 block font-semibold">Ambang Pengendalian:</strong>
+                  <p class="text-agro-800 font-medium">{opt.ambang_pengendalian}</p>
+                </div>
+                {opt.kehilangan_hasil && (
+                  <div>
+                    <strong class="text-soil-900 block font-semibold">Taksiran Dampak:</strong>
+                    <p class="text-soil-600">{opt.kehilangan_hasil}</p>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+
+          <div class="p-5 pt-0">
+            <a 
+              href={`/tanibot?opt=${opt.id}`} 
+              class="w-full inline-flex items-center justify-center gap-1.5 py-2.5 px-4 rounded-xl bg-soil-100 hover:bg-agro-800 hover:text-white text-soil-800 text-xs font-semibold transition-colors border border-soil-200"
+            >
+              Lihat Panduan Dosis & Pengendalian &rarr;
+            </a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</Layout>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const filterBtns = document.querySelectorAll('.opt-filter-btn');
+    const cards = document.querySelectorAll('.opt-card');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const targetFilter = btn.getAttribute('data-filter');
+
+        filterBtns.forEach(b => {
+          b.className = "px-4 py-2 rounded-lg bg-white text-soil-700 border border-soil-300 hover:border-agro-600 opt-filter-btn";
+        });
+        btn.className = "px-4 py-2 rounded-lg bg-agro-800 text-white shadow-xs opt-filter-btn";
+
+        cards.forEach(card => {
+          const type = card.getAttribute('data-type');
+          if (targetFilter === 'all' || type === targetFilter) {
+            (card as HTMLElement).style.display = 'flex';
+          } else {
+            (card as HTMLElement).style.display = 'none';
+          }
+        });
+      });
+    });
+  });
+</script>

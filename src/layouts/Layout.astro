@@ -1,0 +1,168 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = "AgriAlert - Sistem Peringatan Dini Pertanian & Deteksi Penyakit Padi Berbasis AI" } = Astro.props;
+const currentPath = Astro.url.pathname;
+---
+
+<!doctype html>
+<html lang="id" class="h-full bg-soil-50 text-soil-900 antialiased">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/images/mascot.png" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <title>{title} | AgriAlert</title>
+
+    <!-- Preload ONNX Runtime wasm helper -->
+    <script is:inline src="/ort/ort.min.js"></script>
+    <script is:inline>
+      if (window.ort) {
+        window.ort.env.wasm.wasmPaths = "/ort/";
+      }
+    </script>
+  </head>
+  <body class="min-h-full flex flex-col font-sans selection:bg-agro-200 selection:text-agro-900">
+    <!-- Top Navigation Bar -->
+    <header class="sticky top-0 z-40 bg-agro-900 text-white shadow-sm border-b border-agro-800">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+          <!-- Logo & Brand -->
+          <a href="/" class="flex items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-harvest-amber rounded-lg px-2 py-1">
+            <img src="/images/mascot.png" alt="AgriAlert Logo" class="w-9 h-9 object-contain drop-shadow" />
+            <div>
+              <span class="text-xl font-bold tracking-tight text-white flex items-center gap-1.5">
+                AgriAlert
+                <span class="text-xs uppercase tracking-widest font-semibold px-1.5 py-0.5 rounded bg-agro-700 text-agro-200 border border-agro-600">ID</span>
+              </span>
+              <p class="text-[11px] text-agro-300 -mt-0.5 font-medium hidden sm:block">Sistem Cerdas Peringatan Dini Padi</p>
+            </div>
+          </a>
+
+          <!-- Desktop Navigation -->
+          <nav class="hidden md:flex items-center gap-1">
+            <a 
+              href="/" 
+              class={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${currentPath === '/' ? 'bg-agro-800 text-white shadow-inner font-semibold' : 'text-agro-100 hover:bg-agro-800/60 hover:text-white'}`}
+            >
+              Beranda
+            </a>
+            <a 
+              href="/cuaca" 
+              class={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${currentPath.startsWith('/cuaca') ? 'bg-agro-800 text-white shadow-inner font-semibold' : 'text-agro-100 hover:bg-agro-800/60 hover:text-white'}`}
+            >
+              Cuaca & Iklim
+            </a>
+            <a 
+              href="/deteksi" 
+              class={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${currentPath.startsWith('/deteksi') ? 'bg-agro-800 text-white shadow-inner font-semibold' : 'text-agro-100 hover:bg-agro-800/60 hover:text-white'}`}
+            >
+              Cek Hama AI
+            </a>
+            <a 
+              href="/hama" 
+              class={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${currentPath.startsWith('/hama') ? 'bg-agro-800 text-white shadow-inner font-semibold' : 'text-agro-100 hover:bg-agro-800/60 hover:text-white'}`}
+            >
+              Katalog OPT
+            </a>
+            <a 
+              href="/tanibot" 
+              class={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${currentPath.startsWith('/tanibot') ? 'bg-agro-800 text-white shadow-inner font-semibold' : 'text-agro-100 hover:bg-agro-800/60 hover:text-white'}`}
+            >
+              TaniBot
+            </a>
+            <a 
+              href="/pengaduan" 
+              class={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${currentPath.startsWith('/pengaduan') ? 'bg-agro-800 text-white shadow-inner font-semibold' : 'text-agro-100 hover:bg-agro-800/60 hover:text-white'}`}
+            >
+              Pengaduan
+            </a>
+          </nav>
+
+          <!-- Quick Action CTA -->
+          <div class="flex items-center gap-2">
+            <a 
+              href="/deteksi" 
+              class="inline-flex items-center gap-2 bg-harvest-gold hover:bg-harvest-dark text-white text-xs sm:text-sm font-semibold px-3 sm:px-4 py-2 rounded-lg transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-harvest-amber focus:ring-offset-2 focus:ring-offset-agro-900"
+            >
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+              <span class="hidden xs:inline">Pindai Daun</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Viewport Content -->
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 pb-24 md:pb-12">
+      <slot />
+    </main>
+
+    <!-- Mobile Bottom Navigation Bar -->
+    <nav class="md:hidden fixed bottom-0 inset-x-0 z-50 bg-white border-t border-soil-200 shadow-lg px-2 py-1.5 flex justify-around items-center">
+      <a href="/" class={`flex flex-col items-center p-1.5 rounded-lg text-xs font-medium ${currentPath === '/' ? 'text-agro-700 font-bold' : 'text-soil-600 hover:text-agro-800'}`}>
+        <svg class="w-5 h-5 mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+        </svg>
+        Beranda
+      </a>
+      <a href="/cuaca" class={`flex flex-col items-center p-1.5 rounded-lg text-xs font-medium ${currentPath.startsWith('/cuaca') ? 'text-agro-700 font-bold' : 'text-soil-600 hover:text-agro-800'}`}>
+        <svg class="w-5 h-5 mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 00-9.78 2.096A4.001 4.001 0 003 15z" />
+        </svg>
+        Cuaca
+      </a>
+      <a href="/deteksi" class={`flex flex-col items-center p-1.5 rounded-lg text-xs font-medium ${currentPath.startsWith('/deteksi') ? 'text-agro-700 font-bold' : 'text-soil-600 hover:text-agro-800'}`}>
+        <svg class="w-5 h-5 mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0a2 2 0 100-4 2 2 0 000 4zm-8 0a2 2 0 100-4 2 2 0 000 4zm16 0a2 2 0 100-4 2 2 0 000 4z" />
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v1a3 3 0 006 0v-1" />
+        </svg>
+        Deteksi AI
+      </a>
+      <a href="/hama" class={`flex flex-col items-center p-1.5 rounded-lg text-xs font-medium ${currentPath.startsWith('/hama') ? 'text-agro-700 font-bold' : 'text-soil-600 hover:text-agro-800'}`}>
+        <svg class="w-5 h-5 mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+        </svg>
+        Katalog
+      </a>
+      <a href="/tanibot" class={`flex flex-col items-center p-1.5 rounded-lg text-xs font-medium ${currentPath.startsWith('/tanibot') ? 'text-agro-700 font-bold' : 'text-soil-600 hover:text-agro-800'}`}>
+        <svg class="w-5 h-5 mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+        </svg>
+        TaniBot
+      </a>
+    </nav>
+
+    <!-- Footer -->
+    <footer class="mt-auto bg-agro-950 text-agro-200 border-t border-agro-900 py-8 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-xs">
+        <div class="flex items-center gap-3">
+          <img src="/images/mascot.png" alt="Logo" class="w-7 h-7 object-contain opacity-80" />
+          <div>
+            <p class="font-bold text-white text-sm">AgriAlert Indonesia</p>
+            <p class="text-agro-400">Prakiraan OPT Pangan Ditjen Tanaman Pangan Kementan RI & BMKG</p>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-center gap-6 text-agro-300">
+          <a href="/cuaca" class="hover:text-white transition-colors">Analisis Cuaca</a>
+          <a href="/deteksi" class="hover:text-white transition-colors">Klasifikasi Daun</a>
+          <a href="/hama" class="hover:text-white transition-colors">Ensiklopedia OPT</a>
+          <a href="/tanibot" class="hover:text-white transition-colors">Asisten TaniBot</a>
+          <a href="/pengaduan" class="hover:text-white transition-colors">Pengaduan Lapangan</a>
+        </div>
+
+        <p class="text-agro-400 text-center md:text-right">
+          Bebas dependensi server &bull; Berjalan native di peramban
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

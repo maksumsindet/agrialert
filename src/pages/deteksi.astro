@@ -1,0 +1,62 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Classifier from '../components/Classifier.astro';
+---
+
+<Layout title="Deteksi Penyakit Daun Padi AI">
+  <div class="space-y-8">
+    <div>
+      <div class="flex items-center gap-2">
+        <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold bg-agro-100 text-agro-800 border border-agro-300">
+          Visi Komputer Lapangan
+        </span>
+        <span class="text-xs text-soil-500">ONNX WebAssembly</span>
+      </div>
+      <h1 class="text-2xl sm:text-3xl font-black text-soil-900 mt-1 tracking-tight">
+        Deteksi Penyakit Daun Padi Otomatis
+      </h1>
+      <p class="text-xs sm:text-sm text-soil-600 mt-1">
+        Klasifikasi penyakit padi berbasis deep learning CNN langsung di peramban Anda tanpa mengunggah data ke server luar.
+      </p>
+    </div>
+
+    <!-- The Interactive Classifier Component -->
+    <Classifier />
+
+    <!-- Practical Photography Field Guide -->
+    <div class="bg-white rounded-2xl shadow-sm border border-soil-200 p-6 space-y-4">
+      <h3 class="text-base font-bold text-soil-900 flex items-center gap-2">
+        <svg class="w-5 h-5 text-agro-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        Panduan Pengambilan Foto untuk Akurasi Optimal
+      </h3>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
+        <div class="p-3.5 rounded-xl bg-soil-50 border border-soil-200">
+          <span class="w-6 h-6 rounded-full bg-agro-100 text-agro-800 font-bold flex items-center justify-center mb-2">1</span>
+          <strong class="text-soil-900 block mb-1">Jarak 20 - 50 cm</strong>
+          <p class="text-soil-600">Pastikan kamera berada cukup dekat agar pola lesi atau bercak pada helai daun terlihat tajam.</p>
+        </div>
+
+        <div class="p-3.5 rounded-xl bg-soil-50 border border-soil-200">
+          <span class="w-6 h-6 rounded-full bg-agro-100 text-agro-800 font-bold flex items-center justify-center mb-2">2</span>
+          <strong class="text-soil-900 block mb-1">Pencahayaan Merata</strong>
+          <p class="text-soil-600">Ambil foto pada pagi atau sore hari. Hindari bayangan tangan atau sinar matahari langsung yang menyilaukan.</p>
+        </div>
+
+        <div class="p-3.5 rounded-xl bg-soil-50 border border-soil-200">
+          <span class="w-6 h-6 rounded-full bg-agro-100 text-agro-800 font-bold flex items-center justify-center mb-2">3</span>
+          <strong class="text-soil-900 block mb-1">Fokus pada Gejala Daun</strong>
+          <p class="text-soil-600">Arahkan fokus lensa tepat pada bagian daun yang bergejala (ujung daun mengering, bercak oval, atau garis).</p>
+        </div>
+
+        <div class="p-3.5 rounded-xl bg-soil-50 border border-soil-200">
+          <span class="w-6 h-6 rounded-full bg-agro-100 text-agro-800 font-bold flex items-center justify-center mb-2">4</span>
+          <strong class="text-soil-900 block mb-1">Minimalisir Latar Belakang</strong>
+          <p class="text-soil-600">Filter HSV akan menolak foto jika vegetasi daun kurang dari 40% dari total area frame foto.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>

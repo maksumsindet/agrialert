@@ -1,0 +1,216 @@
+---
+// SatelliteChart.astro - Sentinel-2 NDVI & Sentinel-1 SAR Dual Analysis
+import s2Data from '../data/sentinel2.json';
+import s1Data from '../data/sentinel1.json';
+
+const latestNdvi = s2Data[s2Data.length - 1] || { ndvi: 0.74, tanggal: "2024-05" };
+const latestSar = s1Data[s1Data.length - 1] || { vh: -15.2, vv: -9.8, tanggal: "2024-05" };
+---
+
+<div class="bg-white rounded-2xl shadow-sm border border-soil-200 overflow-hidden">
+  <!-- Header -->
+  <div class="p-6 border-b border-soil-200 flex flex-wrap items-center justify-between gap-4">
+    <div>
+      <div class="flex items-center gap-2">
+        <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold bg-agro-100 text-agro-800 border border-agro-300">
+          Penginderaan Jauh
+        </span>
+        <span class="text-xs text-soil-500 font-mono">ESA Copernicus Sentinel-1 & 2</span>
+      </div>
+      <h3 class="text-xl font-bold text-soil-900 mt-1 tracking-tight">Kesehatan Kanopi & Biomassa Satelit</h3>
+      <p class="text-xs text-soil-600 mt-0.5">Indeks Vegetasi Optik (NDVI) dan Hamburan Balik Radar SAR (VH/VV)</p>
+    </div>
+
+    <!-- Switch View Buttons -->
+    <div class="flex items-center p-1 bg-soil-100 rounded-lg border border-soil-200 text-xs font-semibold">
+      <button 
+        type="button" 
+        id="btn-tab-ndvi" 
+        class="px-3 py-1.5 rounded-md bg-white text-agro-900 shadow-xs transition-all"
+      >
+        Optik Sentinel-2 (NDVI)
+      </button>
+      <button 
+        type="button" 
+        id="btn-tab-sar" 
+        class="px-3 py-1.5 rounded-md text-soil-600 hover:text-soil-900 transition-all"
+      >
+        Radar Sentinel-1 (SAR)
+      </button>
+    </div>
+  </div>
+
+  <!-- Chart Viewport -->
+  <div class="p-6">
+    <div class="relative w-full h-[320px]">
+      <canvas id="satellite-canvas"></canvas>
+    </div>
+
+    <!-- Interpretation Guide -->
+    <div class="mt-6 pt-4 border-t border-soil-100 grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
+      <div class="p-3 bg-soil-50 rounded-lg border border-soil-200">
+        <span class="text-soil-500 block">Indeks NDVI Terkini:</span>
+        <div class="flex items-baseline gap-2 mt-0.5">
+          <strong class="text-agro-800 text-lg">{latestNdvi.ndvi.toFixed(2)}</strong>
+          <span class="text-agro-700 font-medium">(Kanopi Lebat & Subur)</span>
+        </div>
+      </div>
+
+      <div class="p-3 bg-soil-50 rounded-lg border border-soil-200">
+        <span class="text-soil-500 block">Backscatter SAR (VH / VV):</span>
+        <div class="flex items-baseline gap-2 mt-0.5">
+          <strong class="text-soil-800 text-lg">{latestSar.vh.toFixed(1)} / {latestSar.vv.toFixed(1)} dB</strong>
+        </div>
+      </div>
+
+      <div class="p-3 bg-soil-50 rounded-lg border border-soil-200">
+        <span class="text-soil-500 block">Fase Pertumbuhan Sawah:</span>
+        <p class="text-soil-800 font-bold text-sm mt-0.5">Fase Maksimum / Bunting</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script is:inline id="s2-raw-data" type="application/json">
+  {JSON.stringify(s2Data)}
+</script>
+<script is:inline id="s1-raw-data" type="application/json">
+  {JSON.stringify(s1Data)}
+</script>
+
+<script>
+  import { Chart, LineController, LineElement, PointElement, LinearScale, CategoryScale, Tooltip, Legend, Filler } from 'chart.js';
+
+  Chart.register(LineController, LineElement, PointElement, LinearScale, CategoryScale, Tooltip, Legend, Filler);
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const s2El = document.getElementById('s2-raw-data');
+    const s1El = document.getElementById('s1-raw-data');
+
+    const s2Data: any[] = s2El ? JSON.parse(s2El.textContent || '[]') : [];
+    const s1Data: any[] = s1El ? JSON.parse(s1El.textContent || '[]') : [];
+
+    const canvas = document.getElementById('satellite-canvas') as HTMLCanvasElement;
+    if (!canvas) return;
+
+    let currentMode = 'ndvi'; // 'ndvi' or 'sar'
+
+    const ndviLabels = s2Data.map(d => d.tanggal);
+    const ndviValues = s2Data.map(d => d.ndvi);
+
+    const sarLabels = s1Data.map(d => d.tanggal);
+    const sarVh = s1Data.map(d => d.vh);
+    const sarVv = s1Data.map(d => d.vv);
+
+    let satChart = new Chart(canvas, {
+      type: 'line',
+      data: {
+        labels: ndviLabels,
+        datasets: [
+          {
+            label: 'Sentinel-2 NDVI',
+            data: ndviValues,
+            borderColor: '#386D3A',
+            backgroundColor: 'rgba(56, 109, 58, 0.12)',
+            borderWidth: 2,
+            fill: true,
+            tension: 0.3,
+            pointRadius: 2.5,
+            pointBackgroundColor: '#386D3A'
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            backgroundColor: '#1F3921',
+            padding: 10
+          }
+        },
+        scales: {
+          x: {
+            grid: { display: false },
+            ticks: { maxTicksLimit: 12, font: { size: 10 }, color: '#795D4A' }
+          },
+          y: {
+            min: 0,
+            max: 1.0,
+            grid: { color: 'rgba(228, 217, 206, 0.6)' },
+            ticks: { font: { size: 10 }, color: '#795D4A' }
+          }
+        }
+      }
+    });
+
+    const btnNdvi = document.getElementById('btn-tab-ndvi');
+    const btnSar = document.getElementById('btn-tab-sar');
+
+    btnNdvi?.addEventListener('click', () => {
+      if (currentMode === 'ndvi') return;
+      currentMode = 'ndvi';
+      btnNdvi.className = "px-3 py-1.5 rounded-md bg-white text-agro-900 shadow-xs transition-all";
+      btnSar!.className = "px-3 py-1.5 rounded-md text-soil-600 hover:text-soil-900 transition-all";
+
+      satChart.data.labels = ndviLabels;
+      satChart.data.datasets = [
+        {
+          label: 'Sentinel-2 NDVI',
+          data: ndviValues,
+          borderColor: '#386D3A',
+          backgroundColor: 'rgba(56, 109, 58, 0.12)',
+          borderWidth: 2,
+          fill: true,
+          tension: 0.3,
+          pointRadius: 2.5,
+          pointBackgroundColor: '#386D3A'
+        }
+      ];
+      if (satChart.options.scales?.y) {
+        satChart.options.scales.y.min = 0;
+        satChart.options.scales.y.max = 1.0;
+      }
+      satChart.update();
+    });
+
+    btnSar?.addEventListener('click', () => {
+      if (currentMode === 'sar') return;
+      currentMode = 'sar';
+      btnSar.className = "px-3 py-1.5 rounded-md bg-white text-agro-900 shadow-xs transition-all";
+      btnNdvi!.className = "px-3 py-1.5 rounded-md text-soil-600 hover:text-soil-900 transition-all";
+
+      satChart.data.labels = sarLabels;
+      satChart.data.datasets = [
+        {
+          label: 'SAR VH (Cross-pol dB)',
+          data: sarVh,
+          borderColor: '#D97706',
+          backgroundColor: 'transparent',
+          borderWidth: 2,
+          fill: false,
+          tension: 0.3,
+          pointRadius: 2.5,
+          pointBackgroundColor: '#D97706'
+        },
+        {
+          label: 'SAR VV (Co-pol dB)',
+          data: sarVv,
+          borderColor: '#2563EB',
+          backgroundColor: 'transparent',
+          borderWidth: 2,
+          fill: false,
+          tension: 0.3,
+          pointRadius: 2.5,
+          pointBackgroundColor: '#2563EB'
+        }
+      ];
+      if (satChart.options.scales?.y) {
+        satChart.options.scales.y.min = -25;
+        satChart.options.scales.y.max = 0;
+      }
+      satChart.update();
+    });
+  });
+</script>
