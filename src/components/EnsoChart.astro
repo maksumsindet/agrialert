@@ -64,18 +64,14 @@ const isLaNina = lastPoint.anom <= -0.5;
   </div>
 </div>
 
-<script is:inline id="enso-raw-data" type="application/json">
-  {JSON.stringify(ensoData)}
-</script>
-
 <script>
   import { Chart, LineController, LineElement, PointElement, LinearScale, CategoryScale, Tooltip, Legend, Filler } from 'chart.js';
+  import ensoData from '../data/enso_recent.json';
 
   Chart.register(LineController, LineElement, PointElement, LinearScale, CategoryScale, Tooltip, Legend, Filler);
 
   document.addEventListener('DOMContentLoaded', () => {
-    const rawEl = document.getElementById('enso-raw-data');
-    const data: any[] = rawEl ? JSON.parse(rawEl.textContent || '[]') : [];
+    const data: any[] = ensoData || [];
 
     const canvas = document.getElementById('enso-canvas') as HTMLCanvasElement;
     if (!canvas || data.length === 0) return;

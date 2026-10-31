@@ -71,25 +71,14 @@ const latestSar = s1Data[s1Data.length - 1] || { vh: -15.2, vv: -9.8, tanggal: "
   </div>
 </div>
 
-<script is:inline id="s2-raw-data" type="application/json">
-  {JSON.stringify(s2Data)}
-</script>
-<script is:inline id="s1-raw-data" type="application/json">
-  {JSON.stringify(s1Data)}
-</script>
-
 <script>
   import { Chart, LineController, LineElement, PointElement, LinearScale, CategoryScale, Tooltip, Legend, Filler } from 'chart.js';
+  import s2Data from '../data/sentinel2.json';
+  import s1Data from '../data/sentinel1.json';
 
   Chart.register(LineController, LineElement, PointElement, LinearScale, CategoryScale, Tooltip, Legend, Filler);
 
   document.addEventListener('DOMContentLoaded', () => {
-    const s2El = document.getElementById('s2-raw-data');
-    const s1El = document.getElementById('s1-raw-data');
-
-    const s2Data: any[] = s2El ? JSON.parse(s2El.textContent || '[]') : [];
-    const s1Data: any[] = s1El ? JSON.parse(s1El.textContent || '[]') : [];
-
     const canvas = document.getElementById('satellite-canvas') as HTMLCanvasElement;
     if (!canvas) return;
 
