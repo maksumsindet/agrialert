@@ -17,53 +17,118 @@ const hamaImages: Record<string, string> = {
 
 <Layout title="Beranda">
   <div class="space-y-10">
-    <!-- Hero Section -->
-    <section class="relative rounded-3xl bg-agro-900 text-white p-8 sm:p-12 overflow-hidden shadow-sm border border-agro-800">
-      <div class="relative z-10 max-w-2xl space-y-4">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-agro-800/80 border border-agro-700 text-agro-200 text-xs font-semibold">
-          <span class="w-2 h-2 rounded-full bg-harvest-amber"></span>
-          AgriAlert &bull; Standar BBPOPT Ditjen Tanaman Pangan
-        </div>
-        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-tight">
-          Peringatan Dini Padi Berbasis AI & Satelit
-        </h1>
-        <p class="text-agro-200 text-sm sm:text-base leading-relaxed">
-          Deteksi penyakit daun padi secara instan via kamera, pantau anomali iklim El Niño/La Niña dengan peramalan LSTM, serta dapatkan rekomendasi pengendalian terpadu secara langsung tanpa koneksi internet.
-        </p>
+    <!-- Hero Section: High-craft 2-Column Banner -->
+    <section class="relative rounded-3xl bg-gradient-to-br from-agro-950 via-agro-900 to-agro-850 text-white p-6 sm:p-10 lg:p-12 overflow-hidden shadow-md border border-agro-800">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
+        <!-- Left: Copy & Call-to-actions -->
+        <div class="lg:col-span-7 space-y-5">
+          <div class="inline-flex items-center gap-2.5 px-3 py-1.5 rounded-full bg-agro-800/90 border border-agro-700/80 text-agro-200 text-xs font-semibold shadow-inner">
+            <span class="w-2.5 h-2.5 rounded-full bg-harvest-amber animate-pulse"></span>
+            <span>AgriAlert &bull; Standar BBPOPT Ditjen Tanaman Pangan</span>
+          </div>
 
-        <div class="pt-2 flex flex-wrap items-center gap-3">
-          <a 
-            href="/deteksi" 
-            class="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-harvest-gold hover:bg-harvest-dark text-white font-bold text-sm shadow-md transition-all focus:outline-none focus:ring-2 focus:ring-harvest-amber"
-          >
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
-            </svg>
-            Pindai Daun Padi Sekarang
-          </a>
-          <a 
-            href="/tanibot" 
-            class="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-agro-800 hover:bg-agro-700 text-white font-semibold text-sm border border-agro-700 transition-all"
-          >
-            <svg class="w-5 h-5 text-agro-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
-            </svg>
-            Tanya TaniBot
-          </a>
-        </div>
-      </div>
+          <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-[1.15] text-white">
+            Peringatan Dini Padi Berbasis AI & Satelit
+          </h1>
 
-      <!-- Subtle agricultural motif overlay -->
-      <div class="absolute right-0 bottom-0 opacity-15 pointer-events-none transform translate-x-10 translate-y-10 lg:translate-y-0">
-        <img src="/images/mascot.png" alt="Mascot" class="w-80 h-80 object-contain" />
+          <p class="text-agro-200 text-sm sm:text-base leading-relaxed max-w-xl">
+            Deteksi penyakit daun padi secara instan via kamera on-device, pantau anomali iklim El Niño/La Niña dengan model peramalan LSTM, dan dapatkan rekomendasi pengendalian terpadu secara langsung tanpa kuota internet.
+          </p>
+
+          <div class="pt-2 flex flex-wrap items-center gap-3">
+            <a 
+              href="/deteksi" 
+              class="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl bg-harvest-gold hover:bg-harvest-dark text-white font-bold text-sm shadow-md hover:shadow-lg transition-all focus:outline-none focus:ring-2 focus:ring-harvest-amber"
+            >
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+              <span>Pindai Daun Padi Sekarang</span>
+            </a>
+
+            <a 
+              href="/tanibot" 
+              class="inline-flex items-center gap-2 px-5 py-3.5 rounded-xl bg-agro-800/80 hover:bg-agro-700 text-white font-semibold text-sm border border-agro-700 transition-all shadow-sm"
+            >
+              <svg class="w-5 h-5 text-agro-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+              </svg>
+              <span>Tanya TaniBot</span>
+            </a>
+          </div>
+
+          <!-- Feature badges -->
+          <div class="pt-3 flex flex-wrap items-center gap-4 text-xs text-agro-300 border-t border-agro-800/80">
+            <span class="flex items-center gap-1.5">
+              <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+              </svg>
+              100% On-Device WebAssembly
+            </span>
+            <span class="flex items-center gap-1.5">
+              <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+              </svg>
+              Filter Vegetasi HSV 4-Layer
+            </span>
+            <span class="flex items-center gap-1.5">
+              <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+              </svg>
+              Radar Satelit Sentinel-1/2
+            </span>
+          </div>
+        </div>
+
+        <!-- Right: Vibrant Mascot Spotlight Card -->
+        <div class="lg:col-span-5 flex justify-center">
+          <div class="relative w-full max-w-sm rounded-2xl bg-gradient-to-b from-agro-800/90 to-agro-900/90 p-6 border border-agro-700/80 shadow-xl backdrop-blur-sm">
+            <div class="flex items-center justify-between mb-4 pb-3 border-b border-agro-700/60">
+              <div class="flex items-center gap-2">
+                <img src="/images/gps.png" alt="GPS" class="w-5 h-5 object-contain" />
+                <span class="text-xs font-bold text-agro-100 uppercase tracking-wider">Sistem Siaga Lapangan</span>
+              </div>
+              <span class="flex items-center gap-1.5 text-[11px] font-semibold text-emerald-300 bg-emerald-950/80 border border-emerald-700 px-2 py-0.5 rounded-full">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                Online / Offline Ready
+              </span>
+            </div>
+
+            <!-- Crisp Mascot Image with Gentle Depth -->
+            <div class="relative flex justify-center py-2">
+              <div class="absolute inset-0 bg-agro-700/20 rounded-full blur-2xl"></div>
+              <img 
+                src="/images/mascot.png" 
+                alt="Maskot AgriAlert" 
+                class="relative w-48 h-48 sm:w-56 sm:h-56 object-contain drop-shadow-2xl hover:scale-105 transition-transform duration-300"
+              />
+            </div>
+
+            <div class="mt-4 p-3 rounded-xl bg-agro-950/70 border border-agro-800/80 text-xs text-agro-200 flex items-center justify-between">
+              <div class="flex items-center gap-2.5">
+                <img src="/images/sun.png" alt="Cuaca" class="w-7 h-7 object-contain" />
+                <div>
+                  <p class="font-bold text-white text-xs">Peringatan Agroklimat</p>
+                  <p class="text-[11px] text-agro-300">Pola Tanam MT-1 Rendengan</p>
+                </div>
+              </div>
+              <a href="/cuaca" class="text-[11px] font-bold text-harvest-amber hover:text-white transition-colors">
+                Detail &rarr;
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
     <!-- Live Weather Widget Section -->
     <section>
       <div class="mb-3 flex items-center justify-between">
-        <h2 class="text-lg font-bold text-soil-900 tracking-tight">Kondisi Cuaca & Kalender Tanam</h2>
+        <div>
+          <h2 class="text-lg font-bold text-soil-900 tracking-tight">Kondisi Cuaca & Kalender Tanam</h2>
+          <p class="text-xs text-soil-500">Kalkulasi mikro agroklimat berdasarkan titik lokasi GPS sawah</p>
+        </div>
         <a href="/cuaca" class="text-xs text-agro-700 hover:text-agro-900 font-semibold flex items-center gap-1">
           Analisis Iklim Lengkap &rarr;
         </a>
@@ -73,47 +138,47 @@ const hamaImages: Record<string, string> = {
 
     <!-- Key Feature Tiles -->
     <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <div class="p-6 rounded-2xl bg-white border border-soil-200 shadow-sm space-y-3">
-        <div class="w-10 h-10 rounded-xl bg-agro-100 text-agro-800 flex items-center justify-center font-bold">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <div class="p-6 rounded-2xl bg-white border border-soil-200 shadow-sm space-y-3 hover:border-agro-500 transition-colors">
+        <div class="w-11 h-11 rounded-xl bg-agro-100 text-agro-800 flex items-center justify-center font-bold">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
           </svg>
         </div>
-        <h3 class="font-bold text-soil-900 text-base">Filter Vegetasi 4-Layer</h3>
+        <h3 class="font-bold text-soil-900 text-base">Filter Vegetasi HSV 4-Layer</h3>
         <p class="text-xs text-soil-600 leading-relaxed">
-          Mencegah false positive dari foto non-tanaman dengan menganalisis spektrum warna HSV (hijau segar, kuning klorosis, dan lesi cokelat).
+          Mencegah salah klasifikasi dari foto non-tanaman dengan memverifikasi spektrum warna hijau klorofil, kuning blast, lesi cokelat, dan desaturasi hawar pelepah.
         </p>
-        <a href="/deteksi" class="inline-block text-xs font-bold text-agro-700 hover:text-agro-900">Uji Deteksi &rarr;</a>
+        <a href="/deteksi" class="inline-block text-xs font-bold text-agro-700 hover:text-agro-900">Uji Deteksi Kamera &rarr;</a>
       </div>
 
-      <div class="p-6 rounded-2xl bg-white border border-soil-200 shadow-sm space-y-3">
-        <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-800 flex items-center justify-center font-bold">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <div class="p-6 rounded-2xl bg-white border border-soil-200 shadow-sm space-y-3 hover:border-agro-500 transition-colors">
+        <div class="w-11 h-11 rounded-xl bg-blue-100 text-blue-800 flex items-center justify-center font-bold">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
           </svg>
         </div>
         <h3 class="font-bold text-soil-900 text-base">Satelit Sentinel-1 & 2</h3>
         <p class="text-xs text-soil-600 leading-relaxed">
-          Pemantauan pertumbuhan padi nasional via indeks vegetasi NDVI dan radar gelombang mikro SAR VH/VV yang mampu menembus awan tebal.
+          Pemantauan pertumbuhan padi nasional via indeks vegetasi optik NDVI dan radar gelombang mikro SAR VH/VV yang mampu menembus awan tebal.
         </p>
         <a href="/cuaca" class="inline-block text-xs font-bold text-agro-700 hover:text-agro-900">Buka Grafik Satelit &rarr;</a>
       </div>
 
-      <div class="p-6 rounded-2xl bg-white border border-soil-200 shadow-sm space-y-3">
-        <div class="w-10 h-10 rounded-xl bg-harvest-light text-harvest-dark flex items-center justify-center font-bold">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <div class="p-6 rounded-2xl bg-white border border-soil-200 shadow-sm space-y-3 hover:border-agro-500 transition-colors">
+        <div class="w-11 h-11 rounded-xl bg-harvest-light text-harvest-dark flex items-center justify-center font-bold">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
           </svg>
         </div>
         <h3 class="font-bold text-soil-900 text-base">Pohon Keputusan Kementan</h3>
         <p class="text-xs text-soil-600 leading-relaxed">
-          Panduan dosis pemupukan dan penanganan penyakit berfase (pra-tanam, pesemaian, pertanaman) dari buku prakiraan resmi BBPOPT.
+          Panduan dosis pemupukan dan penanganan penyakit berfase (pra-tanam, pesemaian, pertanaman) dari buku prakiraan resmi BBPOPT Ditjen Tanaman Pangan.
         </p>
         <a href="/tanibot" class="inline-block text-xs font-bold text-agro-700 hover:text-agro-900">Konsultasi Mandiri &rarr;</a>
       </div>
     </section>
 
-    <!-- Rice Pest Preview Showcase -->
+    <!-- Rice Pest Preview Showcase with Sharp Photography -->
     <section class="space-y-4">
       <div class="flex items-center justify-between">
         <div>
@@ -129,20 +194,25 @@ const hamaImages: Record<string, string> = {
         {pests.map((opt) => (
           <a 
             href={`/hama#${opt.id}`} 
-            class="group bg-white rounded-xl border border-soil-200 overflow-hidden shadow-xs hover:border-agro-600 hover:shadow-sm transition-all"
+            class="group bg-white rounded-xl border border-soil-200 overflow-hidden shadow-xs hover:border-agro-600 hover:shadow-md transition-all flex flex-col justify-between"
           >
-            <img 
-              src={hamaImages[opt.id] || '/assets/hama/sehat.jpg'} 
-              alt={opt.nama_lokal} 
-              class="w-full h-24 object-cover group-hover:scale-105 transition-transform duration-300" 
-            />
-            <div class="p-2.5">
-              <span class={`text-[10px] font-bold uppercase tracking-wider block ${opt.tipe === 'hama' ? 'text-amber-700' : 'text-red-700'}`}>
+            <div class="relative w-full aspect-[4/3] bg-soil-100 overflow-hidden">
+              <img 
+                src={hamaImages[opt.id] || '/assets/hama/sehat.jpg'} 
+                alt={opt.nama_lokal} 
+                loading="lazy"
+                decoding="async"
+                class="w-full h-full object-cover group-hover:scale-108 transition-transform duration-300" 
+              />
+              <span class={`absolute top-2 left-2 text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded shadow-xs text-white ${opt.tipe === 'hama' ? 'bg-amber-600' : 'bg-red-700'}`}>
                 {opt.tipe}
               </span>
-              <p class="font-bold text-soil-900 text-xs truncate mt-0.5 group-hover:text-agro-800">
+            </div>
+            <div class="p-3">
+              <p class="font-bold text-soil-900 text-xs truncate group-hover:text-agro-800 transition-colors">
                 {opt.nama_lokal}
               </p>
+              <p class="text-[10px] text-soil-500 italic truncate font-serif mt-0.5">{opt.nama_latin}</p>
             </div>
           </a>
         ))}

@@ -4,18 +4,22 @@ import tanibotData from '../data/tanibot_data_v2.json';
 
 const optList = tanibotData.opt;
 
-const hamaImageMap: Record<string, string> = {
-  'pbp': '/assets/hama/penggerek_batang_beluk.jpg',
-  'wbc': '/assets/hama/wereng_batang_coklat.jpg',
-  'tikus': '/assets/hama/tikus_sawah.jpg',
-  'blas': '/assets/hama/blas_daun.jpg',
-  'hdb': '/assets/hama/hdb.jpg',
-  'brown_spot': '/assets/hama/bercak_cokelat.jpg',
-  'narrow_brown_spot': '/assets/hama/bercak_cokelat_sempit.jpg',
-  'leaf_scald': '/assets/hama/hawar_pelepah.jpg',
-  'sheath_blight': '/assets/hama/busuk_pelepah.jpg',
-  'tungro': '/assets/hama/tungro.jpg',
-  'rice_hispa': '/assets/hama/hispa.jpg'
+const hamaImageMap: Record<string, { primary: string; secondary?: string; secondaryLabel?: string }> = {
+  'pbp': { 
+    primary: '/assets/hama/penggerek_batang_sundep.jpg', 
+    secondary: '/assets/hama/penggerek_batang_beluk.jpg',
+    secondaryLabel: 'Fase Beluk (Generatif)'
+  },
+  'wbc': { primary: '/assets/hama/wereng_batang_coklat.jpg' },
+  'tikus': { primary: '/assets/hama/tikus_sawah.jpg' },
+  'blas': { primary: '/assets/hama/blas_daun.jpg' },
+  'hdb': { primary: '/assets/hama/hdb.jpg' },
+  'brown_spot': { primary: '/assets/hama/bercak_cokelat.jpg' },
+  'narrow_brown_spot': { primary: '/assets/hama/bercak_cokelat_sempit.jpg' },
+  'leaf_scald': { primary: '/assets/hama/hawar_pelepah.jpg' },
+  'sheath_blight': { primary: '/assets/hama/busuk_pelepah.jpg' },
+  'tungro': { primary: '/assets/hama/tungro.jpg' },
+  'rice_hispa': { primary: '/assets/hama/hispa.jpg' }
 };
 ---
 
@@ -26,18 +30,18 @@ const hamaImageMap: Record<string, string> = {
         <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold bg-agro-100 text-agro-800 border border-agro-300">
           Ensiklopedia OPT Resmi
         </span>
-        <span class="text-xs text-soil-500">BBPOPT Kementan RI</span>
+        <span class="text-xs text-soil-500 font-mono">BBPOPT Kementan RI</span>
       </div>
       <h1 class="text-2xl sm:text-3xl font-black text-soil-900 mt-1 tracking-tight">
         Katalog Hama & Penyakit Padi Utama
       </h1>
       <p class="text-xs sm:text-sm text-soil-600 mt-1">
-        Rujukan komprehensif morfologi, gejala serangan, ambang pengendalian ekonomi, dan taksiran kehilangan hasil panen.
+        Rujukan komprehensif morfologi, gejala serangan, foto lapangan resolusi tinggi, dan ambang batas pengendalian ekonomi.
       </p>
     </div>
 
     <!-- Filter Toggle -->
-    <div class="flex items-center gap-2 text-xs font-semibold">
+    <div class="flex flex-wrap items-center gap-2 text-xs font-semibold">
       <button type="button" class="px-4 py-2 rounded-lg bg-agro-800 text-white shadow-xs opt-filter-btn" data-filter="all">Semua OPT (11)</button>
       <button type="button" class="px-4 py-2 rounded-lg bg-white text-soil-700 border border-soil-300 hover:border-agro-600 opt-filter-btn" data-filter="hama">Hama (Serangga & Vertebrata)</button>
       <button type="button" class="px-4 py-2 rounded-lg bg-white text-soil-700 border border-soil-300 hover:border-agro-600 opt-filter-btn" data-filter="penyakit">Penyakit (Jamur, Bakteri, Virus)</button>
@@ -45,70 +49,131 @@ const hamaImageMap: Record<string, string> = {
 
     <!-- Catalog Cards Grid -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="opt-grid">
-      {optList.map((opt) => (
-        <article 
-          id={opt.id} 
-          data-type={opt.tipe}
-          class="opt-card bg-white rounded-2xl border border-soil-200 overflow-hidden shadow-xs hover:border-agro-500 transition-all flex flex-col justify-between"
-        >
-          <div>
-            <!-- High-Res Field Photo -->
-            <div class="relative h-48 w-full bg-soil-100 overflow-hidden">
-              <img 
-                src={hamaImageMap[opt.id] || '/assets/hama/sehat.jpg'} 
-                alt={opt.nama_lokal} 
-                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" 
-              />
-              <span class={`absolute top-3 left-3 text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full shadow-sm ${opt.tipe === 'hama' ? 'bg-amber-600 text-white' : 'bg-red-700 text-white'}`}>
-                {opt.tipe.toUpperCase()}
-              </span>
-            </div>
+      {optList.map((opt) => {
+        const imgData = hamaImageMap[opt.id] || { primary: '/assets/hama/sehat.jpg' };
+        return (
+          <article 
+            id={opt.id} 
+            data-type={opt.tipe}
+            class="opt-card bg-white rounded-2xl border border-soil-200 overflow-hidden shadow-xs hover:border-agro-500 hover:shadow-md transition-all flex flex-col justify-between"
+          >
+            <div>
+              <!-- High-Res Field Photo with Click-to-Zoom Lightbox -->
+              <div class="relative w-full aspect-[16/10] bg-soil-100 overflow-hidden group">
+                <img 
+                  id={`img-${opt.id}`}
+                  src={imgData.primary} 
+                  alt={opt.nama_lokal} 
+                  loading="lazy"
+                  decoding="async"
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 cursor-pointer pest-clickable-img"
+                  data-full={imgData.primary}
+                  data-title={opt.nama_lokal}
+                />
+                <span class={`absolute top-3 left-3 text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full shadow-sm text-white ${opt.tipe === 'hama' ? 'bg-amber-600' : 'bg-red-700'}`}>
+                  {opt.tipe.toUpperCase()}
+                </span>
 
-            <div class="p-5 space-y-3">
-              <div>
-                <h3 class="font-bold text-lg text-soil-900 leading-snug">{opt.nama_lokal}</h3>
-                <p class="text-xs italic text-soil-500 font-serif">{opt.nama_latin}</p>
-              </div>
+                <!-- Zoom indicator button -->
+                <button 
+                  type="button" 
+                  aria-label="Perbesar Foto"
+                  class="absolute bottom-3 right-3 p-1.5 rounded-lg bg-black/60 text-white hover:bg-black/80 transition-colors opacity-80 hover:opacity-100 pest-zoom-btn"
+                  data-src={imgData.primary}
+                  data-title={opt.nama_lokal}
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7" />
+                  </svg>
+                </button>
 
-              <p class="text-xs text-soil-700 leading-relaxed line-clamp-3">
-                {opt.deskripsi}
-              </p>
-
-              <div class="space-y-2 pt-2 border-t border-soil-100 text-xs">
-                <div>
-                  <strong class="text-soil-900 block font-semibold">Gejala Serangan:</strong>
-                  <p class="text-soil-600 leading-normal line-clamp-2">{opt.gejala}</p>
-                </div>
-                <div>
-                  <strong class="text-soil-900 block font-semibold">Ambang Pengendalian:</strong>
-                  <p class="text-agro-800 font-medium">{opt.ambang_pengendalian}</p>
-                </div>
-                {opt.kehilangan_hasil && (
-                  <div>
-                    <strong class="text-soil-900 block font-semibold">Taksiran Dampak:</strong>
-                    <p class="text-soil-600">{opt.kehilangan_hasil}</p>
+                <!-- Dual phase switcher for PBP (Sundep vs Beluk) -->
+                {imgData.secondary && (
+                  <div class="absolute bottom-3 left-3 flex gap-1 bg-black/70 p-1 rounded-lg text-[10px] font-semibold text-white">
+                    <button 
+                      type="button" 
+                      class="px-2 py-0.5 rounded bg-agro-700 pbp-phase-btn active"
+                      data-target={`img-${opt.id}`}
+                      data-src={imgData.primary}
+                    >
+                      Sundep
+                    </button>
+                    <button 
+                      type="button" 
+                      class="px-2 py-0.5 rounded hover:bg-soil-800 pbp-phase-btn"
+                      data-target={`img-${opt.id}`}
+                      data-src={imgData.secondary}
+                    >
+                      Beluk
+                    </button>
                   </div>
                 )}
               </div>
-            </div>
-          </div>
 
-          <div class="p-5 pt-0">
-            <a 
-              href={`/tanibot?opt=${opt.id}`} 
-              class="w-full inline-flex items-center justify-center gap-1.5 py-2.5 px-4 rounded-xl bg-soil-100 hover:bg-agro-800 hover:text-white text-soil-800 text-xs font-semibold transition-colors border border-soil-200"
-            >
-              Lihat Panduan Dosis & Pengendalian &rarr;
-            </a>
-          </div>
-        </article>
-      ))}
+              <div class="p-5 space-y-3">
+                <div>
+                  <h3 class="font-bold text-lg text-soil-900 leading-snug">{opt.nama_lokal}</h3>
+                  <p class="text-xs italic text-soil-500 font-serif">{opt.nama_latin}</p>
+                </div>
+
+                <p class="text-xs text-soil-700 leading-relaxed line-clamp-3">
+                  {opt.deskripsi}
+                </p>
+
+                <div class="space-y-2 pt-2 border-t border-soil-100 text-xs">
+                  <div>
+                    <strong class="text-soil-900 block font-semibold">Gejala Serangan:</strong>
+                    <p class="text-soil-600 leading-normal line-clamp-2">{opt.gejala}</p>
+                  </div>
+                  <div>
+                    <strong class="text-soil-900 block font-semibold">Ambang Pengendalian:</strong>
+                    <p class="text-agro-800 font-medium">{opt.ambang_pengendalian}</p>
+                  </div>
+                  {opt.kehilangan_hasil && (
+                    <div>
+                      <strong class="text-soil-900 block font-semibold">Taksiran Dampak:</strong>
+                      <p class="text-soil-600">{opt.kehilangan_hasil}</p>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            <div class="p-5 pt-0">
+              <a 
+                href={`/tanibot?opt=${opt.id}`} 
+                class="w-full inline-flex items-center justify-center gap-1.5 py-2.5 px-4 rounded-xl bg-soil-100 hover:bg-agro-800 hover:text-white text-soil-800 text-xs font-semibold transition-colors border border-soil-200 shadow-xs"
+              >
+                Lihat Panduan Dosis & Pengendalian &rarr;
+              </a>
+            </div>
+          </article>
+        );
+      })}
+    </div>
+  </div>
+
+  <!-- High-Res Image Lightbox Modal -->
+  <div id="image-lightbox-modal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="relative max-w-4xl w-full bg-soil-950 rounded-2xl overflow-hidden shadow-2xl border border-soil-800 flex flex-col items-center">
+      <div class="w-full p-4 bg-soil-900/90 text-white flex items-center justify-between border-b border-soil-800">
+        <h4 id="lightbox-title" class="font-bold text-sm text-agro-100"></h4>
+        <button type="button" id="lightbox-close-btn" class="p-1 rounded-lg text-soil-400 hover:text-white hover:bg-soil-800 transition-colors">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+      <div class="p-4 flex items-center justify-center max-h-[75vh] w-full overflow-hidden">
+        <img id="lightbox-img" src="" alt="Detail OPT" class="max-h-[70vh] max-w-full object-contain rounded-lg shadow-lg" />
+      </div>
     </div>
   </div>
 </Layout>
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
+    // Filter buttons logic
     const filterBtns = document.querySelectorAll('.opt-filter-btn');
     const cards = document.querySelectorAll('.opt-card');
 
@@ -130,6 +195,77 @@ const hamaImageMap: Record<string, string> = {
           }
         });
       });
+    });
+
+    // PBP Sundep / Beluk dual image toggle
+    const pbpBtns = document.querySelectorAll('.pbp-phase-btn');
+    pbpBtns.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const targetId = btn.getAttribute('data-target');
+        const targetSrc = btn.getAttribute('data-src');
+        if (targetId && targetSrc) {
+          const img = document.getElementById(targetId) as HTMLImageElement;
+          if (img) {
+            img.src = targetSrc;
+            img.setAttribute('data-full', targetSrc);
+          }
+          btn.parentElement?.querySelectorAll('.pbp-phase-btn').forEach(b => {
+            b.classList.remove('bg-agro-700', 'active');
+            b.classList.add('hover:bg-soil-800');
+          });
+          btn.classList.add('bg-agro-700', 'active');
+          btn.classList.remove('hover:bg-soil-800');
+        }
+      });
+    });
+
+    // Lightbox modal logic
+    const modal = document.getElementById('image-lightbox-modal');
+    const modalImg = document.getElementById('lightbox-img') as HTMLImageElement;
+    const modalTitle = document.getElementById('lightbox-title');
+    const closeBtn = document.getElementById('lightbox-close-btn');
+
+    function openLightbox(src: string, title: string) {
+      if (modal && modalImg && modalTitle) {
+        modalImg.src = src;
+        modalTitle.textContent = title;
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+      }
+    }
+
+    function closeLightbox() {
+      if (modal) {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+      }
+    }
+
+    document.querySelectorAll('.pest-clickable-img').forEach(img => {
+      img.addEventListener('click', () => {
+        const src = img.getAttribute('data-full') || (img as HTMLImageElement).src;
+        const title = img.getAttribute('data-title') || 'Foto OPT';
+        openLightbox(src, title);
+      });
+    });
+
+    document.querySelectorAll('.pest-zoom-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const src = btn.getAttribute('data-src') || '';
+        const title = btn.getAttribute('data-title') || 'Foto OPT';
+        openLightbox(src, title);
+      });
+    });
+
+    closeBtn?.addEventListener('click', closeLightbox);
+    modal?.addEventListener('click', (e) => {
+      if (e.target === modal) closeLightbox();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeLightbox();
     });
   });
 </script>
