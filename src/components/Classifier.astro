@@ -9,9 +9,9 @@ import { url } from '../utils/paths';
     <div>
       <div class="flex items-center gap-2">
         <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold bg-agro-700 text-agro-200 border border-agro-600">
-          Model AI CNN On-Device
+          Model AI CNN AgriWarn Asli
         </span>
-        <span class="text-xs text-agro-300 font-mono">Resolusi 224×224</span>
+        <span class="text-xs text-agro-300 font-mono">Resolusi 128×128 (Keras Native)</span>
       </div>
       <h2 class="text-xl font-bold mt-1 tracking-tight">Deteksi Penyakit Daun Padi</h2>
       <p class="text-xs text-agro-200 mt-0.5">Unggah foto daun atau gunakan kamera langsung di pematang sawah</p>
@@ -185,8 +185,8 @@ import { url } from '../utils/paths';
         </div>
       </div>
 
-      <!-- Hidden 224x224 Canvas for Image Processing -->
-      <canvas id="processing-canvas" width="224" height="224" class="hidden"></canvas>
+      <!-- Hidden 128x128 Canvas for Image Processing (Native Model_CNN_Agriwarn_Final Resolution) -->
+      <canvas id="processing-canvas" width="128" height="128" class="hidden"></canvas>
 
       <!-- Preset Sample Leaves for Instant Testing with Crisp Photos -->
       <div class="bg-soil-50 p-4 rounded-xl border border-soil-200">
@@ -474,7 +474,7 @@ import { url } from '../utils/paths';
   // 4-Layer HSV Vegetation Filter
   function runHsvFilter(imageData: ImageData): { vegRatio: number; saturatedBrownCount: number } {
     const data = imageData.data;
-    const totalPx = 224 * 224;
+    const totalPx = imageData.width * imageData.height;
     let matchCount = 0;
     let saturatedBrownCount = 0;
 
@@ -524,9 +524,12 @@ import { url } from '../utils/paths';
     const compScanImg = document.getElementById('comp-scan-img') as HTMLImageElement;
     if (compScanImg) compScanImg.src = imgElement.src;
 
-    // Draw and resize to 224x224
-    ctx.drawImage(imgElement, 0, 0, 224, 224);
-    const imgData = ctx.getImageData(0, 0, 224, 224);
+    // Draw and resize to 128x128 (Native resolution of Model_CNN_Agriwarn_Final)
+    const TARGET_SIZE = 128;
+    canvas.width = TARGET_SIZE;
+    canvas.height = TARGET_SIZE;
+    ctx.drawImage(imgElement, 0, 0, TARGET_SIZE, TARGET_SIZE);
+    const imgData = ctx.getImageData(0, 0, TARGET_SIZE, TARGET_SIZE);
 
     // 1. HSV 4-Layer Vegetation Check
     const { vegRatio, saturatedBrownCount } = runHsvFilter(imgData);
@@ -545,22 +548,25 @@ import { url } from '../utils/paths';
       return;
     }
 
-    // 2. Prepare float32 tensor [1, 224, 224, 3] with raw 0..255 RGB
-    const floatData = new Float32Array(1 * 224 * 224 * 3);
+    // 2. Prepare float32 tensor [1, 128, 128, 3] with raw 0..255 RGB (rescaling is handled by model graph)
+    const floatData = new Float32Array(1 * TARGET_SIZE * TARGET_SIZE * 3);
     let p = 0;
     for (let i = 0; i < imgData.data.length; i += 4) {
-      floatData[p++] = imgData.data[i];     // R
-      floatData[p++] = imgData.data[i + 1]; // G
-      floatData[p++] = imgData.data[i + 2]; // B
+      floatData[p++] = imgData.data[i];     // R (0..255)
+      floatData[p++] = imgData.data[i + 1]; // G (0..255)
+      floatData[p++] = imgData.data[i + 2]; // B (0..255)
     }
 
     // 3. ONNX Inference
     let probs: number[] = [];
     if (ortSession && (window as any).ort) {
       try {
-        const tensor = new (window as any).ort.Tensor('float32', floatData, [1, 224, 224, 3]);
-        const results = await ortSession.run({ image_input: tensor });
-        const output = results.dense_1.data;
+        const tensor = new (window as any).ort.Tensor('float32', floatData, [1, TARGET_SIZE, TARGET_SIZE, 3]);
+        const inputName = ortSession.inputNames ? ortSession.inputNames[0] : 'image_input';
+        const results = await ortSession.run({ [inputName]: tensor });
+        // Retrieve output tensor dynamically
+        const firstOutKey = Object.keys(results)[0];
+        const output = results[firstOutKey]?.data || results.dense_3?.data || results.dense_1?.data;
         probs = Array.from(output);
       } catch (e) {
         console.error("Inference error:", e);
