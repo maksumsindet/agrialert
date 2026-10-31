@@ -1,6 +1,5 @@
 ---
 // TaniBotChat.astro - Interactive Offline Decision Tree & Agronomist Chatbot
-import tanibotData from '../data/tanibot_data_v2.json';
 import { url } from '../utils/paths';
 ---
 
@@ -36,18 +35,40 @@ import { url } from '../utils/paths';
     </div>
   </div>
 
-  <!-- Search Filter Bar -->
-  <div class="p-3 bg-soil-50 border-b border-soil-200">
-    <div class="relative">
-      <input 
-        type="text" 
-        id="tanibot-search" 
-        placeholder="Cari kata kunci: blas, wereng, dosis urea, varietas tahan..." 
-        class="w-full text-xs pl-8 pr-4 py-2 rounded-lg border border-soil-300 focus:outline-none focus:ring-2 focus:ring-agro-600 focus:border-agro-600 bg-white"
-      />
-      <svg class="w-4 h-4 text-soil-400 absolute left-2.5 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-      </svg>
+  <!-- Search Filter Bar with Submit Button & Quick Chips -->
+  <div class="p-3 bg-soil-50 border-b border-soil-200 space-y-2">
+    <div class="flex gap-2">
+      <div class="relative flex-1">
+        <input 
+          type="text" 
+          id="tanibot-search" 
+          placeholder="Cari kata kunci: blas daun, kresek, wereng, dosis urea, varietas..." 
+          class="w-full text-xs pl-8 pr-4 py-2.5 rounded-xl border border-soil-300 focus:outline-none focus:ring-2 focus:ring-agro-600 focus:border-agro-600 bg-white shadow-2xs"
+        />
+        <svg class="w-4 h-4 text-soil-400 absolute left-2.5 top-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+      </div>
+      <button 
+        type="button" 
+        id="btn-tanibot-search-submit" 
+        class="px-4 py-2.5 bg-agro-700 hover:bg-agro-800 active:scale-95 text-white text-xs font-semibold rounded-xl flex items-center gap-1.5 shadow-sm transition-all"
+      >
+        <span>Tanya</span>
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Quick Suggestion Chips -->
+    <div class="flex items-center gap-1.5 overflow-x-auto pb-1 text-[11px] no-scrollbar">
+      <span class="text-soil-500 font-medium shrink-0">Coba:</span>
+      <button type="button" class="quick-chip shrink-0 px-2.5 py-1 rounded-full bg-white border border-soil-200 hover:border-agro-500 hover:bg-agro-50 text-soil-700 transition-colors" data-query="blas daun">🌾 Blas Daun</button>
+      <button type="button" class="quick-chip shrink-0 px-2.5 py-1 rounded-full bg-white border border-soil-200 hover:border-agro-500 hover:bg-agro-50 text-soil-700 transition-colors" data-query="wereng">🐛 Wereng Cokelat</button>
+      <button type="button" class="quick-chip shrink-0 px-2.5 py-1 rounded-full bg-white border border-soil-200 hover:border-agro-500 hover:bg-agro-50 text-soil-700 transition-colors" data-query="kresek">🍂 Kresek (HDB)</button>
+      <button type="button" class="quick-chip shrink-0 px-2.5 py-1 rounded-full bg-white border border-soil-200 hover:border-agro-500 hover:bg-agro-50 text-soil-700 transition-colors" data-query="dosis urea">🧪 Dosis Urea</button>
+      <button type="button" class="quick-chip shrink-0 px-2.5 py-1 rounded-full bg-white border border-soil-200 hover:border-agro-500 hover:bg-agro-50 text-soil-700 transition-colors" data-query="varietas tahan">🌱 Varietas Tahan</button>
     </div>
   </div>
 
@@ -65,12 +86,9 @@ import { url } from '../utils/paths';
   </div>
 </div>
 
-<!-- Raw data script injection -->
-<script is:inline id="tanibot-raw-data" type="application/json">
-  {JSON.stringify(tanibotData)}
-</script>
-
 <script>
+  import tanibotData from '../data/tanibot_data_v2.json';
+
   interface OptionItem {
     id: string;
     label: string;
@@ -91,18 +109,14 @@ import { url } from '../utils/paths';
     return b.endsWith('/') ? b : b + '/';
   };
 
-  const rawJsonEl = document.getElementById('tanibot-raw-data');
-  const data = rawJsonEl ? JSON.parse(rawJsonEl.textContent || '{}') : {};
-
-  const tree: any[] = data.tree || [];
-  const optList: any[] = data.opt || [];
-  const recsMap: Record<string, any[]> = data.recs || {};
-  const varsMap: Record<string, any[]> = data.vars || {};
-  const pupukList: any[] = data.pupuk || [];
-  const faqMap: Record<string, any[]> = data.faq || {};
+  const tree: any[] = tanibotData.tree || [];
+  const optList: any[] = tanibotData.opt || [];
+  const recsMap: Record<string, any[]> = (tanibotData as any).recs || {};
+  const varsMap: Record<string, any[]> = (tanibotData as any).vars || {};
+  const pupukList: any[] = (tanibotData as any).pupuk || [];
+  const faqMap: Record<string, any[]> = (tanibotData as any).faq || {};
 
   let currentNodeId = 'root';
-  const historyStack: string[] = [];
 
   function findNode(nodeId: string) {
     return tree.find(n => n.id === nodeId);
@@ -127,7 +141,7 @@ import { url } from '../utils/paths';
             📋 Rekomendasi Tindakan:
           </p>
           ${recs.map((r, i) => `
-            <div class="p-3 rounded-lg bg-white/90 border border-agro-200 text-xs shadow-sm space-y-1">
+            <div class="p-3 rounded-lg bg-white/90 border border-agro-200 text-xs shadow-xs space-y-1">
               <div class="flex items-center justify-between gap-2">
                 <strong class="text-soil-900 font-bold">${i + 1}. [${r.metode.toUpperCase()}] ${r.langkah}</strong>
               </div>
@@ -145,7 +159,7 @@ import { url } from '../utils/paths';
 
     wrapper.innerHTML = `
       <img src="${mascotSrc}" alt="TaniBot" width="32" height="32" class="w-8 h-8 rounded-full p-0.5 bg-agro-100 border border-agro-300 shrink-0 mt-0.5" />
-      <div class="bg-agro-50 border border-agro-200/80 rounded-2xl rounded-tl-none p-4 text-xs text-soil-800 shadow-sm leading-relaxed">
+      <div class="bg-agro-50 border border-agro-200/80 rounded-2xl rounded-tl-none p-4 text-xs text-soil-800 shadow-xs leading-relaxed">
         <p class="whitespace-pre-line text-sm font-medium text-soil-900">${text}</p>
         ${recsHtml}
       </div>
@@ -162,7 +176,7 @@ import { url } from '../utils/paths';
     const wrapper = document.createElement('div');
     wrapper.className = "flex justify-end";
     wrapper.innerHTML = `
-      <div class="bg-agro-800 text-white rounded-2xl rounded-tr-none px-4 py-2.5 text-xs font-medium max-w-md shadow-sm">
+      <div class="bg-agro-800 text-white rounded-2xl rounded-tr-none px-4 py-2.5 text-xs font-medium max-w-md shadow-xs">
         ${text}
       </div>
     `;
@@ -178,7 +192,7 @@ import { url } from '../utils/paths';
     options.forEach(opt => {
       const btn = document.createElement('button');
       btn.type = 'button';
-      btn.className = "px-3 py-2 rounded-lg bg-soil-100 hover:bg-agro-700 hover:text-white text-soil-800 text-xs font-medium border border-soil-300 transition-colors shadow-sm text-left";
+      btn.className = "px-3 py-2 rounded-lg bg-soil-100 hover:bg-agro-700 hover:text-white text-soil-800 text-xs font-medium border border-soil-300 transition-colors shadow-2xs text-left";
       btn.textContent = opt.label;
       btn.addEventListener('click', opt.action);
       dock.appendChild(btn);
@@ -304,54 +318,139 @@ import { url } from '../utils/paths';
   }
 
   // Search feature handler
+  function executeSearch(query: string) {
+    const cleanQuery = query.trim().toLowerCase();
+    if (!cleanQuery) return;
+
+    renderUserBubble(`Cari: "${query}"`);
+
+    // 1. Search in OPT (matching keywords)
+    const tokens = cleanQuery.split(/\s+/).filter(t => t.length > 1);
+    
+    const matchedOpt = optList.filter(o => {
+      const targetStr = `${o.id} ${o.nama_lokal} ${o.nama_latin} ${o.deskripsi} ${o.gejala}`.toLowerCase();
+      // Match full query or any significant token (e.g. 'blas' in 'blas daun')
+      return targetStr.includes(cleanQuery) || tokens.some(t => targetStr.includes(t));
+    });
+
+    if (matchedOpt.length > 0) {
+      const opt = matchedOpt[0];
+      const pertanamanRecs = recsMap[`${opt.id}_pertanaman`] || [];
+      const pratanamRecs = recsMap[`${opt.id}_pratanam`] || [];
+      const allRecs = [...pertanamanRecs, ...pratanamRecs].slice(0, 3);
+
+      let msg = `🔍 Ditemukan hasil untuk **${opt.nama_lokal}** (*${opt.nama_latin}*):\n\n` +
+                `• **Tipe:** ${opt.tipe.toUpperCase()}\n` +
+                `• **Gejala Khas:** ${opt.gejala}\n` +
+                `• **Ambang Pengendalian:** ${opt.ambang_pengendalian}\n` +
+                `• **Dampak Lapangan:** ${opt.kehilangan_hasil || '-'}`;
+
+      // Check for related FAQs
+      const relatedFaq = (faqMap[opt.id] || []).slice(0, 1);
+      if (relatedFaq.length > 0) {
+        msg += `\n\n💡 **FAQ BBPOPT:**\n*Q: ${relatedFaq[0].pertanyaan}*\nA: ${relatedFaq[0].jawaban}`;
+      }
+
+      renderBotBubble(msg, allRecs);
+
+      setOptions([
+        { 
+          id: 'opt_view_recs', 
+          label: `📋 Semua Rekomendasi ${opt.nama_lokal}`, 
+          action: () => {
+            renderUserBubble(`Buka semua fase ${opt.nama_lokal}`);
+            const fullRecs = [
+              ...(recsMap[`${opt.id}_pratanam`] || []),
+              ...(recsMap[`${opt.id}_pesemaian`] || []),
+              ...(recsMap[`${opt.id}_pertanaman`] || [])
+            ];
+            renderBotBubble(`Daftar lengkap SOP Pengendalian **${opt.nama_lokal}** seluruh fase:`, fullRecs);
+            setOptions([
+              { id: 'back_root', label: '🏠 Kembali ke Menu Utama', action: () => navigateToNode('root') }
+            ]);
+          }
+        },
+        { id: 'back_root', label: '🏠 Menu Utama', action: () => navigateToNode('root') }
+      ]);
+      return;
+    }
+
+    // 2. Search in Pupuk
+    const matchedPupuk = pupukList.filter(p => 
+      p.jenis_pupuk.toLowerCase().includes(cleanQuery) ||
+      p.catatan.toLowerCase().includes(cleanQuery) ||
+      tokens.some(t => p.jenis_pupuk.toLowerCase().includes(t) || p.catatan.toLowerCase().includes(t))
+    );
+
+    if (matchedPupuk.length > 0) {
+      const p = matchedPupuk[0];
+      renderBotBubble(
+        `🧪 Informasi Pupuk **${p.jenis_pupuk}**:\n\n` +
+        `• **Dosis Anjuran:** ${p.dosis_per_ha}\n` +
+        `• **Waktu Aplikasi:** ${p.waktu_aplikasi}\n` +
+        `• **Catatan Khusus:** ${p.catatan}\n` +
+        `• **Rujukan:** ${p.sumber}`
+      );
+      setOptions([
+        { id: 'all_pupuk', label: '🧪 Lihat Semua Jenis Pupuk', action: () => navigateToNode('opt_pupuk') },
+        { id: 'back_root', label: '🏠 Menu Utama', action: () => navigateToNode('root') }
+      ]);
+      return;
+    }
+
+    // 3. Search in FAQ
+    for (const cat of Object.keys(faqMap)) {
+      const items = faqMap[cat] || [];
+      const match = items.find((f: any) => 
+        f.pertanyaan.toLowerCase().includes(cleanQuery) || 
+        f.jawaban.toLowerCase().includes(cleanQuery) ||
+        tokens.some(t => f.pertanyaan.toLowerCase().includes(t))
+      );
+      if (match) {
+        renderBotBubble(
+          `❓ **${match.pertanyaan}**\n\n${match.jawaban}\n\n*Sumber: ${match.sumber}*`
+        );
+        setOptions([
+          { id: 'back_root', label: '🏠 Menu Utama', action: () => navigateToNode('root') }
+        ]);
+        return;
+      }
+    }
+
+    renderBotBubble(`Maaf, tidak ditemukan hasil spesifik untuk kata kunci "${query}". Silakan pilih topik di menu utama atau coba kata kunci seperti "blas", "wereng", "urea", atau "varietas".`);
+    setOptions([
+      { id: 'back_root', label: '🏠 Kembali ke Menu Utama', action: () => navigateToNode('root') }
+    ]);
+  }
+
   function setupSearch() {
     const searchInput = document.getElementById('tanibot-search') as HTMLInputElement;
-    if (!searchInput) return;
+    const searchBtn = document.getElementById('btn-tanibot-search-submit');
 
-    searchInput.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        const query = searchInput.value.trim().toLowerCase();
-        if (!query) return;
-
-        renderUserBubble(`Cari: "${query}"`);
+    const trigger = () => {
+      if (!searchInput) return;
+      const val = searchInput.value.trim();
+      if (val) {
+        executeSearch(val);
         searchInput.value = '';
-
-        // Search in OPT
-        const matchedOpt = optList.filter(o => 
-          o.nama_lokal.toLowerCase().includes(query) ||
-          o.deskripsi.toLowerCase().includes(query) ||
-          o.gejala.toLowerCase().includes(query)
-        );
-
-        if (matchedOpt.length > 0) {
-          const opt = matchedOpt[0];
-          const recs = recsMap[`${opt.id}_pertanaman`] || [];
-          renderBotBubble(`Ditemukan informasi untuk **${opt.nama_lokal}** (*${opt.nama_latin}*):\n\n**Gejala:** ${opt.gejala}\n**Ambang Kendali:** ${opt.ambang_pengendalian}`, recs);
-          setOptions([
-            { id: 'back_root', label: '🏠 Kembali ke Menu Utama', action: () => navigateToNode('root') }
-          ]);
-          return;
-        }
-
-        // Search in Pupuk
-        const matchedPupuk = pupukList.filter(p => 
-          p.jenis_pupuk.toLowerCase().includes(query) ||
-          p.catatan.toLowerCase().includes(query)
-        );
-        if (matchedPupuk.length > 0) {
-          const p = matchedPupuk[0];
-          renderBotBubble(`Informasi Pupuk **${p.jenis_pupuk}**:\n\n• **Dosis Anjuran:** ${p.dosis_per_ha}\n• **Waktu:** ${p.waktu_aplikasi}\n• **Keterangan:** ${p.catatan}`);
-          setOptions([
-            { id: 'back_root', label: '🏠 Kembali ke Menu Utama', action: () => navigateToNode('root') }
-          ]);
-          return;
-        }
-
-        renderBotBubble(`Maaf, tidak ditemukan hasil spesifik untuk kata kunci "${query}". Silakan pilih topik di menu utama atau periksa penulisan kata.`);
-        setOptions([
-          { id: 'back_root', label: '🏠 Kembali ke Menu Utama', action: () => navigateToNode('root') }
-        ]);
       }
+    };
+
+    searchBtn?.addEventListener('click', trigger);
+
+    searchInput?.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        trigger();
+      }
+    });
+
+    // Quick chips click
+    const chips = document.querySelectorAll('.quick-chip');
+    chips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        const q = chip.getAttribute('data-query');
+        if (q) executeSearch(q);
+      });
     });
   }
 
