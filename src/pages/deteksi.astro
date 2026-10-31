@@ -17,7 +17,7 @@ import { url } from '../utils/paths';
         Deteksi Penyakit Daun Padi Otomatis
       </h1>
       <p class="text-xs sm:text-sm text-soil-600 mt-1">
-        Klasifikasi penyakit padi berbasis deep learning CNN langsung di peramban Anda tanpa mengunggah data ke server luar.
+        Klasifikasi penyakit padi secara instan langsung di peramban Anda tanpa mengunggah data ke server luar.
       </p>
     </div>
 
@@ -66,35 +66,5 @@ import { url } from '../utils/paths';
       </div>
     </div>
 
-    <!-- AI Architecture Technical Transparency Section -->
-    <div class="bg-white rounded-2xl shadow-sm border border-soil-200 p-6 sm:p-8 space-y-4">
-      <div class="flex items-center justify-between border-b border-soil-100 pb-3">
-        <div>
-          <h3 class="text-base font-bold text-soil-900 flex items-center gap-2">
-            <svg class="w-5 h-5 text-agro-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
-            </svg>
-            Arsitektur Deep Learning: Color-Aware CNN
-          </h3>
-          <p class="text-xs text-soil-500 mt-0.5">Diagram alur ekstraksi fitur spektral warna dan fusi spasial model AgriWarn</p>
-        </div>
-        <span class="text-xs font-mono text-soil-400 bg-soil-100 px-2 py-1 rounded">v3 Color-Aware</span>
-      </div>
-
-      <div class="bg-soil-50 p-4 rounded-xl border border-soil-200 flex flex-col items-center">
-        <img 
-          src={url('/images/arsitektur_color_aware_v3.png')} 
-          alt="Diagram Arsitektur Model CNN Color-Aware AgriAlert" 
-          loading="lazy"
-          decoding="async"
-          width="800"
-          height="450"
-          class="max-w-full rounded-lg shadow-sm border border-soil-300 object-contain hover:scale-[1.02] transition-transform duration-300"
-        />
-        <p class="text-xs text-soil-500 mt-3 text-center">
-          Struktur model menggabungkan cabang konvolusi spasial standar dengan modul atensi spektral untuk mendeteksi variasi nekrosis dan klorosis daun secara presisi.
-        </p>
-      </div>
-    </div>
   </div>
 </Layout>
