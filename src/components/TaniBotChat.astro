@@ -1,27 +1,44 @@
 ---
-// TaniBotChat.astro - Interactive Offline Decision Tree & Agronomist Chatbot
+// TaniBotChat.astro - Interactive Conversational AI Agronomist & Decision Tree
 import { url } from '../utils/paths';
 ---
 
-<div class="bg-white rounded-2xl shadow-sm border border-soil-200 overflow-hidden flex flex-col h-[750px] max-h-[85vh]">
+<div class="bg-white rounded-2xl shadow-sm border border-soil-200 overflow-hidden flex flex-col h-[780px] max-h-[88vh]" id="tanibot-app">
   <!-- Chat Header -->
-  <div class="p-4 sm:p-5 bg-gradient-to-r from-agro-900 to-agro-800 text-white flex items-center justify-between border-b border-agro-700">
+  <div class="p-4 sm:p-5 bg-gradient-to-r from-agro-900 via-agro-850 to-agro-800 text-white flex items-center justify-between border-b border-agro-700 shadow-xs">
     <div class="flex items-center gap-3">
       <div class="relative">
-        <img src={url('/images/mascot.png')} alt="TaniBot Mascot" width="40" height="40" class="w-10 h-10 object-contain rounded-full bg-white/10 p-1 border border-white/20" />
-        <span class="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-emerald-400 border-2 border-agro-900"></span>
+        <img src={url('/images/mascot.png')} alt="TaniBot Mascot" width="42" height="42" class="w-10 h-10 object-contain rounded-full bg-white/10 p-1 border border-white/20 drop-shadow-sm" />
+        <span class="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-emerald-400 border-2 border-agro-900" title="AI Siap"></span>
       </div>
       <div>
         <div class="flex items-center gap-2">
-          <h3 class="font-bold text-base tracking-tight">TaniBot Offline</h3>
-          <span class="text-[10px] uppercase font-bold px-2 py-0.5 rounded bg-agro-700/80 text-agro-200 border border-agro-600">BBPOPT Kementan</span>
+          <h3 class="font-bold text-base tracking-tight">TaniBot AI</h3>
+          <span id="ai-engine-badge" class="text-[10px] uppercase font-bold px-2 py-0.5 rounded bg-emerald-900/80 text-emerald-200 border border-emerald-600">
+            Penyuluh Pertanian Cerdas
+          </span>
         </div>
-        <p class="text-xs text-agro-300">Asisten Cerdas Penanganan OPT & Pemupukan Padi</p>
+        <p class="text-xs text-agro-200">Asisten Percakapan Agronomi BBPOPT Kementan & AI Padi</p>
       </div>
     </div>
 
-    <!-- Quick Navigation Reset -->
+    <!-- Header Actions: AI Settings & Reset -->
     <div class="flex items-center gap-2">
+      <!-- AI Mode / Key Settings Modal Toggle -->
+      <button 
+        type="button" 
+        id="btn-open-settings" 
+        class="text-xs text-agro-200 hover:text-white bg-agro-800/80 hover:bg-agro-700 px-2.5 py-1.5 rounded-lg border border-agro-600 transition-colors flex items-center gap-1.5"
+        title="Pengaturan Mode AI & Groq API"
+      >
+        <svg class="w-3.5 h-3.5 text-agro-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+        </svg>
+        <span class="hidden sm:inline">Setelan AI</span>
+      </button>
+
+      <!-- Reset Chat -->
       <button 
         type="button" 
         id="btn-tanibot-reset" 
@@ -30,79 +47,136 @@ import { url } from '../utils/paths';
         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
         </svg>
-        <span>Mulai Ulang</span>
+        <span>Reset</span>
       </button>
-    </div>
-  </div>
-
-  <!-- Search Filter Bar with Submit Button & Quick Chips -->
-  <div class="p-3 bg-soil-50 border-b border-soil-200 space-y-2">
-    <div class="flex gap-2">
-      <div class="relative flex-1">
-        <input 
-          type="text" 
-          id="tanibot-search" 
-          placeholder="Cari kata kunci: blas daun, kresek, wereng, dosis urea, varietas..." 
-          class="w-full text-xs pl-8 pr-4 py-2.5 rounded-xl border border-soil-300 focus:outline-none focus:ring-2 focus:ring-agro-600 focus:border-agro-600 bg-white shadow-2xs"
-        />
-        <svg class="w-4 h-4 text-soil-400 absolute left-2.5 top-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-        </svg>
-      </div>
-      <button 
-        type="button" 
-        id="btn-tanibot-search-submit" 
-        class="px-4 py-2.5 bg-agro-700 hover:bg-agro-800 active:scale-95 text-white text-xs font-semibold rounded-xl flex items-center gap-1.5 shadow-sm transition-all"
-      >
-        <span>Tanya</span>
-        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-        </svg>
-      </button>
-    </div>
-
-    <!-- Quick Suggestion Chips -->
-    <div class="flex items-center gap-1.5 overflow-x-auto pb-1 text-[11px] no-scrollbar">
-      <span class="text-soil-500 font-medium shrink-0">Coba:</span>
-      <button type="button" class="quick-chip shrink-0 px-2.5 py-1 rounded-full bg-white border border-soil-200 hover:border-agro-500 hover:bg-agro-50 text-soil-700 transition-colors" data-query="blas daun">🌾 Blas Daun</button>
-      <button type="button" class="quick-chip shrink-0 px-2.5 py-1 rounded-full bg-white border border-soil-200 hover:border-agro-500 hover:bg-agro-50 text-soil-700 transition-colors" data-query="wereng">🐛 Wereng Cokelat</button>
-      <button type="button" class="quick-chip shrink-0 px-2.5 py-1 rounded-full bg-white border border-soil-200 hover:border-agro-500 hover:bg-agro-50 text-soil-700 transition-colors" data-query="kresek">🍂 Kresek (HDB)</button>
-      <button type="button" class="quick-chip shrink-0 px-2.5 py-1 rounded-full bg-white border border-soil-200 hover:border-agro-500 hover:bg-agro-50 text-soil-700 transition-colors" data-query="dosis urea">🧪 Dosis Urea</button>
-      <button type="button" class="quick-chip shrink-0 px-2.5 py-1 rounded-full bg-white border border-soil-200 hover:border-agro-500 hover:bg-agro-50 text-soil-700 transition-colors" data-query="varietas tahan">🌱 Varietas Tahan</button>
     </div>
   </div>
 
   <!-- Messages History Viewport -->
-  <div id="tanibot-messages" class="flex-1 p-4 sm:p-6 overflow-y-auto space-y-4 bg-soil-50/40">
+  <div id="tanibot-messages" class="flex-1 p-4 sm:p-6 overflow-y-auto space-y-4 bg-soil-50/50">
     <!-- Messages injected dynamically via JS -->
   </div>
 
-  <!-- Bottom Options Dock -->
-  <div id="tanibot-options-dock" class="p-4 bg-white border-t border-soil-200 space-y-2">
-    <p class="text-[11px] font-semibold text-soil-500 uppercase tracking-wider mb-2">Pilih Langkah atau Topik:</p>
-    <div id="tanibot-options-container" class="flex flex-wrap gap-2">
-      <!-- Option buttons rendered here -->
+  <!-- Typing Indicator Bar (Hidden by default) -->
+  <div id="tanibot-typing" class="hidden px-6 py-2 bg-soil-50/70 border-t border-soil-200/60 text-xs text-soil-500 flex items-center gap-2">
+    <div class="flex gap-1 items-center">
+      <span class="w-1.5 h-1.5 rounded-full bg-agro-600 animate-bounce"></span>
+      <span class="w-1.5 h-1.5 rounded-full bg-agro-600 animate-bounce [animation-delay:0.2s]"></span>
+      <span class="w-1.5 h-1.5 rounded-full bg-agro-600 animate-bounce [animation-delay:0.4s]"></span>
+    </div>
+    <span id="typing-text">TaniBot sedang menganalisis gejala tanaman padi Anda...</span>
+  </div>
+
+  <!-- Bottom Input & Quick Action Dock -->
+  <div class="p-3 sm:p-4 bg-white border-t border-soil-200 space-y-2.5">
+    <!-- Quick Question Inspiration Chips -->
+    <div class="flex items-center gap-1.5 overflow-x-auto pb-1 text-[11px] no-scrollbar">
+      <span class="text-soil-500 font-semibold shrink-0">Tanya Cepat:</span>
+      <button type="button" class="quick-chip shrink-0 px-3 py-1 rounded-full bg-soil-100 hover:bg-agro-50 hover:border-agro-400 border border-soil-200 text-soil-700 transition-all font-medium" data-query="Daun padi saya bercak belah ketupat abu-abu, kenapa ya Pak?">🌾 Bercak Belah Ketupat</button>
+      <button type="button" class="quick-chip shrink-0 px-3 py-1 rounded-full bg-soil-100 hover:bg-agro-50 hover:border-agro-400 border border-soil-200 text-soil-700 transition-all font-medium" data-query="Bagaimana cara mengatasi wereng batang coklat yang mulai banyak?">🐛 Atasi Wereng</button>
+      <button type="button" class="quick-chip shrink-0 px-3 py-1 rounded-full bg-soil-100 hover:bg-agro-50 hover:border-agro-400 border border-soil-200 text-soil-700 transition-all font-medium" data-query="Kapan jadwal dan dosis pemupukan Urea yang tepat agar tidak kena blast?">🧪 Jadwal Pemupukan</button>
+      <button type="button" class="quick-chip shrink-0 px-3 py-1 rounded-full bg-soil-100 hover:bg-agro-50 hover:border-agro-400 border border-soil-200 text-soil-700 transition-all font-medium" data-query="Varietas padi apa yang paling tahan penyakit hawar daun bakteri dan blas?">🌱 Varietas Tahan</button>
+      <button type="button" class="quick-chip shrink-0 px-3 py-1 rounded-full bg-soil-100 hover:bg-agro-50 hover:border-agro-400 border border-soil-200 text-soil-700 transition-all font-medium" data-query="Kenapa pucuk padi saya layu dan mudah dicabut?">🦗 Pucuk Mati (Sundep)</button>
+    </div>
+
+    <!-- Conversational Input Bar -->
+    <form id="tanibot-form" class="flex gap-2 items-center">
+      <div class="relative flex-1">
+        <input 
+          type="text" 
+          id="tanibot-input" 
+          placeholder="Tanyakan keluhan sawah, gejala daun, atau dosis obat ke AI..." 
+          class="w-full text-xs sm:text-sm pl-4 pr-10 py-3 rounded-xl border border-soil-300 focus:outline-none focus:ring-2 focus:ring-agro-600 focus:border-agro-600 bg-soil-50/40 text-soil-900 shadow-2xs"
+          autocomplete="off"
+        />
+        <button 
+          type="button" 
+          id="btn-clear-input" 
+          class="absolute right-3 top-3.5 text-soil-400 hover:text-soil-600 hidden"
+          title="Hapus ketikan"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Send Button -->
+      <button 
+        type="submit" 
+        id="btn-tanibot-send" 
+        class="px-5 py-3 bg-agro-700 hover:bg-agro-800 active:scale-95 text-white text-xs sm:text-sm font-bold rounded-xl flex items-center gap-2 shadow-sm transition-all shrink-0"
+      >
+        <span>Kirim</span>
+        <svg class="w-4 h-4 text-emerald-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+        </svg>
+      </button>
+    </form>
+  </div>
+
+  <!-- Settings Modal (Groq API Key / Mode Switcher) -->
+  <div id="settings-modal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-xs hidden items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-md w-full overflow-hidden shadow-2xl border border-soil-200">
+      <div class="p-4 bg-agro-900 text-white flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+          </svg>
+          <h4 class="font-bold text-sm">Setelan Mesin AI TaniBot</h4>
+        </div>
+        <button type="button" id="btn-close-settings" class="text-agro-300 hover:text-white p-1 rounded-lg">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="p-5 space-y-4 text-xs text-soil-700">
+        <div>
+          <label class="font-bold text-soil-900 block mb-1">Mode Percakapan Aktif:</label>
+          <div class="space-y-2">
+            <label class="flex items-start gap-2 p-2.5 rounded-xl border border-emerald-300 bg-emerald-50/60 cursor-pointer">
+              <input type="radio" name="ai_mode" value="smart_local" checked class="mt-0.5 text-agro-700" />
+              <div>
+                <strong class="text-soil-900 block text-xs">⚡ Mode Cerdas Agronomi Lokal (Bawaan)</strong>
+                <span class="text-soil-500 text-[11px]">Sistem penalaran ahli berbasis database resmi BBPOPT Kementan RI. Cepat, instan, 100% jalan tanpa kuota internet.</span>
+              </div>
+            </label>
+
+            <label class="flex items-start gap-2 p-2.5 rounded-xl border border-soil-200 hover:border-agro-300 bg-white cursor-pointer">
+              <input type="radio" name="ai_mode" value="groq_online" class="mt-0.5 text-agro-700" />
+              <div>
+                <strong class="text-soil-900 block text-xs">🌐 Mode Online Cloud (LLaMA 3.3 70B via Groq)</strong>
+                <span class="text-soil-500 text-[11px]">Menggunakan LLM Cloud berkecepatan tinggi persis seperti versi Streamlit asli (butuh Groq API Key).</span>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <div id="groq-key-group" class="hidden space-y-1.5 pt-2 border-t border-soil-200">
+          <label for="groq-api-key" class="font-bold text-soil-800 block">Kunci API Groq (Opsional):</label>
+          <input 
+            type="password" 
+            id="groq-api-key" 
+            placeholder="gsk_..." 
+            class="w-full p-2.5 rounded-lg border border-soil-300 text-xs font-mono"
+          />
+          <p class="text-[10px] text-soil-500">Kunci disimpan hanya di browser lokal Anda. Dapatkan gratis di <a href="https://console.groq.com" target="_blank" class="text-agro-700 underline">console.groq.com</a>.</p>
+        </div>
+
+        <div class="pt-3 border-t border-soil-200 flex justify-end gap-2">
+          <button type="button" id="btn-save-settings" class="px-4 py-2 rounded-xl bg-agro-700 hover:bg-agro-800 text-white font-bold text-xs">
+            Simpan Setelan
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
 <script>
   import tanibotData from '../data/tanibot_data_v2.json';
-
-  interface OptionItem {
-    id: string;
-    label: string;
-    targetNode?: string;
-  }
-
-  interface RecItem {
-    metode: string;
-    langkah: string;
-    detail: string;
-    dosis: string | null;
-    waktu_aplikasi: string | null;
-    sumber: string;
-  }
 
   const getCleanBase = () => {
     const b = (window as any).__AGRI_BASE_URL__ || '/';
@@ -116,67 +190,78 @@ import { url } from '../utils/paths';
   const pupukList: any[] = (tanibotData as any).pupuk || [];
   const faqMap: Record<string, any[]> = (tanibotData as any).faq || {};
 
-  let currentNodeId = 'root';
+  // Chat message history for LLM context
+  const chatContext: { role: 'user' | 'assistant' | 'system'; content: string }[] = [];
 
-  function findNode(nodeId: string) {
-    return tree.find(n => n.id === nodeId);
-  }
+  const PPL_SYSTEM_PROMPT = `Kamu adalah Penyuluh Pertanian Lapangan (PPL) senior yang sangat berpengalaman, ramah, dan membumi.
+Bantu petani padi di Indonesia dengan bahasa yang santai, bersahabat, tidak kaku, dan mudah dipahami (jangan gunakan gaya robot kaku).
+Berikan saran praktis yang bisa langsung diterapkan di sawah berbasis Pengendalian Hama Terpadu (PHT).
+Jika menyarankan pestisida/kimia, selalu dahulukan pencegahan alami atau sanitasi/kultur teknis terlebih dahulu.
+Gunakan istilah sehari-hari petani padi, bila ada istilah latin sebutkan penjelasannya dalam kurung (misal: Trichoderma jamur sahabat tanaman).`;
 
-  function getChildOptions(parentNodeId: string) {
-    return tree.filter(n => n.pid === parentNodeId);
-  }
+  // UI Elements
+  const container = document.getElementById('tanibot-messages');
+  const typingBar = document.getElementById('tanibot-typing');
+  const typingText = document.getElementById('typing-text');
+  const chatInput = document.getElementById('tanibot-input') as HTMLInputElement;
+  const chatForm = document.getElementById('tanibot-form');
+  const clearBtn = document.getElementById('btn-clear-input');
+  const resetBtn = document.getElementById('btn-tanibot-reset');
+  const settingsModal = document.getElementById('settings-modal');
+  const openSettingsBtn = document.getElementById('btn-open-settings');
+  const closeSettingsBtn = document.getElementById('btn-close-settings');
+  const saveSettingsBtn = document.getElementById('btn-save-settings');
+  const groqKeyInput = document.getElementById('groq-api-key') as HTMLInputElement;
+  const groqKeyGroup = document.getElementById('groq-key-group');
+  const aiBadge = document.getElementById('ai-engine-badge');
 
-  function renderBotBubble(text: string, recs: RecItem[] = [], meta: any = null) {
-    const container = document.getElementById('tanibot-messages');
+  function renderBotMessage(htmlContent: string, actionChips: { label: string; action: () => void }[] = []) {
     if (!container) return;
 
     const wrapper = document.createElement('div');
     wrapper.className = "flex gap-3 items-start max-w-2xl";
 
-    let recsHtml = '';
-    if (recs && recs.length > 0) {
-      recsHtml = `
-        <div class="mt-3 space-y-2.5 pt-3 border-t border-agro-200">
-          <p class="text-xs font-bold text-agro-900 uppercase tracking-wider flex items-center gap-1.5">
-            📋 Rekomendasi Tindakan:
-          </p>
-          ${recs.map((r, i) => `
-            <div class="p-3 rounded-lg bg-white/90 border border-agro-200 text-xs shadow-xs space-y-1">
-              <div class="flex items-center justify-between gap-2">
-                <strong class="text-soil-900 font-bold">${i + 1}. [${r.metode.toUpperCase()}] ${r.langkah}</strong>
-              </div>
-              <p class="text-soil-700 leading-relaxed">${r.detail}</p>
-              ${r.dosis ? `<p class="text-agro-800 font-medium">💊 <strong>Dosis:</strong> ${r.dosis}</p>` : ''}
-              ${r.waktu_aplikasi ? `<p class="text-soil-600">🕐 <strong>Waktu Aplikasi:</strong> ${r.waktu_aplikasi}</p>` : ''}
-              <p class="text-[10px] text-soil-500 pt-1 italic">Rujukan: ${r.sumber}</p>
-            </div>
-          `).join('')}
-        </div>
-      `;
-    }
-
     const mascotSrc = getCleanBase() + 'images/mascot.png';
 
+    let chipsHtml = '';
+    if (actionChips.length > 0) {
+      chipsHtml = `<div class="mt-3 pt-2.5 border-t border-agro-200 flex flex-wrap gap-1.5 chips-container"></div>`;
+    }
+
     wrapper.innerHTML = `
-      <img src="${mascotSrc}" alt="TaniBot" width="32" height="32" class="w-8 h-8 rounded-full p-0.5 bg-agro-100 border border-agro-300 shrink-0 mt-0.5" />
-      <div class="bg-agro-50 border border-agro-200/80 rounded-2xl rounded-tl-none p-4 text-xs text-soil-800 shadow-xs leading-relaxed">
-        <p class="whitespace-pre-line text-sm font-medium text-soil-900">${text}</p>
-        ${recsHtml}
+      <img src="${mascotSrc}" alt="TaniBot" width="36" height="36" class="w-8 h-8 sm:w-9 sm:h-9 rounded-full p-0.5 bg-agro-100 border border-agro-300 shrink-0 mt-0.5 shadow-xs" />
+      <div class="bg-white border border-soil-200/90 rounded-2xl rounded-tl-none p-4 text-xs sm:text-sm text-soil-800 shadow-xs leading-relaxed space-y-2">
+        <div class="bot-content">${htmlContent}</div>
+        ${chipsHtml}
       </div>
     `;
+
+    // Attach click events to action chips
+    if (actionChips.length > 0) {
+      const chipsBox = wrapper.querySelector('.chips-container');
+      if (chipsBox) {
+        actionChips.forEach(chip => {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = "px-2.5 py-1 rounded-lg bg-agro-50 hover:bg-agro-700 hover:text-white text-agro-900 border border-agro-200 font-semibold text-[11px] transition-colors";
+          btn.textContent = chip.label;
+          btn.addEventListener('click', chip.action);
+          chipsBox.appendChild(btn);
+        });
+      }
+    }
 
     container.appendChild(wrapper);
     container.scrollTop = container.scrollHeight;
   }
 
-  function renderUserBubble(text: string) {
-    const container = document.getElementById('tanibot-messages');
+  function renderUserMessage(text: string) {
     if (!container) return;
 
     const wrapper = document.createElement('div');
     wrapper.className = "flex justify-end";
     wrapper.innerHTML = `
-      <div class="bg-agro-800 text-white rounded-2xl rounded-tr-none px-4 py-2.5 text-xs font-medium max-w-md shadow-xs">
+      <div class="bg-agro-800 text-white rounded-2xl rounded-tr-none px-4 py-2.5 text-xs sm:text-sm font-medium max-w-md shadow-xs leading-relaxed">
         ${text}
       </div>
     `;
@@ -184,284 +269,388 @@ import { url } from '../utils/paths';
     container.scrollTop = container.scrollHeight;
   }
 
-  function setOptions(options: { id: string; label: string; action: () => void }[]) {
-    const dock = document.getElementById('tanibot-options-container');
-    if (!dock) return;
-    dock.innerHTML = '';
-
-    options.forEach(opt => {
-      const btn = document.createElement('button');
-      btn.type = 'button';
-      btn.className = "px-3 py-2 rounded-lg bg-soil-100 hover:bg-agro-700 hover:text-white text-soil-800 text-xs font-medium border border-soil-300 transition-colors shadow-2xs text-left";
-      btn.textContent = opt.label;
-      btn.addEventListener('click', opt.action);
-      dock.appendChild(btn);
-    });
-  }
-
-  function navigateToNode(nodeId: string) {
-    const node = findNode(nodeId);
-    if (!node) return;
-
-    currentNodeId = nodeId;
-    const children = getChildOptions(nodeId);
-
-    // If node has specific meta handler (e.g. fertilizer or opt)
-    if (nodeId === 'opt_pupuk') {
-      let pupukText = "Berikut adalah anjuran pemupukan berimbang untuk padi sawah berdasarkan uji tanah:";
-      const recItems: RecItem[] = pupukList.map(p => ({
-        metode: 'Pemupukan',
-        langkah: p.jenis_pupuk,
-        detail: `${p.dosis_per_ha} (${p.catatan})`,
-        dosis: p.dosis_per_ha,
-        waktu_aplikasi: p.waktu_aplikasi,
-        sumber: p.sumber
-      }));
-      renderBotBubble(pupukText, recItems);
-
-      setOptions([
-        { id: 'back_root', label: '⬅️ Kembali ke Menu Utama', action: () => navigateToNode('root') }
-      ]);
-      return;
-    }
-
-    if (nodeId === 'opt_varietas') {
-      let vText = "Pilih varietas tahan untuk penyakit yang sedang mewabah di daerah Anda:";
-      renderBotBubble(vText);
-      const varOpts = Object.keys(varsMap).map(k => {
-        const optObj = optList.find(o => o.id === k);
-        const name = optObj ? optObj.nama_lokal : k.toUpperCase();
-        return {
-          id: `var_${k}`,
-          label: `🌱 Varietas Tahan ${name}`,
-          action: () => {
-            renderUserBubble(`Lihat varietas tahan ${name}`);
-            const list = varsMap[k] || [];
-            const rItems: RecItem[] = list.map((v: any) => ({
-              metode: 'Varietas',
-              langkah: v.nama,
-              detail: `Ketahanan: ${v.ketahanan}. Keterangan: ${v.keterangan || '-'}`,
-              dosis: null,
-              waktu_aplikasi: 'Sebelum tanam',
-              sumber: 'Balai Besar Penelitian Tanaman Padi (BBPadi / BRIN)'
-            }));
-            renderBotBubble(`Rekomendasi varietas padi tahan terhadap ${name}:`, rItems);
-            setOptions([
-              { id: 'back_var', label: '⬅️ Pilih Varietas Lain', action: () => navigateToNode('opt_varietas') },
-              { id: 'back_root', label: '🏠 Menu Utama', action: () => navigateToNode('root') }
-            ]);
-          }
-        };
-      });
-      varOpts.push({ id: 'back_root', label: '⬅️ Menu Utama', action: () => navigateToNode('root') });
-      setOptions(varOpts);
-      return;
-    }
-
-    // Default node rendering
-    renderBotBubble(node.txt);
-
-    if (children.length > 0) {
-      setOptions(children.map(ch => ({
-        id: ch.id,
-        label: ch.txt,
-        action: () => {
-          renderUserBubble(ch.txt);
-          navigateToNode(ch.id);
-        }
-      })));
+  function setTyping(visible: boolean, text: string = "TaniBot sedang menganalisis...") {
+    if (!typingBar || !typingText) return;
+    if (visible) {
+      typingText.textContent = text;
+      typingBar.classList.remove('hidden');
     } else {
-      // If leaf node, offer back navigation
-      setOptions([
-        { id: 'back_root', label: '🏠 Kembali ke Menu Utama', action: () => navigateToNode('root') }
-      ]);
+      typingBar.classList.add('hidden');
     }
+    if (container) container.scrollTop = container.scrollHeight;
   }
 
-  // Handle direct post-detection parameter (e.g. ?opt=blas)
-  function handleUrlParams() {
+  // --- SMART CONVERSATIONAL AGROMIST ENGINE (Zero Latency Offline) ---
+  function generateConversationalReply(userQuery: string): { replyHtml: string; chips: { label: string; action: () => void }[] } {
+    const q = userQuery.toLowerCase().trim();
+    const tokens = q.split(/\s+/).filter(t => t.length > 1);
+
+    // 1. Sapaan / Salam
+    if (/^(halo|hai|assalamu|selamat|pagi|siang|sore|malam|tes|hai|bot|tanibot)/i.test(q) && tokens.length <= 3) {
+      return {
+        replyHtml: `Halo Sobat Tani! 👋 Senang bisa mendampingi Anda di sawah hari ini.
+<br><br>
+Saya <strong>TaniBot</strong>, asisten agronomi cerdas siap bantu jawab keluhan padi:
+<br>• Identifikasi penyakit dari gejala daun (bercak, kuning, kresek, blas)
+<br>• Atasi hama wereng, sundep, beluk, tikus, walang sangit
+<br>• Takaran dosis pemupukan Urea, NPK, dan KCl yang berimbang
+<br>• Pilihan varietas benih unggul tahan wereng dan blas
+<br><br>
+Silakan ceritakan kondisi tanaman padi Anda sekarang!`,
+        chips: [
+          { label: "🌾 Daun Ada Bercak Belah Ketupat", action: () => handleUserQuestion("Daun padi saya ada bercak belah ketupat abu-abu") },
+          { label: "🐛 Batang Menguning & Ada Wereng", action: () => handleUserQuestion("Wereng batang coklat di sawah") },
+          { label: "🧪 Aturan Dosis Pupuk Urea", action: () => handleUserQuestion("Berapa dosis pupuk urea yang tepat?") }
+        ]
+      };
+    }
+
+    // 2. Pertanyaan Pemupukan (Urea, NPK, KCl, Dosis, Waktu Sebar)
+    if (q.includes('pupuk') || q.includes('urea') || q.includes('npk') || q.includes('phonska') || q.includes('kcl') || q.includes('dosis')) {
+      let pupukInfo = `<strong>Panduan Pemupukan Berimbang Padi Sawah (BBPOPT & Balitbangtan):</strong><br><br>`;
+      pupukInfo += `Pemupukan padi harus tepat waktu dan dosis agar batang kokoh dan daun tidak lunak:<br><br>`;
+      pupukList.forEach((p, idx) => {
+        pupukInfo += `<strong>${idx + 1}. ${p.jenis_pupuk}</strong>: <span class="text-agro-800 font-semibold">${p.dosis_per_ha}</span><br>`;
+        pupukInfo += `&bull; <em>Waktu:</em> ${p.waktu_aplikasi}<br>`;
+        pupukInfo += `&bull; <em>Catatan Lapangan:</em> ${p.catatan}<br><br>`;
+      });
+      pupukInfo += `⚠️ <strong>Pesan Penting PPL:</strong> Hindari pemupukan Urea berlebih saat musim hujan atau saat cuaca lembap, karena memicu ledakan jamur Blas dan bakteri Kresek (HDB).`;
+
+      return {
+        replyHtml: pupukInfo,
+        chips: [
+          { label: "🌱 Varietas Tahan Hama", action: () => handleUserQuestion("Varietas padi tahan hama") },
+          { label: "🌾 Penanganan Blas Daun", action: () => handleUserQuestion("Blas daun") }
+        ]
+      };
+    }
+
+    // 3. Pertanyaan Varietas Tahan
+    if (q.includes('varietas') || q.includes('benih') || q.includes('bibit') || q.includes('inpari') || q.includes('tahan')) {
+      let vHtml = `<strong>Rekomendasi Varietas Padi Tahan OPT dari BBPOPT & BBPadi:</strong><br><br>`;
+      vHtml += `Penggunaan benih varietas tahan adalah langkah pencegahan paling hemat biaya:<br><br>`;
+      vHtml += `• <strong>Tahan Blas Daun & Leher:</strong> Inpari 21, Inpari 22, Inpari 26, Inpari 27, serta Inpago 4, 7, 8 (padi gogo).<br>`;
+      vHtml += `• <strong>Tahan Wereng Batang Coklat (WBC):</strong> Inpari 13, Inpari 33 (tahan biotipe 1, 2, 3), Inpari 18, Inpari 19.<br>`;
+      vHtml += `• <strong>Tahan Hawar Daun Bakteri (Kresek/HDB):</strong> Inpari 32 HDB, Inpari 42 Agritan GSR.<br><br>`;
+      vHtml += `<em>Tips PPL:</em> Lakukan pergiliran varietas antar musim agar ketahanan genetik tanaman tidak mudah patah oleh biotipe baru.`;
+
+      return {
+        replyHtml: vHtml,
+        chips: [
+          { label: "🐛 Cara Kendalikan Wereng", action: () => handleUserQuestion("Cara kendalikan wereng coklat") },
+          { label: "🧪 Aturan Pupuk Padi", action: () => handleUserQuestion("Aturan pupuk padi berimbang") }
+        ]
+      };
+    }
+
+    // 4. Deteksi Hama / Penyakit Spesifik
+    const matchedOpt = optList.filter(o => {
+      const fullText = `${o.id} ${o.nama_lokal} ${o.nama_latin} ${o.deskripsi} ${o.gejala}`.toLowerCase();
+      if (fullText.includes(q)) return true;
+      // Match aliases
+      if (q.includes('sundep') || q.includes('beluk')) return o.id === 'pbp';
+      if (q.includes('kresek')) return o.id === 'hdb';
+      if (q.includes('wereng')) return o.id === 'wbc';
+      if (q.includes('tikus')) return o.id === 'tikus';
+      if (q.includes('blas') || q.includes('blast')) return o.id === 'blas';
+      if (q.includes('ulat') && o.id === 'pbp') return true;
+      return tokens.some(t => fullText.includes(t) && t.length > 3);
+    });
+
+    if (matchedOpt.length > 0) {
+      const opt = matchedOpt[0];
+      const recs = (recsMap[`${opt.id}_pertanaman`] || recsMap[`${opt.id}_pratanam`] || []).slice(0, 3);
+
+      let reply = `Pak Tani, mengenai keluhan <strong>${opt.nama_lokal}</strong> (<em>${opt.nama_latin}</em>), berikut penjelasan dan solusi praktisnya:<br><br>`;
+      reply += `🔍 <strong>Karakteristik & Gejala Lapangan:</strong><br>${opt.gejala}<br><br>`;
+      reply += `🎯 <strong>Ambang Kendali Petani:</strong><br>${opt.ambang_pengendalian}<br><br>`;
+
+      if (recs.length > 0) {
+        reply += `📋 <strong>SOP Pengendalian Lapangan (BBPOPT Kementan):</strong><br>`;
+        recs.forEach((r, idx) => {
+          reply += `<div class="p-2.5 my-1.5 rounded-xl bg-soil-50 border border-soil-200">
+            <strong>${idx + 1}. [${r.metode.toUpperCase()}] ${r.langkah}</strong><br>
+            <span class="text-soil-700">${r.detail}</span>
+            ${r.dosis ? `<br><span class="text-agro-800 font-semibold">💊 Takaran: ${r.dosis}</span>` : ''}
+            ${r.waktu_aplikasi ? `<br><span class="text-soil-600">🕐 Waktu semprot: ${r.waktu_aplikasi}</span>` : ''}
+          </div>`;
+        });
+      }
+
+      // Check relevant FAQ
+      const faqs = (faqMap[opt.id] || []).slice(0, 1);
+      if (faqs.length > 0) {
+        reply += `<br>💡 <strong>Tanya Jawab Petani:</strong><br><em>Q: ${faqs[0].pertanyaan}</em><br>${faqs[0].jawaban}<br>`;
+      }
+
+      return {
+        replyHtml: reply,
+        chips: [
+          { label: `🌱 Varietas Tahan ${opt.nama_lokal}`, action: () => handleUserQuestion(`Varietas tahan ${opt.nama_lokal}`) },
+          { label: "🧪 Cek Dosis Pemupukan", action: () => handleUserQuestion("Jadwal dan dosis pemupukan") }
+        ]
+      };
+    }
+
+    // 5. Gejala Umum (Kuning, Layu, Kering, Bolong)
+    if (q.includes('kuning') || q.includes('layu') || q.includes('kering') || q.includes('bercak')) {
+      return {
+        replyHtml: `Halo Pak Tani! Daun padi yang <strong>menguning / layu</strong> biasanya dipicu oleh salah satu dari 3 kemungkinan utama:<br><br>
+1. <strong>Hawar Daun Bakteri (Kresek/HDB):</strong> Tepi daun menguning bergelombang dari ujung ke pangkal, lalu mengering warna jerami. <em>Solusi:</em> Kurangi genangan air, stop sementara pupuk Urea, semprot bakterisida Tembaga Hidroksida.<br><br>
+2. <strong>Wereng Batang Coklat (WBC):</strong> Tanaman menguning dari pelepah bawah, batang bawah basah berkerumun serangga wereng. <em>Solusi:</em> Sibak tanaman, semprot agens hayati <em>Beauveria bassiana</em> atau insektisida BPMC jika populasi di atas ambang batas.<br><br>
+3. <strong>Kekurangan Unsur Hara Kalium / Nitrogen:</strong> Warna kuning merata pada helai daun tua. <em>Solusi:</em> Tambahkan KCl atau kompos jerami padi saat pemupukan susulan.<br><br>
+Untuk memastikan, apakah bagian bawah batang padi basah ada serangga kecil, atau ada bercak berbentuk garis/belah ketupat di daunnya?`,
+        chips: [
+          { label: "🍂 Gejala Kresek (HDB)", action: () => handleUserQuestion("Hawar daun bakteri kresek") },
+          { label: "🐛 Wereng di Pangkal Batang", action: () => handleUserQuestion("Wereng batang coklat") },
+          { label: "🌾 Blas Bercak Belah Ketupat", action: () => handleUserQuestion("Blas daun") }
+        ]
+      };
+    }
+
+    // Fallback general response
+    return {
+      replyHtml: `Terima kasih atas pertanyaannya! Berdasarkan ilmu Pengendalian Hama Terpadu (PHT) padi sawah:
+<br><br>
+Untuk masalah <em>"${userQuery}"</em>, kami menyarankan memeriksa tiga hal utama:
+<br>1. <strong>Amati Bagian Tanaman:</strong> Apakah keluhan terdapat pada helai daun, pangkal batang, atau leher malai?
+<br>2. <strong>Pengairan Berselang:</strong> Keringkan sawah selama 2-3 hari untuk menekan kelembapan jamur dan menghentikan perkembangbiakan wereng.
+<br>3. <strong>Keseimbangan Pupuk:</strong> Pastikan tidak over-dosis Urea dan cukupi unsur Kalium (KCl).
+<br><br>
+Anda juga bisa mencoba kata kunci spesifik seperti: <em>"blas daun"</em>, <em>"wereng coklat"</em>, <em>"kresek"</em>, <em>"sundep"</em>, atau <em>"dosis pupuk"</em>.`,
+      chips: [
+        { label: "🌾 Tanya Blas Daun", action: () => handleUserQuestion("Blas daun") },
+        { label: "🐛 Tanya Wereng Padi", action: () => handleUserQuestion("Wereng batang coklat") },
+        { label: "🧪 Rekomendasi Pupuk", action: () => handleUserQuestion("Dosis pupuk urea dan npk") }
+      ]
+    };
+  }
+
+  // --- ONLINE GROQ LLM STREAMING HANDLER (If key is available) ---
+  async function callGroqCloudAI(userText: string): Promise<string> {
+    const savedKey = localStorage.getItem('agrialert_groq_key') || '';
+    if (!savedKey) throw new Error("No Groq API Key");
+
+    const messages = [
+      { role: "system", content: PPL_SYSTEM_PROMPT },
+      ...chatContext.slice(-6),
+      { role: "user", content: userText }
+    ];
+
+    const resp = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${savedKey}`
+      },
+      body: JSON.stringify({
+        model: "llama-3.3-70b-versatile",
+        messages: messages,
+        temperature: 0.6,
+        max_tokens: 800
+      })
+    });
+
+    if (!resp.ok) {
+      const errJson = await resp.json().catch(() => ({}));
+      throw new Error(errJson.error?.message || `HTTP ${resp.status}`);
+    }
+
+    const data = await resp.json();
+    return data.choices[0]?.message?.content || "";
+  }
+
+  // Handle incoming user question
+  async function handleUserQuestion(queryText: string) {
+    const text = queryText.trim();
+    if (!text) return;
+
+    // Render user speech bubble
+    renderUserMessage(text);
+    chatContext.push({ role: 'user', content: text });
+
+    setTyping(true, "TaniBot sedang meracik jawaban agronomi terbaik...");
+
+    const activeMode = localStorage.getItem('agrialert_ai_mode') || 'smart_local';
+    const groqKey = localStorage.getItem('agrialert_groq_key') || '';
+
+    // If Groq Online mode is enabled and user has key
+    if (activeMode === 'groq_online' && groqKey) {
+      try {
+        const aiAnswer = await callGroqCloudAI(text);
+        setTyping(false);
+        // Format markdown to HTML
+        const formatted = aiAnswer
+          .replace(/\n\n/g, '<br><br>')
+          .replace(/\n/g, '<br>')
+          .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+          .replace(/\*(.*?)\*/g, '<em>$1</em>');
+
+        renderBotMessage(formatted, [
+          { label: "📋 Cek SOP Dosis Lapangan", action: () => handleUserQuestion(`Dosis obat untuk ${text}`) },
+          { label: "🌱 Varietas Tahan", action: () => handleUserQuestion("Varietas padi tahan hama") }
+        ]);
+        chatContext.push({ role: 'assistant', content: aiAnswer });
+        return;
+      } catch (err) {
+        console.warn("Groq Online AI error, falling back to smart local agronomist:", err);
+      }
+    }
+
+    // Default: Smart In-Browser Conversational Agronomist (Zero Latency)
+    setTimeout(() => {
+      setTyping(false);
+      const { replyHtml, chips } = generateConversationalReply(text);
+      renderBotMessage(replyHtml, chips);
+      chatContext.push({ role: 'assistant', content: replyHtml.replace(/<[^>]*>?/gm, '') });
+    }, 450);
+  }
+
+  // Initial Welcome Flow
+  function initGreeting() {
+    // Check if coming from detection page with opt parameter
     const urlParams = new URLSearchParams(window.location.search);
     const optParam = urlParams.get('opt');
 
     if (optParam) {
       const optItem = optList.find(o => o.id === optParam || o.id === optParam.replace('leaf_', ''));
       const optName = optItem ? optItem.nama_lokal : optParam.toUpperCase();
-
-      renderBotBubble(`📸 Anda dialihkan dari Deteksi Daun untuk menangani: **${optName}**.\n\nPilih fase pertanaman padi Anda saat ini untuk melihat takaran dosis dan rekomendasi:`);
-
-      const phases = ['pratanam', 'pesemaian', 'pertanaman'];
-      const phaseLabels: Record<string, string> = {
-        'pratanam': '1. Pra-Tanam (Olah Tanah & Bibit)',
-        'pesemaian': '2. Fase Pesemaian',
-        'pertanaman': '3. Fase Pertanaman (Vegetatif & Generatif)'
-      };
-
-      setOptions(phases.map(ph => ({
-        id: `rec_${optParam}_${ph}`,
-        label: phaseLabels[ph] || ph,
-        action: () => {
-          renderUserBubble(`Lihat panduan ${phaseLabels[ph]}`);
-          const key = `${optItem ? optItem.id : optParam}_${ph}`;
-          const recs = recsMap[key] || [];
-          renderBotBubble(`Rekomendasi penanganan **${optName}** pada fase **${ph.toUpperCase()}**:`, recs);
-          setOptions([
-            { id: 'back_phase', label: '⬅️ Pilih Fase Lain', action: () => handleUrlParams() },
-            { id: 'back_root', label: '🏠 Kembali ke Menu Utama', action: () => navigateToNode('root') }
-          ]);
-        }
-      })));
+      renderBotMessage(
+        `Halo Sobat Tani! 📸 Saya melihat Anda baru saja melakukan deteksi foto daun padi dan teridentifikasi: <strong>${optName}</strong>.
+<br><br>
+Ada yang ingin ditanyakan seputar cara semprot, takaran dosis fungisida/insektisida, atau cara penanganan air di petak sawah Anda?`,
+        [
+          { label: `📋 Takaran Dosis ${optName}`, action: () => handleUserQuestion(`Berapa dosis dan cara semprot untuk ${optName}?`) },
+          { label: `🌱 Varietas Tahan ${optName}`, action: () => handleUserQuestion(`Varietas tahan ${optName}`) },
+          { label: "🧪 Aturan Pemupukan", action: () => handleUserQuestion("Aturan pupuk padi") }
+        ]
+      );
       return;
     }
 
-    // Initial root start
-    navigateToNode('root');
-  }
-
-  // Search feature handler
-  function executeSearch(query: string) {
-    const cleanQuery = query.trim().toLowerCase();
-    if (!cleanQuery) return;
-
-    renderUserBubble(`Cari: "${query}"`);
-
-    // 1. Search in OPT (matching keywords)
-    const tokens = cleanQuery.split(/\s+/).filter(t => t.length > 1);
-    
-    const matchedOpt = optList.filter(o => {
-      const targetStr = `${o.id} ${o.nama_lokal} ${o.nama_latin} ${o.deskripsi} ${o.gejala}`.toLowerCase();
-      // Match full query or any significant token (e.g. 'blas' in 'blas daun')
-      return targetStr.includes(cleanQuery) || tokens.some(t => targetStr.includes(t));
-    });
-
-    if (matchedOpt.length > 0) {
-      const opt = matchedOpt[0];
-      const pertanamanRecs = recsMap[`${opt.id}_pertanaman`] || [];
-      const pratanamRecs = recsMap[`${opt.id}_pratanam`] || [];
-      const allRecs = [...pertanamanRecs, ...pratanamRecs].slice(0, 3);
-
-      let msg = `🔍 Ditemukan hasil untuk **${opt.nama_lokal}** (*${opt.nama_latin}*):\n\n` +
-                `• **Tipe:** ${opt.tipe.toUpperCase()}\n` +
-                `• **Gejala Khas:** ${opt.gejala}\n` +
-                `• **Ambang Pengendalian:** ${opt.ambang_pengendalian}\n` +
-                `• **Dampak Lapangan:** ${opt.kehilangan_hasil || '-'}`;
-
-      // Check for related FAQs
-      const relatedFaq = (faqMap[opt.id] || []).slice(0, 1);
-      if (relatedFaq.length > 0) {
-        msg += `\n\n💡 **FAQ BBPOPT:**\n*Q: ${relatedFaq[0].pertanyaan}*\nA: ${relatedFaq[0].jawaban}`;
-      }
-
-      renderBotBubble(msg, allRecs);
-
-      setOptions([
-        { 
-          id: 'opt_view_recs', 
-          label: `📋 Semua Rekomendasi ${opt.nama_lokal}`, 
-          action: () => {
-            renderUserBubble(`Buka semua fase ${opt.nama_lokal}`);
-            const fullRecs = [
-              ...(recsMap[`${opt.id}_pratanam`] || []),
-              ...(recsMap[`${opt.id}_pesemaian`] || []),
-              ...(recsMap[`${opt.id}_pertanaman`] || [])
-            ];
-            renderBotBubble(`Daftar lengkap SOP Pengendalian **${opt.nama_lokal}** seluruh fase:`, fullRecs);
-            setOptions([
-              { id: 'back_root', label: '🏠 Kembali ke Menu Utama', action: () => navigateToNode('root') }
-            ]);
-          }
-        },
-        { id: 'back_root', label: '🏠 Menu Utama', action: () => navigateToNode('root') }
-      ]);
-      return;
-    }
-
-    // 2. Search in Pupuk
-    const matchedPupuk = pupukList.filter(p => 
-      p.jenis_pupuk.toLowerCase().includes(cleanQuery) ||
-      p.catatan.toLowerCase().includes(cleanQuery) ||
-      tokens.some(t => p.jenis_pupuk.toLowerCase().includes(t) || p.catatan.toLowerCase().includes(t))
+    // Standard warm welcoming
+    renderBotMessage(
+      `🌾 <strong>Halo Sobat Tani Indonesia! Selamat Datang di TaniBot AI!</strong>
+<br><br>
+Saya adalah asisten cerdas agronomi dan penyuluh pertanian lapangan (PPL) digital Anda. 
+<br><br>
+Bebas tanyakan keluhan sawah Anda dalam bahasa sehari-hari:
+<br>• <em>"Daun padi saya pinggirnya menguning layu, kenapa ya Pak?"</em>
+<br>• <em>"Kapan waktu semprot insektisida wereng yang paling manjur?"</em>
+<br>• <em>"Berapa takaran pupuk urea dan NPK untuk 1 hektar sawah?"</em>
+<br><br>
+Silakan ketik pertanyaan di bawah atau pilih topik cepat!`,
+      [
+        { label: "🌾 Blas Daun (Bercak Diamond)", action: () => handleUserQuestion("Daun padi saya ada bercak belah ketupat abu-abu") },
+        { label: "🐛 Wereng Batang Cokelat", action: () => handleUserQuestion("Wereng batang coklat") },
+        { label: "🍂 Kresek (Hawar Daun Bakteri)", action: () => handleUserQuestion("Hawar daun bakteri kresek") },
+        { label: "🧪 Dosis Pupuk Urea & NPK", action: () => handleUserQuestion("Dosis pupuk urea dan npk") }
+      ]
     );
-
-    if (matchedPupuk.length > 0) {
-      const p = matchedPupuk[0];
-      renderBotBubble(
-        `🧪 Informasi Pupuk **${p.jenis_pupuk}**:\n\n` +
-        `• **Dosis Anjuran:** ${p.dosis_per_ha}\n` +
-        `• **Waktu Aplikasi:** ${p.waktu_aplikasi}\n` +
-        `• **Catatan Khusus:** ${p.catatan}\n` +
-        `• **Rujukan:** ${p.sumber}`
-      );
-      setOptions([
-        { id: 'all_pupuk', label: '🧪 Lihat Semua Jenis Pupuk', action: () => navigateToNode('opt_pupuk') },
-        { id: 'back_root', label: '🏠 Menu Utama', action: () => navigateToNode('root') }
-      ]);
-      return;
-    }
-
-    // 3. Search in FAQ
-    for (const cat of Object.keys(faqMap)) {
-      const items = faqMap[cat] || [];
-      const match = items.find((f: any) => 
-        f.pertanyaan.toLowerCase().includes(cleanQuery) || 
-        f.jawaban.toLowerCase().includes(cleanQuery) ||
-        tokens.some(t => f.pertanyaan.toLowerCase().includes(t))
-      );
-      if (match) {
-        renderBotBubble(
-          `❓ **${match.pertanyaan}**\n\n${match.jawaban}\n\n*Sumber: ${match.sumber}*`
-        );
-        setOptions([
-          { id: 'back_root', label: '🏠 Menu Utama', action: () => navigateToNode('root') }
-        ]);
-        return;
-      }
-    }
-
-    renderBotBubble(`Maaf, tidak ditemukan hasil spesifik untuk kata kunci "${query}". Silakan pilih topik di menu utama atau coba kata kunci seperti "blas", "wereng", "urea", atau "varietas".`);
-    setOptions([
-      { id: 'back_root', label: '🏠 Kembali ke Menu Utama', action: () => navigateToNode('root') }
-    ]);
-  }
-
-  function setupSearch() {
-    const searchInput = document.getElementById('tanibot-search') as HTMLInputElement;
-    const searchBtn = document.getElementById('btn-tanibot-search-submit');
-
-    const trigger = () => {
-      if (!searchInput) return;
-      const val = searchInput.value.trim();
-      if (val) {
-        executeSearch(val);
-        searchInput.value = '';
-      }
-    };
-
-    searchBtn?.addEventListener('click', trigger);
-
-    searchInput?.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        trigger();
-      }
-    });
-
-    // Quick chips click
-    const chips = document.querySelectorAll('.quick-chip');
-    chips.forEach(chip => {
-      chip.addEventListener('click', () => {
-        const q = chip.getAttribute('data-query');
-        if (q) executeSearch(q);
-      });
-    });
   }
 
   document.addEventListener('DOMContentLoaded', () => {
-    handleUrlParams();
-    setupSearch();
+    initGreeting();
 
-    document.getElementById('btn-tanibot-reset')?.addEventListener('click', () => {
-      const container = document.getElementById('tanibot-messages');
+    // Form submission
+    chatForm?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (!chatInput) return;
+      const text = chatInput.value.trim();
+      if (text) {
+        handleUserQuestion(text);
+        chatInput.value = '';
+        clearBtn?.classList.add('hidden');
+      }
+    });
+
+    // Clear input button
+    chatInput?.addEventListener('input', () => {
+      if (chatInput.value.length > 0) {
+        clearBtn?.classList.remove('hidden');
+      } else {
+        clearBtn?.classList.add('hidden');
+      }
+    });
+
+    clearBtn?.addEventListener('click', () => {
+      if (chatInput) {
+        chatInput.value = '';
+        chatInput.focus();
+        clearBtn.classList.add('hidden');
+      }
+    });
+
+    // Quick chips
+    document.querySelectorAll('.quick-chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        const query = chip.getAttribute('data-query');
+        if (query) handleUserQuestion(query);
+      });
+    });
+
+    // Reset button
+    resetBtn?.addEventListener('click', () => {
       if (container) container.innerHTML = '';
-      navigateToNode('root');
+      chatContext.length = 0;
+      initGreeting();
+    });
+
+    // Settings Modal Handlers
+    openSettingsBtn?.addEventListener('click', () => {
+      settingsModal?.classList.remove('hidden');
+      settingsModal?.classList.add('flex');
+      const curMode = localStorage.getItem('agrialert_ai_mode') || 'smart_local';
+      const curKey = localStorage.getItem('agrialert_groq_key') || '';
+      
+      const radio = document.querySelector(`input[name="ai_mode"][value="${curMode}"]`) as HTMLInputElement;
+      if (radio) radio.checked = true;
+      if (groqKeyInput) groqKeyInput.value = curKey;
+      if (curMode === 'groq_online') {
+        groqKeyGroup?.classList.remove('hidden');
+      } else {
+        groqKeyGroup?.classList.add('hidden');
+      }
+    });
+
+    closeSettingsBtn?.addEventListener('click', () => {
+      settingsModal?.classList.add('hidden');
+      settingsModal?.classList.remove('flex');
+    });
+
+    document.querySelectorAll('input[name="ai_mode"]').forEach(r => {
+      r.addEventListener('change', (e) => {
+        const val = (e.target as HTMLInputElement).value;
+        if (val === 'groq_online') {
+          groqKeyGroup?.classList.remove('hidden');
+        } else {
+          groqKeyGroup?.classList.add('hidden');
+        }
+      });
+    });
+
+    saveSettingsBtn?.addEventListener('click', () => {
+      const selected = document.querySelector('input[name="ai_mode"]:checked') as HTMLInputElement;
+      const mode = selected ? selected.value : 'smart_local';
+      const key = groqKeyInput ? groqKeyInput.value.trim() : '';
+
+      localStorage.setItem('agrialert_ai_mode', mode);
+      if (key) localStorage.setItem('agrialert_groq_key', key);
+
+      if (aiBadge) {
+        if (mode === 'groq_online' && key) {
+          aiBadge.textContent = "LLaMA 3.3 70B Online";
+          aiBadge.className = "text-[10px] uppercase font-bold px-2 py-0.5 rounded bg-blue-900/80 text-blue-200 border border-blue-500";
+        } else {
+          aiBadge.textContent = "Penyuluh Pertanian Cerdas";
+          aiBadge.className = "text-[10px] uppercase font-bold px-2 py-0.5 rounded bg-emerald-900/80 text-emerald-200 border border-emerald-600";
+        }
+      }
+
+      settingsModal?.classList.add('hidden');
+      settingsModal?.classList.remove('flex');
+
+      renderBotMessage(`⚙️ <em>Setelan AI berhasil diperbarui ke: <strong>${mode === 'groq_online' && key ? 'Mode Online Cloud (LLaMA 3.3 70B)' : 'Mode Cerdas Agronomi Lokal'}</strong>. Silakan lanjutkan bertanya!</em>`);
     });
   });
 </script>
