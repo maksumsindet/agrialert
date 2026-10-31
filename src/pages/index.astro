@@ -96,30 +96,27 @@ const hamaImages: Record<string, string> = {
               </span>
             </div>
 
-            <!-- Mascot Spotlight with Animated Waving Greeting & Speech Bubble -->
-            <div class="relative flex justify-center items-center py-2 min-h-[240px]">
-              <div class="absolute inset-0 bg-agro-700/20 rounded-full blur-2xl"></div>
-
-              <!-- Sparkle Accents (Blink/Happy Expression) -->
-              <span class="absolute top-4 left-6 text-xl animate-sparkle-1 pointer-events-none select-none" aria-hidden="true">✨</span>
-              <span class="absolute top-8 right-6 text-lg animate-sparkle-2 pointer-events-none select-none" aria-hidden="true">🌟</span>
-
-              <!-- Interactive Waving Speech Bubble -->
+            <!-- Mascot Interactive Speech Pill (Cleanly above mascot, no overlapping!) -->
+            <div class="flex justify-center mb-1">
               <div 
                 id="mascot-bubble" 
-                class="animate-bubble-pop absolute -top-3 sm:-top-4 -right-1 sm:right-0 z-20 max-w-[195px] sm:max-w-[215px] bg-white text-agro-950 p-2.5 sm:p-3 rounded-2xl rounded-bl-sm shadow-2xl border-2 border-emerald-400 text-left cursor-pointer select-none transition-transform active:scale-95"
+                class="animate-bubble-pop inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-950/90 text-agro-100 shadow-md border border-emerald-500/50 text-xs cursor-pointer select-none transition-all hover:bg-emerald-900/90 hover:border-emerald-400 active:scale-95"
                 title="Klik untuk sapaan lainnya"
               >
-                <div class="flex items-start gap-1.5">
-                  <span class="text-xl sm:text-2xl inline-block animate-wave origin-bottom-right flex-shrink-0" aria-hidden="true">👋</span>
-                  <div class="leading-tight">
-                    <p class="font-bold text-[12px] sm:text-[13px] text-agro-900" id="bubble-title">Halo Sobat Tani!</p>
-                    <p class="text-[10px] sm:text-[11px] text-agro-700 mt-0.5" id="bubble-subtitle">Yuk cek kesehatan padi hari ini!</p>
-                  </div>
-                </div>
-                <!-- Triangle Tail Pointing to Mascot -->
-                <div class="absolute -bottom-2 left-6 w-0 h-0 border-l-[8px] border-l-transparent border-t-[8px] border-t-white border-r-[8px] border-r-transparent"></div>
+                <span class="text-base inline-block animate-wave origin-bottom-right" aria-hidden="true">👋</span>
+                <span id="bubble-title" class="font-bold text-white text-xs">Halo Sobat Tani!</span>
+                <span class="text-agro-400 text-[11px]">&bull;</span>
+                <span id="bubble-subtitle" class="text-agro-200 text-[11px]">Siap cek padi hari ini?</span>
               </div>
+            </div>
+
+            <!-- Mascot Spotlight with Animated Waving Greeting (Completely Unobstructed) -->
+            <div class="relative flex justify-center items-center py-1">
+              <div class="absolute inset-0 bg-agro-700/20 rounded-full blur-2xl"></div>
+
+              <!-- Sparkle Accents (Blink/Happy Expression) on the sides -->
+              <span class="absolute top-2 left-6 text-base animate-sparkle-1 pointer-events-none select-none opacity-70" aria-hidden="true">✨</span>
+              <span class="absolute top-4 right-6 text-sm animate-sparkle-2 pointer-events-none select-none opacity-70" aria-hidden="true">🌟</span>
 
               <!-- Mascot Character with Entrance Wave Animation -->
               <div id="mascot-wrapper" class="relative cursor-pointer group" title="Klik maskot untuk menyapa!">
@@ -129,12 +126,8 @@ const hamaImages: Record<string, string> = {
                   alt="Maskot AgriAlert Melambai" 
                   width="224"
                   height="224"
-                  class="animate-mascot-greet relative w-48 h-48 sm:w-56 sm:h-56 object-contain drop-shadow-2xl transition-transform duration-300 group-hover:scale-105"
+                  class="animate-mascot-greet relative w-44 h-44 sm:w-52 sm:h-52 object-contain drop-shadow-2xl transition-transform duration-300 group-hover:scale-105"
                 />
-                <!-- Subtle tap hint badge on hover -->
-                <span class="absolute bottom-1 right-2 bg-agro-950/80 text-[10px] text-agro-300 px-2 py-0.5 rounded-full border border-agro-700 opacity-0 group-hover:opacity-100 transition-opacity">
-                  Ketuk aku 👋
-                </span>
               </div>
             </div>
 
