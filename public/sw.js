@@ -1,11 +1,11 @@
 // AgriAlert Service Worker - Progressive Web App & Offline Field Companion
-const CACHE_NAME = 'agrialert-cache-v2';
+const CACHE_NAME = 'agrialert-cache-v3';
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
     (async () => {
       const cache = await caches.open(CACHE_NAME);
-      const scope = self.registration.scope; // e.g. "https://maksumsindet.github.io/agrialert/" or "http://localhost:4321/"
+      const scope = self.registration.scope;
       const cleanScope = scope.endsWith('/') ? scope : scope + '/';
 
       const essentialAssets = [
@@ -20,12 +20,12 @@ self.addEventListener('install', (event) => {
         cleanScope + 'images/sun.png',
         cleanScope + 'images/gps.png',
         cleanScope + 'images/maps.png',
-        cleanScope + 'model_agriwarn.onnx',
+        cleanScope + 'models/model_agriwarn.onnx',
         cleanScope + 'ort/ort.min.js',
-        cleanScope + 'ort/ort-wasm-simd-threaded.wasm'
+        cleanScope + 'ort/ort-wasm-simd.wasm',
+        cleanScope + 'ort/ort-wasm.wasm'
       ];
 
-      // Add each asset gracefully so one missing asset doesn't break cache installation
       for (const asset of essentialAssets) {
         try {
           await cache.add(asset);
@@ -50,10 +50,8 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
-  // Only handle GET requests
   if (event.request.method !== 'GET') return;
 
-  // Stale-while-revalidate strategy for maximum speed and instant offline availability
   event.respondWith(
     caches.match(event.request).then((cachedResponse) => {
       const fetchPromise = fetch(event.request).then((networkResponse) => {
@@ -65,7 +63,6 @@ self.addEventListener('fetch', (event) => {
         }
         return networkResponse;
       }).catch(() => {
-        // Fallback for navigation requests if network fails
         if (event.request.mode === 'navigate') {
           return caches.match(self.registration.scope);
         }

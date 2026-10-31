@@ -47,15 +47,24 @@ function isActive(path: string) {
     <!-- Load ONNX Runtime only on pages that require AI inference to keep other pages blazing fast -->
     {includeOnnx && (
       <>
-        <script is:inline src={url('/ort/ort.min.js')} defer></script>
+        <script is:inline src={url('/ort/ort.min.js')}></script>
         <script is:inline>
-          window.addEventListener('DOMContentLoaded', () => {
-            if (window.ort) {
-              const base = window.__AGRI_BASE_URL__ || '/';
-              const cleanBase = base.endsWith('/') ? base : base + '/';
-              window.ort.env.wasm.wasmPaths = cleanBase + "ort/";
+          (function() {
+            function configureOrt() {
+              if (window.ort) {
+                const base = window.__AGRI_BASE_URL__ || '/';
+                const cleanBase = base.endsWith('/') ? base : base + '/';
+                window.ort.env.wasm.wasmPaths = cleanBase + "ort/";
+                window.ort.env.wasm.numThreads = 1;
+                window.ort.env.wasm.proxy = false;
+              }
             }
-          });
+            if (window.ort) {
+              configureOrt();
+            } else {
+              window.addEventListener('DOMContentLoaded', configureOrt);
+            }
+          })();
         </script>
       </>
     )}

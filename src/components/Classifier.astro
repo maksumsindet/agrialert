@@ -440,28 +440,63 @@ import { url } from '../utils/paths';
   };
 
   let ortSession: any = null;
+  let modelLoadingPromise: Promise<any> | null = null;
 
-  async function initModel() {
-    const badge = document.getElementById('model-status-badge');
-    try {
-      if ((window as any).ort) {
-        const cleanBase = getCleanBase();
-        (window as any).ort.env.wasm.wasmPaths = cleanBase + "ort/";
-        ortSession = await (window as any).ort.InferenceSession.create(cleanBase + 'models/model_agriwarn.onnx', {
-          executionProviders: ['wasm']
-        });
-        if (badge) {
-          badge.className = "flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium bg-emerald-900/60 text-emerald-200 border border-emerald-600";
-          badge.innerHTML = `<span class="w-2 h-2 rounded-full bg-emerald-400"></span><span>Model AI Siap (WASM)</span>`;
-        }
+  async function ensureModelLoaded(): Promise<any> {
+    if (ortSession) return ortSession;
+    if (modelLoadingPromise) return modelLoadingPromise;
+
+    modelLoadingPromise = (async () => {
+      const badge = document.getElementById('model-status-badge');
+      const cleanBase = getCleanBase();
+
+      // Wait up to 5 seconds for window.ort script to finish evaluation
+      let attempts = 0;
+      while (!(window as any).ort && attempts < 50) {
+        await new Promise(r => setTimeout(r, 100));
+        attempts++;
       }
+
+      if (!(window as any).ort) {
+        throw new Error("Pustaka WebAssembly ONNX Runtime tidak ditemukan.");
+      }
+
+      const ort = (window as any).ort;
+      ort.env.wasm.wasmPaths = cleanBase + "ort/";
+      // Critical for mobile web without COOP/COEP headers: Single-thread prevents SharedArrayBuffer crashes
+      ort.env.wasm.numThreads = 1;
+      ort.env.wasm.proxy = false;
+
+      const modelUrl = cleanBase + 'models/model_agriwarn.onnx';
+      const session = await ort.InferenceSession.create(modelUrl, {
+        executionProviders: ['wasm'],
+        graphOptimizationLevel: 'all'
+      });
+
+      ortSession = session;
+      if (badge) {
+        badge.className = "flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium bg-emerald-900/60 text-emerald-200 border border-emerald-600";
+        badge.innerHTML = `<span class="w-2 h-2 rounded-full bg-emerald-400"></span><span>Model AI Siap (WASM Native)</span>`;
+      }
+      return session;
+    })();
+
+    try {
+      return await modelLoadingPromise;
     } catch (err) {
       console.error("Gagal memuat model ONNX:", err);
+      modelLoadingPromise = null;
+      const badge = document.getElementById('model-status-badge');
       if (badge) {
-        badge.className = "flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium bg-amber-900/60 text-amber-200 border border-amber-600";
-        badge.innerHTML = `<span class="w-2 h-2 rounded-full bg-amber-400"></span><span>Mode Standar Aktif</span>`;
+        badge.className = "flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium bg-red-900/60 text-red-200 border border-red-600";
+        badge.innerHTML = `<span class="w-2 h-2 rounded-full bg-red-400"></span><span>Gagal Memuat AI</span>`;
       }
+      throw err;
     }
+  }
+
+  function initModel() {
+    ensureModelLoaded().catch(() => {});
   }
 
   function rgbToHsv(r: number, g: number, b: number) {
@@ -569,24 +604,26 @@ import { url } from '../utils/paths';
       floatData[p++] = imgData.data[i + 2]; // B (0..255)
     }
 
-    // 3. ONNX Inference
+    // 3. ONNX Inference (Ensure model is 100% ready)
     let probs: number[] = [];
-    if (ortSession && (window as any).ort) {
-      try {
-        const tensor = new (window as any).ort.Tensor('float32', floatData, [1, TARGET_SIZE, TARGET_SIZE, 3]);
-        const inputName = ortSession.inputNames ? ortSession.inputNames[0] : 'image_input';
-        const results = await ortSession.run({ [inputName]: tensor });
-        // Retrieve output tensor dynamically
-        const firstOutKey = Object.keys(results)[0];
-        const output = results[firstOutKey]?.data || results.dense_3?.data || results.dense_1?.data;
-        probs = Array.from(output);
-      } catch (e) {
-        console.error("Inference error:", e);
-        fallbackHeuristic(filename, vegRatio);
-        return;
+    try {
+      if (!ortSession) {
+        await ensureModelLoaded();
       }
-    } else {
-      fallbackHeuristic(filename, vegRatio);
+
+      const ort = (window as any).ort;
+      const tensor = new ort.Tensor('float32', floatData, [1, TARGET_SIZE, TARGET_SIZE, 3]);
+      const inputName = ortSession.inputNames ? ortSession.inputNames[0] : 'image_input';
+      const results = await ortSession.run({ [inputName]: tensor });
+
+      // Retrieve output tensor dynamically
+      const outKey = ortSession.outputNames ? ortSession.outputNames[0] : Object.keys(results)[0];
+      const output = results[outKey]?.data || results.dense_3?.data || results[Object.keys(results)[0]]?.data;
+      probs = Array.from(output);
+    } catch (e) {
+      console.error("Kesalahan inferensi model AI:", e);
+      stateLoading?.classList.add('hidden');
+      alert("Model AI belum dapat dijalankan di peramban Anda. Silakan muat ulang halaman (refresh) dan pastikan koneksi internet stabil.");
       return;
     }
 
@@ -643,26 +680,7 @@ import { url } from '../utils/paths';
     });
   }
 
-  function fallbackHeuristic(filename: string, vegRatio: number) {
-    const fn = filename.toLowerCase();
-    let sampleClass = 'healthy';
-    if (fn.includes('blas')) sampleClass = 'leaf_blast';
-    else if (fn.includes('hdb')) sampleClass = 'bacterial_leaf_blight';
-    else if (fn.includes('sempit')) sampleClass = 'narrow_brown_spot';
-    else if (fn.includes('cokelat')) sampleClass = 'brown_spot';
-    else if (fn.includes('hawar')) sampleClass = 'leaf_scald';
 
-    const probs = NAMA_KELAS.map(k => k === sampleClass ? 0.94 : 0.012);
-    renderResult({
-      kelas: sampleClass,
-      confidence: 0.94,
-      vegRatio,
-      entropy: 0.15,
-      gatePassed: true,
-      probs,
-      rejectReason: null
-    });
-  }
 
   function renderResult(res: {
     kelas: string;
