@@ -99,15 +99,15 @@ const hamaImages: Record<string, string> = {
               </span>
             </div>
 
-            <!-- Mascot Interactive Speech Capsule -->
+            <!-- Mascot Interactive Speech Capsule with Bootstrap Icons -->
             <div class="flex justify-center mb-2">
               <div 
                 id="mascot-bubble" 
                 class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-950 text-agro-100 border border-emerald-500/50 text-xs cursor-pointer select-none transition-all hover:bg-emerald-900 active:scale-95"
                 title="Klik untuk sapaan lainnya"
               >
-                <span class="text-base inline-block animate-wave origin-bottom-right" aria-hidden="true">👋</span>
-                <span id="bubble-title" class="font-bold text-white text-xs">Halo Sobat Tani!</span>
+                <i class="bi bi-chat-quote-fill text-harvest-amber text-sm" aria-hidden="true"></i>
+                <span id="bubble-title" class="font-bold text-white text-xs">Halo Sobat Tani</span>
                 <span class="text-agro-400 text-xs">&bull;</span>
                 <span id="bubble-subtitle" class="text-agro-200 text-xs">Siap cek padi hari ini?</span>
               </div>
@@ -245,12 +245,12 @@ const hamaImages: Record<string, string> = {
 
 <script>
   const greetings = [
-    { title: "Halo Sobat Tani!", subtitle: "Yuk cek kesehatan padi hari ini!" },
-    { title: "Padi Sehat, Panen Melimpah! 🌾", subtitle: "Waspada gejala sundep dan blast daun." },
-    { title: "Deteksi AI Cepat! 📸", subtitle: "Foto daun mencurigakan langsung dari sawah." },
-    { title: "Bisa Dipakai Offline! ⚡", subtitle: "Model AI jalan di HP tanpa perlu internet." },
-    { title: "Pantau Satelit BMKG! 🛰️", subtitle: "Data radar Sentinel-1 siap pandu pola tanam." },
-    { title: "Semangat Pahlawan Pangan! 🇮🇩", subtitle: "Bersama kita jaga swasembada beras nasional." }
+    { title: "Halo Sobat Tani", subtitle: "Yuk cek kesehatan padi hari ini!" },
+    { title: "Padi Sehat, Panen Melimpah", subtitle: "Waspada gejala sundep dan blast daun." },
+    { title: "Deteksi AI Cepat", subtitle: "Foto daun mencurigakan langsung dari sawah." },
+    { title: "Bisa Dipakai Offline", subtitle: "Model AI jalan di HP tanpa perlu internet." },
+    { title: "Pantau Satelit BMKG", subtitle: "Data radar Sentinel-1 siap pandu pola tanam." },
+    { title: "Semangat Ketahanan Pangan", subtitle: "Bersama kita jaga swasembada beras nasional." }
   ];
 
   let currentGreetingIdx = 0;

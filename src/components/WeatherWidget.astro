@@ -83,28 +83,31 @@ import { url } from '../utils/paths';
         <p class="text-xs text-soil-500 mt-0.5">Dinamika fluktuasi suhu, kelembapan spora, dan curah hujan per jam di sawah Anda</p>
       </div>
 
-      <!-- Realtime Metric Mode Switcher Tabs -->
+      <!-- Realtime Metric Mode Switcher Tabs with Bootstrap Icons -->
       <div class="flex items-center p-1 bg-soil-100 rounded-lg border border-soil-200 text-xs font-semibold">
         <button 
           type="button" 
           id="btn-metric-temp" 
-          class="cursor-pointer px-3 py-1.5 rounded-md bg-white text-agro-900 font-bold shadow-xs transition-all border border-soil-200"
+          class="cursor-pointer px-3 py-1.5 rounded-md bg-white text-agro-900 font-bold shadow-xs transition-all border border-soil-200 inline-flex items-center gap-1.5"
         >
-          🌡️ Suhu (°C)
+          <i class="bi bi-thermometer-half text-red-600 text-sm"></i>
+          <span>Suhu (°C)</span>
         </button>
         <button 
           type="button" 
           id="btn-metric-rh" 
-          class="cursor-pointer px-3 py-1.5 rounded-md text-soil-600 hover:text-soil-900 font-semibold transition-all hover:bg-soil-200/60"
+          class="cursor-pointer px-3 py-1.5 rounded-md text-soil-600 hover:text-soil-900 font-semibold transition-all hover:bg-soil-200/60 inline-flex items-center gap-1.5"
         >
-          💧 Kelembapan (%)
+          <i class="bi bi-droplet-half text-blue-600 text-sm"></i>
+          <span>Kelembapan (%)</span>
         </button>
         <button 
           type="button" 
           id="btn-metric-rain" 
-          class="cursor-pointer px-3 py-1.5 rounded-md text-soil-600 hover:text-soil-900 font-semibold transition-all hover:bg-soil-200/60"
+          class="cursor-pointer px-3 py-1.5 rounded-md text-soil-600 hover:text-soil-900 font-semibold transition-all hover:bg-soil-200/60 inline-flex items-center gap-1.5"
         >
-          🌧️ Hujan (mm)
+          <i class="bi bi-cloud-rain-heavy text-sky-600 text-sm"></i>
+          <span>Hujan (mm)</span>
         </button>
       </div>
     </div>

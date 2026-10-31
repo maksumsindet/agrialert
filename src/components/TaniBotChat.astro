@@ -72,11 +72,11 @@ import { url } from '../utils/paths';
     <!-- Quick Question Inspiration Chips -->
     <div class="flex items-center gap-1.5 overflow-x-auto pb-1 text-[11px] no-scrollbar">
       <span class="text-soil-500 font-semibold shrink-0">Tanya Cepat:</span>
-      <button type="button" class="quick-chip shrink-0 px-3 py-1 rounded-full bg-soil-100 hover:bg-agro-50 hover:border-agro-400 border border-soil-200 text-soil-700 transition-all font-medium" data-query="Daun padi saya bercak belah ketupat abu-abu, kenapa ya Pak?">🌾 Bercak Belah Ketupat</button>
-      <button type="button" class="quick-chip shrink-0 px-3 py-1 rounded-full bg-soil-100 hover:bg-agro-50 hover:border-agro-400 border border-soil-200 text-soil-700 transition-all font-medium" data-query="Bagaimana cara mengatasi wereng batang coklat yang mulai banyak?">🐛 Atasi Wereng</button>
-      <button type="button" class="quick-chip shrink-0 px-3 py-1 rounded-full bg-soil-100 hover:bg-agro-50 hover:border-agro-400 border border-soil-200 text-soil-700 transition-all font-medium" data-query="Kapan jadwal dan dosis pemupukan Urea yang tepat agar tidak kena blast?">🧪 Jadwal Pemupukan</button>
-      <button type="button" class="quick-chip shrink-0 px-3 py-1 rounded-full bg-soil-100 hover:bg-agro-50 hover:border-agro-400 border border-soil-200 text-soil-700 transition-all font-medium" data-query="Varietas padi apa yang paling tahan penyakit hawar daun bakteri dan blas?">🌱 Varietas Tahan</button>
-      <button type="button" class="quick-chip shrink-0 px-3 py-1 rounded-full bg-soil-100 hover:bg-agro-50 hover:border-agro-400 border border-soil-200 text-soil-700 transition-all font-medium" data-query="Kenapa pucuk padi saya layu dan mudah dicabut?">🦗 Pucuk Mati (Sundep)</button>
+      <button type="button" class="quick-chip shrink-0 px-3 py-1 rounded-full bg-soil-100 hover:bg-agro-50 hover:border-agro-400 border border-soil-200 text-soil-700 transition-all font-medium" data-query="Daun padi saya bercak belah ketupat abu-abu, kenapa ya Pak?"><i class="bi bi-patch-exclamation mr-1 text-amber-600"></i> Bercak Belah Ketupat</button>
+      <button type="button" class="quick-chip shrink-0 px-3 py-1 rounded-full bg-soil-100 hover:bg-agro-50 hover:border-agro-400 border border-soil-200 text-soil-700 transition-all font-medium" data-query="Bagaimana cara mengatasi wereng batang coklat yang mulai banyak?"><i class="bi bi-bug mr-1 text-amber-800"></i> Atasi Wereng</button>
+      <button type="button" class="quick-chip shrink-0 px-3 py-1 rounded-full bg-soil-100 hover:bg-agro-50 hover:border-agro-400 border border-soil-200 text-soil-700 transition-all font-medium" data-query="Kapan jadwal dan dosis pemupukan Urea yang tepat agar tidak kena blast?"><i class="bi bi-droplet-half mr-1 text-blue-600"></i> Jadwal Pemupukan</button>
+      <button type="button" class="quick-chip shrink-0 px-3 py-1 rounded-full bg-soil-100 hover:bg-agro-50 hover:border-agro-400 border border-soil-200 text-soil-700 transition-all font-medium" data-query="Varietas padi apa yang paling tahan penyakit hawar daun bakteri dan blas?"><i class="bi bi-award mr-1 text-emerald-600"></i> Varietas Tahan</button>
+      <button type="button" class="quick-chip shrink-0 px-3 py-1 rounded-full bg-soil-100 hover:bg-agro-50 hover:border-agro-400 border border-soil-200 text-soil-700 transition-all font-medium" data-query="Kenapa pucuk padi saya layu dan mudah dicabut?"><i class="bi bi-scissors mr-1 text-rose-600"></i> Pucuk Mati (Sundep)</button>
     </div>
 
     <!-- Conversational Input Bar -->
@@ -139,7 +139,7 @@ import { url } from '../utils/paths';
             <label class="flex items-start gap-2 p-2.5 rounded-xl border border-emerald-300 bg-emerald-50/60 cursor-pointer">
               <input type="radio" name="ai_mode" value="smart_local" checked class="mt-0.5 text-agro-700" />
               <div>
-                <strong class="text-soil-900 block text-xs">⚡ Mode Cerdas Agronomi Lokal (Bawaan)</strong>
+                <strong class="text-soil-900 block text-xs"><i class="bi bi-cpu-fill text-agro-700 mr-1.5"></i> Mode Cerdas Agronomi Lokal (Bawaan)</strong>
                 <span class="text-soil-500 text-[11px]">Sistem penalaran ahli berbasis database resmi BBPOPT Kementan RI. Cepat, instan, 100% jalan tanpa kuota internet.</span>
               </div>
             </label>
@@ -147,7 +147,7 @@ import { url } from '../utils/paths';
             <label class="flex items-start gap-2 p-2.5 rounded-xl border border-soil-200 hover:border-agro-300 bg-white cursor-pointer">
               <input type="radio" name="ai_mode" value="groq_online" class="mt-0.5 text-agro-700" />
               <div>
-                <strong class="text-soil-900 block text-xs">🌐 Mode Online Cloud (LLaMA 3.3 70B via Groq)</strong>
+                <strong class="text-soil-900 block text-xs"><i class="bi bi-cloud-arrow-up-fill text-blue-600 mr-1.5"></i> Mode Online Cloud (LLaMA 3.3 70B via Groq)</strong>
                 <span class="text-soil-500 text-[11px]">Menggunakan LLM Cloud berkecepatan tinggi persis seperti versi Streamlit asli (butuh Groq API Key).</span>
               </div>
             </label>
@@ -303,7 +303,7 @@ Gunakan istilah sehari-hari petani padi, bila ada istilah latin sebutkan penjela
           const btn = document.createElement('button');
           btn.type = 'button';
           btn.className = "px-2.5 py-1 rounded-lg bg-agro-50 hover:bg-agro-700 hover:text-white text-agro-900 border border-agro-200 font-semibold text-[11px] transition-colors";
-          btn.textContent = chip.label;
+          btn.innerHTML = chip.label;
           btn.addEventListener('click', chip.action);
           chipsBox.appendChild(btn);
         });
@@ -347,7 +347,7 @@ Gunakan istilah sehari-hari petani padi, bila ada istilah latin sebutkan penjela
     // 1. Sapaan / Salam
     if (/^(halo|hai|assalamu|selamat|pagi|siang|sore|malam|tes|hai|bot|tanibot)/i.test(q) && tokens.length <= 3) {
       return {
-        replyHtml: `Halo Sobat Tani! 👋 Senang bisa mendampingi Anda di sawah hari ini.
+        replyHtml: `Halo Sobat Tani! Senang bisa mendampingi Anda di sawah hari ini.
 <br><br>
 Saya <strong>TaniBot</strong>, asisten agronomi cerdas siap bantu jawab keluhan padi:
 <br>• Identifikasi penyakit dari gejala daun (bercak, kuning, kresek, blas)
@@ -357,9 +357,9 @@ Saya <strong>TaniBot</strong>, asisten agronomi cerdas siap bantu jawab keluhan 
 <br><br>
 Silakan ceritakan kondisi tanaman padi Anda sekarang!`,
         chips: [
-          { label: "🌾 Daun Ada Bercak Belah Ketupat", action: () => handleUserQuestion("Daun padi saya ada bercak belah ketupat abu-abu") },
-          { label: "🐛 Batang Menguning & Ada Wereng", action: () => handleUserQuestion("Wereng batang coklat di sawah") },
-          { label: "🧪 Aturan Dosis Pupuk Urea", action: () => handleUserQuestion("Berapa dosis pupuk urea yang tepat?") }
+          { label: `<i class="bi bi-patch-exclamation mr-1 text-amber-600"></i> Daun Ada Bercak Belah Ketupat`, action: () => handleUserQuestion("Daun padi saya ada bercak belah ketupat abu-abu") },
+          { label: `<i class="bi bi-bug mr-1 text-amber-800"></i> Batang Menguning & Ada Wereng`, action: () => handleUserQuestion("Wereng batang coklat di sawah") },
+          { label: `<i class="bi bi-droplet-half mr-1 text-blue-600"></i> Aturan Dosis Pupuk Urea`, action: () => handleUserQuestion("Berapa dosis pupuk urea yang tepat?") }
         ]
       };
     }
@@ -373,13 +373,13 @@ Silakan ceritakan kondisi tanaman padi Anda sekarang!`,
         pupukInfo += `&bull; <em>Waktu:</em> ${p.waktu_aplikasi}<br>`;
         pupukInfo += `&bull; <em>Catatan Lapangan:</em> ${p.catatan}<br><br>`;
       });
-      pupukInfo += `⚠️ <strong>Pesan Penting PPL:</strong> Hindari pemupukan Urea berlebih saat musim hujan atau saat cuaca lembap, karena memicu ledakan jamur Blas dan bakteri Kresek (HDB).`;
+      pupukInfo += `<i class="bi bi-exclamation-triangle-fill text-amber-500 mr-1"></i> <strong>Pesan Penting PPL:</strong> Hindari pemupukan Urea berlebih saat musim hujan atau saat cuaca lembap, karena memicu ledakan jamur Blas dan bakteri Kresek (HDB).`;
 
       return {
         replyHtml: pupukInfo,
         chips: [
-          { label: "🌱 Varietas Tahan Hama", action: () => handleUserQuestion("Varietas padi tahan hama") },
-          { label: "🌾 Penanganan Blas Daun", action: () => handleUserQuestion("Blas daun") }
+          { label: `<i class="bi bi-award mr-1 text-emerald-600"></i> Varietas Tahan Hama`, action: () => handleUserQuestion("Varietas padi tahan hama") },
+          { label: `<i class="bi bi-shield-check mr-1 text-agro-700"></i> Penanganan Blas Daun`, action: () => handleUserQuestion("Blas daun") }
         ]
       };
     }
@@ -396,8 +396,8 @@ Silakan ceritakan kondisi tanaman padi Anda sekarang!`,
       return {
         replyHtml: vHtml,
         chips: [
-          { label: "🐛 Cara Kendalikan Wereng", action: () => handleUserQuestion("Cara kendalikan wereng coklat") },
-          { label: "🧪 Aturan Pupuk Padi", action: () => handleUserQuestion("Aturan pupuk padi berimbang") }
+          { label: `<i class="bi bi-bug mr-1 text-amber-800"></i> Cara Kendalikan Wereng`, action: () => handleUserQuestion("Cara kendalikan wereng coklat") },
+          { label: `<i class="bi bi-droplet-half mr-1 text-blue-600"></i> Aturan Pupuk Padi`, action: () => handleUserQuestion("Aturan pupuk padi berimbang") }
         ]
       };
     }
@@ -421,17 +421,17 @@ Silakan ceritakan kondisi tanaman padi Anda sekarang!`,
       const recs = (recsMap[`${opt.id}_pertanaman`] || recsMap[`${opt.id}_pratanam`] || []).slice(0, 3);
 
       let reply = `Pak Tani, mengenai keluhan <strong>${opt.nama_lokal}</strong> (<em>${opt.nama_latin}</em>), berikut penjelasan dan solusi praktisnya:<br><br>`;
-      reply += `🔍 <strong>Karakteristik & Gejala Lapangan:</strong><br>${opt.gejala}<br><br>`;
-      reply += `🎯 <strong>Ambang Kendali Petani:</strong><br>${opt.ambang_pengendalian}<br><br>`;
+      reply += `<i class="bi bi-search text-agro-700 mr-1"></i> <strong>Karakteristik & Gejala Lapangan:</strong><br>${opt.gejala}<br><br>`;
+      reply += `<i class="bi bi-bullseye text-agro-700 mr-1"></i> <strong>Ambang Kendali Petani:</strong><br>${opt.ambang_pengendalian}<br><br>`;
 
       if (recs.length > 0) {
-        reply += `📋 <strong>SOP Pengendalian Lapangan (BBPOPT Kementan):</strong><br>`;
+        reply += `<i class="bi bi-clipboard2-check text-agro-700 mr-1"></i> <strong>SOP Pengendalian Lapangan (BBPOPT Kementan):</strong><br>`;
         recs.forEach((r, idx) => {
           reply += `<div class="p-2.5 my-1.5 rounded-xl bg-soil-50 border border-soil-200">
             <strong>${idx + 1}. [${r.metode.toUpperCase()}] ${r.langkah}</strong><br>
             <span class="text-soil-700">${r.detail}</span>
-            ${r.dosis ? `<br><span class="text-agro-800 font-semibold">💊 Takaran: ${r.dosis}</span>` : ''}
-            ${r.waktu_aplikasi ? `<br><span class="text-soil-600">🕐 Waktu semprot: ${r.waktu_aplikasi}</span>` : ''}
+            ${r.dosis ? `<br><span class="text-agro-800 font-semibold"><i class="bi bi-capsule text-agro-700 mr-1"></i> Takaran: ${r.dosis}</span>` : ''}
+            ${r.waktu_aplikasi ? `<br><span class="text-soil-600"><i class="bi bi-clock-history text-soil-500 mr-1"></i> Waktu semprot: ${r.waktu_aplikasi}</span>` : ''}
           </div>`;
         });
       }
@@ -439,14 +439,14 @@ Silakan ceritakan kondisi tanaman padi Anda sekarang!`,
       // Check relevant FAQ
       const faqs = (faqMap[opt.id] || []).slice(0, 1);
       if (faqs.length > 0) {
-        reply += `<br>💡 <strong>Tanya Jawab Petani:</strong><br><em>Q: ${faqs[0].pertanyaan}</em><br>${faqs[0].jawaban}<br>`;
+        reply += `<br><i class="bi bi-lightbulb-fill text-amber-500 mr-1"></i> <strong>Tanya Jawab Petani:</strong><br><em>Q: ${faqs[0].pertanyaan}</em><br>${faqs[0].jawaban}<br>`;
       }
 
       return {
         replyHtml: reply,
         chips: [
-          { label: `🌱 Varietas Tahan ${opt.nama_lokal}`, action: () => handleUserQuestion(`Varietas tahan ${opt.nama_lokal}`) },
-          { label: "🧪 Cek Dosis Pemupukan", action: () => handleUserQuestion("Jadwal dan dosis pemupukan") }
+          { label: `<i class="bi bi-award mr-1 text-emerald-600"></i> Varietas Tahan ${opt.nama_lokal}`, action: () => handleUserQuestion(`Varietas tahan ${opt.nama_lokal}`) },
+          { label: `<i class="bi bi-droplet-half mr-1 text-blue-600"></i> Cek Dosis Pemupukan`, action: () => handleUserQuestion("Jadwal dan dosis pemupukan") }
         ]
       };
     }
@@ -460,9 +460,9 @@ Silakan ceritakan kondisi tanaman padi Anda sekarang!`,
 3. <strong>Kekurangan Unsur Hara Kalium / Nitrogen:</strong> Warna kuning merata pada helai daun tua. <em>Solusi:</em> Tambahkan KCl atau kompos jerami padi saat pemupukan susulan.<br><br>
 Untuk memastikan, apakah bagian bawah batang padi basah ada serangga kecil, atau ada bercak berbentuk garis/belah ketupat di daunnya?`,
         chips: [
-          { label: "🍂 Gejala Kresek (HDB)", action: () => handleUserQuestion("Hawar daun bakteri kresek") },
-          { label: "🐛 Wereng di Pangkal Batang", action: () => handleUserQuestion("Wereng batang coklat") },
-          { label: "🌾 Blas Bercak Belah Ketupat", action: () => handleUserQuestion("Blas daun") }
+          { label: `<i class="bi bi-virus mr-1 text-amber-700"></i> Gejala Kresek (HDB)`, action: () => handleUserQuestion("Hawar daun bakteri kresek") },
+          { label: `<i class="bi bi-bug mr-1 text-amber-800"></i> Wereng di Pangkal Batang`, action: () => handleUserQuestion("Wereng batang coklat") },
+          { label: `<i class="bi bi-patch-exclamation mr-1 text-amber-600"></i> Blas Bercak Belah Ketupat`, action: () => handleUserQuestion("Blas daun") }
         ]
       };
     }
@@ -478,9 +478,9 @@ Untuk masalah <em>"${userQuery}"</em>, kami menyarankan memeriksa tiga hal utama
 <br><br>
 Anda juga bisa mencoba kata kunci spesifik seperti: <em>"blas daun"</em>, <em>"wereng coklat"</em>, <em>"kresek"</em>, <em>"sundep"</em>, atau <em>"dosis pupuk"</em>.`,
       chips: [
-        { label: "🌾 Tanya Blas Daun", action: () => handleUserQuestion("Blas daun") },
-        { label: "🐛 Tanya Wereng Padi", action: () => handleUserQuestion("Wereng batang coklat") },
-        { label: "🧪 Rekomendasi Pupuk", action: () => handleUserQuestion("Dosis pupuk urea dan npk") }
+        { label: `<i class="bi bi-shield-exclamation mr-1 text-agro-700"></i> Tanya Blas Daun`, action: () => handleUserQuestion("Blas daun") },
+        { label: `<i class="bi bi-bug mr-1 text-amber-800"></i> Tanya Wereng Padi`, action: () => handleUserQuestion("Wereng batang coklat") },
+        { label: `<i class="bi bi-droplet-half mr-1 text-blue-600"></i> Rekomendasi Pupuk`, action: () => handleUserQuestion("Dosis pupuk urea dan npk") }
       ]
     };
   }
@@ -546,8 +546,8 @@ Anda juga bisa mencoba kata kunci spesifik seperti: <em>"blas daun"</em>, <em>"w
           .replace(/\*(.*?)\*/g, '<em>$1</em>');
 
         renderBotMessage(formatted, [
-          { label: "📋 Cek SOP Dosis Lapangan", action: () => handleUserQuestion(`Dosis obat untuk ${text}`) },
-          { label: "🌱 Varietas Tahan", action: () => handleUserQuestion("Varietas padi tahan hama") }
+          { label: `<i class="bi bi-clipboard2-check mr-1 text-agro-700"></i> Cek SOP Dosis Lapangan`, action: () => handleUserQuestion(`Dosis obat untuk ${text}`) },
+          { label: `<i class="bi bi-award mr-1 text-emerald-600"></i> Varietas Tahan`, action: () => handleUserQuestion("Varietas padi tahan hama") }
         ]);
         chatContext.push({ role: 'assistant', content: aiAnswer });
         return;
@@ -575,13 +575,13 @@ Anda juga bisa mencoba kata kunci spesifik seperti: <em>"blas daun"</em>, <em>"w
       const optItem = optList.find(o => o.id === optParam || o.id === optParam.replace('leaf_', ''));
       const optName = optItem ? optItem.nama_lokal : optParam.toUpperCase();
       renderBotMessage(
-        `Halo Sobat Tani! 📸 Saya melihat Anda baru saja melakukan deteksi foto daun padi dan teridentifikasi: <strong>${optName}</strong>.
+        `Halo Sobat Tani! <i class="bi bi-camera-fill text-agro-700 mr-1"></i> Saya melihat Anda baru saja melakukan deteksi foto daun padi dan teridentifikasi: <strong>${optName}</strong>.
 <br><br>
 Ada yang ingin ditanyakan seputar cara semprot, takaran dosis fungisida/insektisida, atau cara penanganan air di petak sawah Anda?`,
         [
-          { label: `📋 Takaran Dosis ${optName}`, action: () => handleUserQuestion(`Berapa dosis dan cara semprot untuk ${optName}?`) },
-          { label: `🌱 Varietas Tahan ${optName}`, action: () => handleUserQuestion(`Varietas tahan ${optName}`) },
-          { label: "🧪 Aturan Pemupukan", action: () => handleUserQuestion("Aturan pupuk padi") }
+          { label: `<i class="bi bi-capsule mr-1 text-agro-700"></i> Takaran Dosis ${optName}`, action: () => handleUserQuestion(`Berapa dosis dan cara semprot untuk ${optName}?`) },
+          { label: `<i class="bi bi-award mr-1 text-emerald-600"></i> Varietas Tahan ${optName}`, action: () => handleUserQuestion(`Varietas tahan ${optName}`) },
+          { label: `<i class="bi bi-droplet-half mr-1 text-blue-600"></i> Aturan Pemupukan`, action: () => handleUserQuestion("Aturan pupuk padi") }
         ]
       );
       return;
@@ -589,7 +589,7 @@ Ada yang ingin ditanyakan seputar cara semprot, takaran dosis fungisida/insektis
 
     // Standard warm welcoming
     renderBotMessage(
-      `🌾 <strong>Halo Sobat Tani Indonesia! Selamat Datang di TaniBot AI!</strong>
+      `<i class="bi bi-robot text-agro-700 mr-1.5"></i> <strong>Halo Sobat Tani Indonesia! Selamat Datang di TaniBot AI!</strong>
 <br><br>
 Saya adalah asisten cerdas agronomi dan penyuluh pertanian lapangan (PPL) digital Anda. 
 <br><br>
@@ -600,10 +600,10 @@ Bebas tanyakan keluhan sawah Anda dalam bahasa sehari-hari:
 <br><br>
 Silakan ketik pertanyaan di bawah atau pilih topik cepat!`,
       [
-        { label: "🌾 Blas Daun (Bercak Diamond)", action: () => handleUserQuestion("Daun padi saya ada bercak belah ketupat abu-abu") },
-        { label: "🐛 Wereng Batang Cokelat", action: () => handleUserQuestion("Wereng batang coklat") },
-        { label: "🍂 Kresek (Hawar Daun Bakteri)", action: () => handleUserQuestion("Hawar daun bakteri kresek") },
-        { label: "🧪 Dosis Pupuk Urea & NPK", action: () => handleUserQuestion("Dosis pupuk urea dan npk") }
+        { label: `<i class="bi bi-patch-exclamation mr-1 text-amber-600"></i> Blas Daun (Bercak Diamond)`, action: () => handleUserQuestion("Daun padi saya ada bercak belah ketupat abu-abu") },
+        { label: `<i class="bi bi-bug mr-1 text-amber-800"></i> Wereng Batang Cokelat`, action: () => handleUserQuestion("Wereng batang coklat") },
+        { label: `<i class="bi bi-virus mr-1 text-amber-700"></i> Kresek (Hawar Daun Bakteri)`, action: () => handleUserQuestion("Hawar daun bakteri kresek") },
+        { label: `<i class="bi bi-droplet-half mr-1 text-blue-600"></i> Dosis Pupuk Urea & NPK`, action: () => handleUserQuestion("Dosis pupuk urea dan npk") }
       ]
     );
   }
@@ -709,7 +709,7 @@ Silakan ketik pertanyaan di bawah atau pilih topik cepat!`,
       settingsModal?.classList.add('hidden');
       settingsModal?.classList.remove('flex');
 
-      renderBotMessage(`⚙️ <em>Setelan AI berhasil diperbarui ke: <strong>${mode === 'groq_online' && key ? 'Mode Online Cloud (LLaMA 3.3 70B)' : 'Mode Cerdas Agronomi Lokal'}</strong>. Silakan lanjutkan bertanya!</em>`);
+      renderBotMessage(`<i class="bi bi-gear-fill text-agro-700 mr-1"></i> <em>Setelan AI berhasil diperbarui ke: <strong>${mode === 'groq_online' && key ? 'Mode Online Cloud (LLaMA 3.3 70B)' : 'Mode Cerdas Agronomi Lokal'}</strong>. Silakan lanjutkan bertanya!</em>`);
     });
   });
 </script>

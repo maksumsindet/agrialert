@@ -126,7 +126,7 @@
     {
       "id": "root",
       "pid": null,
-      "txt": "🌾 Selamat datang di TaniBot!\nSaya siap membantu Anda menangani masalah tanaman padi.\nPilih topik yang ingin ditanyakan:",
+      "txt": "Selamat datang di TaniBot!\nSaya siap membantu Anda menangani masalah tanaman padi.\nPilih topik yang ingin ditanyakan:",
       "tp": "root",
       "oid": null,
       "meta": null
@@ -134,7 +134,7 @@
     {
       "id": "opt_faq",
       "pid": "root",
-      "txt": "❓ Pertanyaan umum pertanian",
+      "txt": "Pertanyaan umum pertanian",
       "tp": "option",
       "oid": null,
       "meta": null
@@ -142,7 +142,7 @@
     {
       "id": "opt_pupuk",
       "pid": "root",
-      "txt": "🧪 Rekomendasi pemupukan",
+      "txt": "Rekomendasi pemupukan",
       "tp": "option",
       "oid": null,
       "meta": null
@@ -150,7 +150,7 @@
     {
       "id": "opt_varietas",
       "pid": "root",
-      "txt": "🌱 Info varietas tahan",
+      "txt": "Info varietas tahan",
       "tp": "option",
       "oid": null,
       "meta": null
@@ -166,7 +166,7 @@
     {
       "id": "faq_pengendalian",
       "pid": "faq_q",
-      "txt": "🛡️ Pengendalian hama/penyakit",
+      "txt": "️ Pengendalian hama/penyakit",
       "tp": "action",
       "oid": null,
       "meta": "{\"kategori\": \"pengendalian\"}"
@@ -174,7 +174,7 @@
     {
       "id": "faq_blas",
       "pid": "faq_q",
-      "txt": "🍂 Tentang penyakit blas",
+      "txt": "Tentang penyakit blas",
       "tp": "action",
       "oid": null,
       "meta": "{\"kategori\": \"blas\"}"
@@ -182,7 +182,7 @@
     {
       "id": "faq_wereng",
       "pid": "faq_q",
-      "txt": "🪲 Tentang wereng",
+      "txt": "Tentang wereng",
       "tp": "action",
       "oid": null,
       "meta": "{\"kategori\": \"wereng\"}"
@@ -190,7 +190,7 @@
     {
       "id": "faq_tikus",
       "pid": "faq_q",
-      "txt": "🐀 Tentang tikus",
+      "txt": "Tentang tikus",
       "tp": "action",
       "oid": null,
       "meta": "{\"kategori\": \"tikus\"}"
@@ -198,7 +198,7 @@
     {
       "id": "faq_umum",
       "pid": "faq_q",
-      "txt": "📋 Umum pertanian padi",
+      "txt": "Umum pertanian padi",
       "tp": "action",
       "oid": null,
       "meta": "{\"kategori\": \"umum\"}"
@@ -206,7 +206,7 @@
     {
       "id": "pupuk_ans",
       "pid": "opt_pupuk",
-      "txt": "📊 Rekomendasi dosis pemupukan padi sawah",
+      "txt": "Rekomendasi dosis pemupukan padi sawah",
       "tp": "action",
       "oid": null,
       "meta": "{\"tipe\": \"pemupukan\"}"
@@ -246,7 +246,7 @@
     {
       "id": "opt_detection",
       "pid": "root",
-      "txt": "📸 Hasil deteksi penyakit/hama (foto daun)",
+      "txt": "Hasil deteksi penyakit/hama (foto daun)",
       "tp": "option",
       "oid": null,
       "meta": null
@@ -254,7 +254,7 @@
     {
       "id": "opt_info_hama",
       "pid": "root",
-      "txt": "📖 Info hama lain (PBP, WBC, Tikus)",
+      "txt": "Info hama lain (PBP, WBC, Tikus)",
       "tp": "option",
       "oid": null,
       "meta": null
@@ -270,7 +270,7 @@
     {
       "id": "det_blas",
       "pid": "det_q",
-      "txt": "🍂 Blas (Blast)",
+      "txt": "Blas (Blast)",
       "tp": "option",
       "oid": "blas",
       "meta": null
@@ -278,7 +278,7 @@
     {
       "id": "det_hdb",
       "pid": "det_q",
-      "txt": "🔥 Hawar Daun Bakteri (HDB)",
+      "txt": "Hawar Daun Bakteri (HDB)",
       "tp": "option",
       "oid": "hdb",
       "meta": null
@@ -286,7 +286,7 @@
     {
       "id": "det_tungro",
       "pid": "det_q",
-      "txt": "💛 Tungro",
+      "txt": "Tungro",
       "tp": "option",
       "oid": "tungro",
       "meta": null
@@ -294,7 +294,7 @@
     {
       "id": "det_brown_spot",
       "pid": "det_q",
-      "txt": "🟤 Bercak Cokelat (Brown Spot)",
+      "txt": "Bercak Cokelat (Brown Spot)",
       "tp": "option",
       "oid": "brown_spot",
       "meta": null
@@ -302,7 +302,7 @@
     {
       "id": "det_narrow_brown",
       "pid": "det_q",
-      "txt": "📏 Bercak Cokelat Sempit",
+      "txt": "Bercak Cokelat Sempit",
       "tp": "option",
       "oid": "narrow_brown_spot",
       "meta": null
@@ -310,7 +310,7 @@
     {
       "id": "det_sheath",
       "pid": "det_q",
-      "txt": "🌿 Hawar Pelepah (Sheath Blight)",
+      "txt": "Hawar Pelepah (Sheath Blight)",
       "tp": "option",
       "oid": "sheath_blight",
       "meta": null
@@ -318,7 +318,7 @@
     {
       "id": "det_hispa",
       "pid": "det_q",
-      "txt": "🪲 Hispa Padi (Rice Hispa)",
+      "txt": "Hispa Padi (Rice Hispa)",
       "tp": "option",
       "oid": "rice_hispa",
       "meta": null
@@ -326,7 +326,7 @@
     {
       "id": "det_leaf_scald",
       "pid": "det_q",
-      "txt": "☀️ Lepuh Daun (Leaf Scald)",
+      "txt": "️ Lepuh Daun (Leaf Scald)",
       "tp": "option",
       "oid": "leaf_scald",
       "meta": null
@@ -398,7 +398,7 @@
     {
       "id": "ans_blas_pre",
       "pid": "fase_blas",
-      "txt": "🔧 Pratanam",
+      "txt": "Pratanam",
       "tp": "action",
       "oid": "blas",
       "meta": "{\"fase\": \"pratanam\"}"
@@ -406,7 +406,7 @@
     {
       "id": "ans_blas_seed",
       "pid": "fase_blas",
-      "txt": "🌱 Pesemaian",
+      "txt": "Pesemaian",
       "tp": "action",
       "oid": "blas",
       "meta": "{\"fase\": \"pesemaian\"}"
@@ -414,7 +414,7 @@
     {
       "id": "ans_blas_grow",
       "pid": "fase_blas",
-      "txt": "🌿 Pertanaman",
+      "txt": "Pertanaman",
       "tp": "action",
       "oid": "blas",
       "meta": "{\"fase\": \"pertanaman\"}"
@@ -422,7 +422,7 @@
     {
       "id": "ans_hdb_pre",
       "pid": "fase_hdb",
-      "txt": "🔧 Pratanam",
+      "txt": "Pratanam",
       "tp": "action",
       "oid": "hdb",
       "meta": "{\"fase\": \"pratanam\"}"
@@ -430,7 +430,7 @@
     {
       "id": "ans_hdb_seed",
       "pid": "fase_hdb",
-      "txt": "🌱 Pesemaian",
+      "txt": "Pesemaian",
       "tp": "action",
       "oid": "hdb",
       "meta": "{\"fase\": \"pesemaian\"}"
@@ -438,7 +438,7 @@
     {
       "id": "ans_hdb_grow",
       "pid": "fase_hdb",
-      "txt": "🌿 Pertanaman",
+      "txt": "Pertanaman",
       "tp": "action",
       "oid": "hdb",
       "meta": "{\"fase\": \"pertanaman\"}"
@@ -446,7 +446,7 @@
     {
       "id": "ans_tungro_pre",
       "pid": "fase_tungro",
-      "txt": "🔧 Pratanam",
+      "txt": "Pratanam",
       "tp": "action",
       "oid": "tungro",
       "meta": "{\"fase\": \"pratanam\"}"
@@ -454,7 +454,7 @@
     {
       "id": "ans_tungro_seed",
       "pid": "fase_tungro",
-      "txt": "🌱 Pesemaian",
+      "txt": "Pesemaian",
       "tp": "action",
       "oid": "tungro",
       "meta": "{\"fase\": \"pesemaian\"}"
@@ -462,7 +462,7 @@
     {
       "id": "ans_tungro_grow",
       "pid": "fase_tungro",
-      "txt": "🌿 Pertanaman",
+      "txt": "Pertanaman",
       "tp": "action",
       "oid": "tungro",
       "meta": "{\"fase\": \"pertanaman\"}"
@@ -470,7 +470,7 @@
     {
       "id": "ans_bs_pre",
       "pid": "fase_brown_spot",
-      "txt": "🔧 Pratanam",
+      "txt": "Pratanam",
       "tp": "action",
       "oid": "brown_spot",
       "meta": "{\"fase\": \"pratanam\"}"
@@ -478,7 +478,7 @@
     {
       "id": "ans_bs_seed",
       "pid": "fase_brown_spot",
-      "txt": "🌱 Pesemaian",
+      "txt": "Pesemaian",
       "tp": "action",
       "oid": "brown_spot",
       "meta": "{\"fase\": \"pesemaian\"}"
@@ -486,7 +486,7 @@
     {
       "id": "ans_bs_grow",
       "pid": "fase_brown_spot",
-      "txt": "🌿 Pertanaman",
+      "txt": "Pertanaman",
       "tp": "action",
       "oid": "brown_spot",
       "meta": "{\"fase\": \"pertanaman\"}"
@@ -494,7 +494,7 @@
     {
       "id": "ans_nbs_pre",
       "pid": "fase_narrow_brown",
-      "txt": "🔧 Pratanam",
+      "txt": "Pratanam",
       "tp": "action",
       "oid": "narrow_brown_spot",
       "meta": "{\"fase\": \"pratanam\"}"
@@ -502,7 +502,7 @@
     {
       "id": "ans_nbs_grow",
       "pid": "fase_narrow_brown",
-      "txt": "🌿 Pertanaman",
+      "txt": "Pertanaman",
       "tp": "action",
       "oid": "narrow_brown_spot",
       "meta": "{\"fase\": \"pertanaman\"}"
@@ -510,7 +510,7 @@
     {
       "id": "ans_sb_pre",
       "pid": "fase_sheath",
-      "txt": "🔧 Pratanam",
+      "txt": "Pratanam",
       "tp": "action",
       "oid": "sheath_blight",
       "meta": "{\"fase\": \"pratanam\"}"
@@ -518,7 +518,7 @@
     {
       "id": "ans_sb_grow",
       "pid": "fase_sheath",
-      "txt": "🌿 Pertanaman",
+      "txt": "Pertanaman",
       "tp": "action",
       "oid": "sheath_blight",
       "meta": "{\"fase\": \"pertanaman\"}"
@@ -526,7 +526,7 @@
     {
       "id": "ans_rh_pre",
       "pid": "fase_hispa",
-      "txt": "🔧 Pratanam",
+      "txt": "Pratanam",
       "tp": "action",
       "oid": "rice_hispa",
       "meta": "{\"fase\": \"pratanam\"}"
@@ -534,7 +534,7 @@
     {
       "id": "ans_rh_grow",
       "pid": "fase_hispa",
-      "txt": "🌿 Pertanaman",
+      "txt": "Pertanaman",
       "tp": "action",
       "oid": "rice_hispa",
       "meta": "{\"fase\": \"pertanaman\"}"
@@ -542,7 +542,7 @@
     {
       "id": "ans_ls_pre",
       "pid": "fase_leaf_scald",
-      "txt": "🔧 Pratanam",
+      "txt": "Pratanam",
       "tp": "action",
       "oid": "leaf_scald",
       "meta": "{\"fase\": \"pratanam\"}"
@@ -550,7 +550,7 @@
     {
       "id": "ans_ls_grow",
       "pid": "fase_leaf_scald",
-      "txt": "🌿 Pertanaman",
+      "txt": "Pertanaman",
       "tp": "action",
       "oid": "leaf_scald",
       "meta": "{\"fase\": \"pertanaman\"}"
@@ -566,7 +566,7 @@
     {
       "id": "info_pbp",
       "pid": "info_hama_q",
-      "txt": "🐛 Penggerek Batang Padi (PBP)",
+      "txt": "Penggerek Batang Padi (PBP)",
       "tp": "action",
       "oid": "pbp",
       "meta": "{\"tipe\": \"info_opt\"}"
@@ -574,7 +574,7 @@
     {
       "id": "info_wbc",
       "pid": "info_hama_q",
-      "txt": "🪲 Wereng Batang Cokelat (WBC)",
+      "txt": "Wereng Batang Cokelat (WBC)",
       "tp": "action",
       "oid": "wbc",
       "meta": "{\"tipe\": \"info_opt\"}"
@@ -582,7 +582,7 @@
     {
       "id": "info_tikus",
       "pid": "info_hama_q",
-      "txt": "🐀 Tikus Sawah",
+      "txt": "Tikus Sawah",
       "tp": "action",
       "oid": "tikus",
       "meta": "{\"tipe\": \"info_opt\"}"
@@ -590,7 +590,7 @@
     {
       "id": "faq_brown_spot",
       "pid": "faq_q",
-      "txt": "🟤 Tentang bercak cokelat",
+      "txt": "Tentang bercak cokelat",
       "tp": "action",
       "oid": null,
       "meta": "{\"kategori\": \"brown_spot\"}"
@@ -598,7 +598,7 @@
     {
       "id": "faq_sheath",
       "pid": "faq_q",
-      "txt": "🌿 Tentang hawar pelepah",
+      "txt": "Tentang hawar pelepah",
       "tp": "action",
       "oid": null,
       "meta": "{\"kategori\": \"sheath_blight\"}"
@@ -606,7 +606,7 @@
     {
       "id": "faq_hispa",
       "pid": "faq_q",
-      "txt": "🪲 Tentang hispa padi",
+      "txt": "Tentang hispa padi",
       "tp": "action",
       "oid": null,
       "meta": "{\"kategori\": \"rice_hispa\"}"

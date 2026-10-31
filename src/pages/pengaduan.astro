@@ -570,11 +570,11 @@ _Dikirim via AgriAlert Peringatan Dini Padi Indonesia_`;
             if (inputLoc) {
               inputLoc.value = `Koordinat GPS: ${lat}, ${lng} (Sawah)`;
             }
-            btnGps.innerHTML = `✓ GPS Aktif`;
+            btnGps.innerHTML = `<i class="bi bi-geo-alt-fill text-emerald-600 mr-1"></i> GPS Aktif`;
           },
           () => {
             alert("Izin lokasi GPS tidak diizinkan atau dinonaktifkan.");
-            btnGps.innerHTML = `GPS`;
+            btnGps.innerHTML = `<i class="bi bi-geo-alt mr-1"></i> GPS`;
           },
           { enableHighAccuracy: true, timeout: 8000 }
         );
