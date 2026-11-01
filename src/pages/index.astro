@@ -27,7 +27,7 @@ const hamaImages: Record<string, string> = {
         <!-- Left: Crisp Technical Copy & Concrete Actions -->
         <div class="lg:col-span-7 space-y-6">
           <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-agro-900 border border-agro-700/80 text-agro-200 text-xs font-semibold">
-            <span class="w-2 h-2 rounded-full bg-harvest-amber animate-pulse"></span>
+            <span class="w-2 h-2 rounded-full bg-harvest-amber"></span>
             <span>Standar Teknis BBPOPT Ditjen Tanaman Pangan RI</span>
           </div>
 
@@ -42,9 +42,9 @@ const hamaImages: Record<string, string> = {
           <div class="pt-1 flex flex-wrap items-center gap-3">
             <a 
               href={url('/deteksi')} 
-              class="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl bg-harvest-gold hover:bg-harvest-dark text-white font-bold text-sm transition-all focus:outline-none focus:ring-2 focus:ring-harvest-amber active:scale-95"
+              class="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl bg-harvest-gold hover:bg-harvest-dark text-agro-950 font-black text-sm transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-harvest-amber focus-visible:ring-offset-2 focus-visible:ring-offset-agro-950 active:scale-95"
             >
-              <svg class="w-5 h-5 text-amber-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="w-5 h-5 text-agro-950" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg>
@@ -53,7 +53,7 @@ const hamaImages: Record<string, string> = {
 
             <a 
               href={url('/tanibot')} 
-              class="inline-flex items-center gap-2 px-5 py-3.5 rounded-xl bg-agro-900 hover:bg-agro-850 text-white font-semibold text-sm border border-agro-700 transition-all"
+              class="inline-flex items-center gap-2 px-5 py-3.5 rounded-xl bg-agro-900 hover:bg-agro-850 text-white font-semibold text-sm border border-agro-700 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-harvest-amber focus-visible:ring-offset-2 focus-visible:ring-offset-agro-950 active:scale-95"
             >
               <svg class="w-5 h-5 text-agro-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
@@ -87,10 +87,10 @@ const hamaImages: Record<string, string> = {
 
         <!-- Right: Character Mascot Card with Clear Framing -->
         <div class="lg:col-span-5 flex justify-center">
-          <div class="relative w-full max-w-sm rounded-grain-sm bg-agro-900 p-6 border border-agro-700/80">
-            <div class="flex items-center justify-between mb-4 pb-3 border-b border-agro-800">
+          <div class="relative w-full max-w-sm rounded-grain-sm bg-agro-900/60 p-6 backdrop-blur-xs">
+            <div class="flex items-center justify-between mb-3 pb-3 border-b border-agro-800">
               <div class="flex items-center gap-2">
-                <img src={url('/images/gps.png')} alt="GPS" width="20" height="20" class="w-5 h-5 object-contain" />
+                <img src={url('/images/gps.png')} alt="" aria-hidden="true" width="20" height="20" class="w-5 h-5 object-contain" />
                 <span class="text-xs font-bold text-agro-100 uppercase tracking-wider">Status Lapangan</span>
               </div>
               <span class="flex items-center gap-1.5 text-xs font-semibold text-emerald-300 bg-emerald-950/80 border border-emerald-700 px-2.5 py-0.5 rounded-full">
@@ -99,23 +99,45 @@ const hamaImages: Record<string, string> = {
               </span>
             </div>
 
-            <!-- Mascot Interactive Speech Capsule with Bootstrap Icons -->
+            <!-- Mini Early-Warning Telemetry Strip (SATRIA DATA Science Backbone) -->
+            <div class="mb-3 px-3.5 py-2 rounded-xl bg-agro-950/60 text-xs flex items-center justify-between gap-2">
+              <div class="flex items-center gap-1.5 truncate">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 shrink-0" aria-hidden="true"></span>
+                <span class="text-agro-300 text-[11px] font-medium truncate">ENSO ONI: <strong class="text-white font-bold">Netral (0.0°C)</strong></span>
+              </div>
+              <span class="text-[10px] font-bold text-harvest-amber bg-harvest-amber/10 border border-harvest-amber/30 px-2 py-0.5 rounded shrink-0">
+                Risiko Blas: Waspada MT-1
+              </span>
+            </div>
+
+            <!-- Mascot Interactive Speech Capsule with Accessible Button & Step Counter -->
             <div class="flex justify-center mb-2">
-              <div 
+              <button 
+                type="button"
                 id="mascot-bubble" 
-                class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-950 text-agro-100 border border-emerald-500/50 text-xs cursor-pointer select-none transition-all hover:bg-emerald-900 active:scale-95"
-                title="Klik untuk sapaan lainnya"
+                class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-950 text-agro-100 border border-emerald-500/50 text-xs cursor-pointer select-none transition-all hover:bg-emerald-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-harvest-amber focus-visible:ring-offset-2 focus-visible:ring-offset-agro-900 active:scale-95"
+                title="Klik atau tekan Spasi untuk tips berikutnya"
+                aria-label="Tips agronomi maskot AgriAlert (Klik untuk tips berikutnya)"
+                aria-live="polite"
+                aria-atomic="true"
               >
                 <i class="bi bi-chat-quote-fill text-harvest-amber text-sm" aria-hidden="true"></i>
                 <span id="bubble-title" class="font-bold text-white text-xs">Halo Sobat Tani</span>
-                <span class="text-agro-400 text-xs">&bull;</span>
+                <span class="text-agro-400 text-xs" aria-hidden="true">&bull;</span>
                 <span id="bubble-subtitle" class="text-agro-200 text-xs">Siap cek padi hari ini?</span>
-              </div>
+                <span id="bubble-step" class="text-[10px] font-bold text-harvest-amber bg-agro-900/80 border border-emerald-700/60 px-1.5 py-0.5 rounded-full ml-0.5" aria-label="Tips 1 dari 6">1/6</span>
+              </button>
             </div>
 
             <!-- Mascot Character -->
             <div class="relative flex justify-center items-center py-2">
-              <div id="mascot-wrapper" class="relative cursor-pointer group" title="Klik maskot untuk menyapa!">
+              <button 
+                type="button"
+                id="mascot-wrapper" 
+                class="relative cursor-pointer group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-harvest-amber focus-visible:ring-offset-2 focus-visible:ring-offset-agro-900 rounded-2xl p-1" 
+                title="Klik maskot untuk menyapa!"
+                aria-label="Maskot interaktif AgriAlert. Klik atau tekan Enter untuk sapaan."
+              >
                 <img 
                   id="mascot-img"
                   src={url('/images/mascot.png')} 
@@ -124,18 +146,18 @@ const hamaImages: Record<string, string> = {
                   height="220"
                   class="relative w-44 h-44 sm:w-48 sm:h-48 object-contain transition-transform duration-300 group-hover:scale-105"
                 />
-              </div>
+              </button>
             </div>
 
-            <div class="mt-4 p-3.5 rounded-xl bg-agro-950 border border-agro-800 text-xs text-agro-200 flex items-center justify-between">
+            <div class="mt-4 p-3.5 rounded-xl bg-agro-950/60 text-xs text-agro-200 flex items-center justify-between">
               <div class="flex items-center gap-2.5">
-                <img src={url('/images/sun.png')} alt="Cuaca" width="28" height="28" class="w-7 h-7 object-contain" />
+                <img src={url('/images/sun.png')} alt="" aria-hidden="true" width="28" height="28" class="w-7 h-7 object-contain" />
                 <div>
                   <p class="font-bold text-white text-xs">Peringatan Agroklimat</p>
                   <p class="text-xs text-agro-300">Pola Tanam MT-1 Rendengan</p>
                 </div>
               </div>
-              <a href={url('/cuaca')} class="text-xs font-bold text-harvest-amber hover:text-white transition-colors">
+              <a href={url('/cuaca')} class="min-h-[44px] inline-flex items-center text-xs font-bold text-harvest-amber hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-harvest-amber focus-visible:ring-offset-1 rounded px-2">
                 Detail &rarr;
               </a>
             </div>
@@ -149,54 +171,54 @@ const hamaImages: Record<string, string> = {
       <div class="flex items-center justify-between">
         <div>
           <h2 class="text-xl font-bold text-soil-900 tracking-tight">Kondisi Cuaca Sawah & Kalender Tanam</h2>
-          <p class="text-xs text-soil-600">Prakiraan 24 jam real-time Open-Meteo & BMKG berdasarkan koordinat GPS sawah Anda</p>
+          <p class="text-xs text-soil-700 font-medium">Prakiraan 24 jam real-time Open-Meteo & BMKG berdasarkan koordinat GPS sawah Anda</p>
         </div>
-        <a href={url('/cuaca')} class="text-xs text-agro-800 hover:text-agro-950 font-bold flex items-center gap-1">
+        <a href={url('/cuaca')} class="min-h-[44px] inline-flex items-center text-xs text-agro-800 hover:text-agro-950 font-bold gap-1 px-2.5 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-harvest-amber focus-visible:ring-offset-2">
           Analisis Iklim Lengkap &rarr;
         </a>
       </div>
       <WeatherWidget />
     </section>
 
-    <!-- Three Architectural Field Pillars -->
+    <!-- Three Architectural Field Pillars with Domain-Specific Tonal Resonance -->
     <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <div class="p-6 rounded-2xl bg-white border border-soil-200/90 space-y-3 hover:border-agro-600 transition-colors">
+      <div class="p-6 rounded-2xl bg-white border border-soil-200/90 space-y-3 hover:border-agro-600 transition-all hover:shadow-xs">
         <div class="w-10 h-10 rounded-xl bg-agro-100 text-agro-800 flex items-center justify-center font-bold">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
           </svg>
         </div>
         <h3 class="font-bold text-soil-900 text-base">Filter Vegetasi HSV 4-Layer</h3>
-        <p class="text-xs text-soil-600 leading-relaxed">
+        <p class="text-xs text-soil-700 leading-relaxed font-normal">
           Memverifikasi spektral hijau klorofil, kuning blast, lesi cokelat, dan desaturasi hawar pelepah untuk menolak foto non-tanaman dengan akurat.
         </p>
-        <a href={url('/deteksi')} class="inline-block text-xs font-bold text-agro-800 hover:text-agro-950">Buka Kamera Deteksi &rarr;</a>
+        <a href={url('/deteksi')} class="min-h-[44px] inline-flex items-center text-xs font-bold text-agro-800 hover:text-agro-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-harvest-amber focus-visible:ring-offset-1 rounded">Buka Kamera Deteksi &rarr;</a>
       </div>
 
-      <div class="p-6 rounded-2xl bg-white border border-soil-200/90 space-y-3 hover:border-agro-600 transition-colors">
-        <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-800 flex items-center justify-center font-bold">
+      <div class="p-6 rounded-2xl bg-white border border-soil-200/90 space-y-3 hover:border-sky-500 transition-all hover:shadow-xs">
+        <div class="w-10 h-10 rounded-xl bg-sky-100 text-sky-800 flex items-center justify-center font-bold">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
           </svg>
         </div>
         <h3 class="font-bold text-soil-900 text-base">Satelit Sentinel-1 & 2</h3>
-        <p class="text-xs text-soil-600 leading-relaxed">
+        <p class="text-xs text-soil-700 leading-relaxed font-normal">
           Pemantauan kesehatan kanopi dan biomassa sawah nasional via indeks vegetasi optik NDVI serta radar gelombang mikro SAR penembus awan tebal.
         </p>
-        <a href={url('/cuaca')} class="inline-block text-xs font-bold text-agro-800 hover:text-agro-950">Lihat Grafik Satelit &rarr;</a>
+        <a href={url('/cuaca')} class="min-h-[44px] inline-flex items-center text-xs font-bold text-sky-800 hover:text-sky-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-1 rounded">Lihat Grafik Satelit &rarr;</a>
       </div>
 
-      <div class="p-6 rounded-2xl bg-white border border-soil-200/90 space-y-3 hover:border-agro-600 transition-colors">
-        <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center font-bold">
+      <div class="p-6 rounded-2xl bg-white border border-soil-200/90 space-y-3 hover:border-harvest-amber transition-all hover:shadow-xs">
+        <div class="w-10 h-10 rounded-xl bg-harvest-light text-harvest-dark flex items-center justify-center font-bold">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
           </svg>
         </div>
         <h3 class="font-bold text-soil-900 text-base">Pohon Keputusan POPT</h3>
-        <p class="text-xs text-soil-600 leading-relaxed">
+        <p class="text-xs text-soil-700 leading-relaxed font-normal">
           SOP pengendalian terpadu berfase (pra-tanam, pesemaian, pertanaman) dan dosis bahan aktif resmi dari balai proteksi tanaman pangan.
         </p>
-        <a href={url('/tanibot')} class="inline-block text-xs font-bold text-agro-800 hover:text-agro-950">Mulai Konsultasi &rarr;</a>
+        <a href={url('/tanibot')} class="min-h-[44px] inline-flex items-center text-xs font-bold text-harvest-dark hover:text-harvest-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-harvest-amber focus-visible:ring-offset-1 rounded">Mulai Konsultasi &rarr;</a>
       </div>
     </section>
 
@@ -205,9 +227,9 @@ const hamaImages: Record<string, string> = {
       <div class="flex items-center justify-between">
         <div>
           <h2 class="text-xl font-bold text-soil-900 tracking-tight">Katalog Hama & Penyakit Utama</h2>
-          <p class="text-xs text-soil-600">Mengenali morfologi dan gejala dini untuk mencegah kegagalan panen</p>
+          <p class="text-xs text-soil-700 font-medium">Mengenali morfologi dan gejala dini untuk mencegah kegagalan panen</p>
         </div>
-        <a href={url('/hama')} class="text-xs font-bold text-agro-800 hover:text-agro-950">
+        <a href={url('/hama')} class="min-h-[44px] inline-flex items-center text-xs font-bold text-agro-800 hover:text-agro-950 px-2 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-harvest-amber focus-visible:ring-offset-2">
           Lihat Semua 11 OPT &rarr;
         </a>
       </div>
@@ -216,7 +238,7 @@ const hamaImages: Record<string, string> = {
         {pests.map((opt) => (
           <a 
             href={url(`/hama#${opt.id}`)} 
-            class="group bg-white rounded-xl border border-soil-200 overflow-hidden hover:border-agro-600 transition-all flex flex-col justify-between"
+            class="group bg-white rounded-xl border border-soil-200 overflow-hidden hover:border-agro-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-harvest-amber focus-visible:ring-offset-2 transition-all flex flex-col justify-between active:scale-[0.98]"
           >
             <div class="relative w-full aspect-[4/3] bg-soil-100 overflow-hidden">
               <img 
@@ -226,15 +248,15 @@ const hamaImages: Record<string, string> = {
                 decoding="async"
                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" 
               />
-              <span class={`absolute top-2 left-2 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded text-white ${opt.tipe === 'hama' ? 'bg-amber-600' : 'bg-red-700'}`}>
+              <span class={`absolute top-2 left-2 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded text-white ${opt.tipe === 'hama' ? 'bg-amber-800' : 'bg-red-800'}`}>
                 {opt.tipe}
               </span>
             </div>
-            <div class="p-3">
-              <p class="font-bold text-soil-900 text-xs truncate group-hover:text-agro-800 transition-colors">
+            <div class="p-3.5 sm:p-4">
+              <p class="font-bold text-soil-900 text-xs line-clamp-2 min-h-[2rem] group-hover:text-agro-800 transition-colors">
                 {opt.nama_lokal}
               </p>
-              <p class="text-[11px] text-soil-500 italic truncate font-serif mt-0.5">{opt.nama_latin}</p>
+              <p class="text-xs text-soil-700 italic truncate mt-0.5">{opt.nama_latin}</p>
             </div>
           </a>
         ))}
@@ -258,6 +280,7 @@ const hamaImages: Record<string, string> = {
   const mascotBubble = document.getElementById('mascot-bubble');
   const bubbleTitle = document.getElementById('bubble-title');
   const bubbleSubtitle = document.getElementById('bubble-subtitle');
+  const bubbleStep = document.getElementById('bubble-step');
   const mascotWrapper = document.getElementById('mascot-wrapper');
 
   function triggerGreetingReaction() {
@@ -276,11 +299,24 @@ const hamaImages: Record<string, string> = {
       setTimeout(() => {
         bubbleTitle.textContent = next.title;
         bubbleSubtitle.textContent = next.subtitle;
+        if (bubbleStep) {
+          bubbleStep.textContent = `${currentGreetingIdx + 1}/${greetings.length}`;
+          bubbleStep.setAttribute('aria-label', `Tips ${currentGreetingIdx + 1} dari ${greetings.length}`);
+        }
         mascotBubble.style.transform = '';
       }, 120);
     }
   }
 
+  function handleKeydown(e: KeyboardEvent) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      triggerGreetingReaction();
+    }
+  }
+
   mascotWrapper?.addEventListener('click', triggerGreetingReaction);
+  mascotWrapper?.addEventListener('keydown', handleKeydown as EventListener);
   mascotBubble?.addEventListener('click', triggerGreetingReaction);
+  mascotBubble?.addEventListener('keydown', handleKeydown as EventListener);
 </script>
