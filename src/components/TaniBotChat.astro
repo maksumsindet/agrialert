@@ -58,11 +58,11 @@ import { url } from '../utils/paths';
   </div>
 
   <!-- Typing Indicator Bar (Hidden by default) -->
-  <div id="tanibot-typing" class="hidden px-6 py-2 bg-soil-50/70 border-t border-soil-200/60 text-xs text-soil-500 flex items-center gap-2">
-    <div class="flex gap-1 items-center">
-      <span class="w-1.5 h-1.5 rounded-full bg-agro-600 animate-bounce"></span>
-      <span class="w-1.5 h-1.5 rounded-full bg-agro-600 animate-bounce [animation-delay:0.2s]"></span>
-      <span class="w-1.5 h-1.5 rounded-full bg-agro-600 animate-bounce [animation-delay:0.4s]"></span>
+  <div id="tanibot-typing" class="hidden px-6 py-2 bg-soil-50/70 border-t border-soil-200/60 text-xs text-soil-600 flex items-center gap-2">
+    <div class="flex gap-1.5 items-center">
+      <span class="w-2 h-2 rounded-full bg-agro-600 animate-pulse"></span>
+      <span class="w-2 h-2 rounded-full bg-agro-600 animate-pulse [animation-delay:200ms]"></span>
+      <span class="w-2 h-2 rounded-full bg-agro-600 animate-pulse [animation-delay:400ms]"></span>
     </div>
     <span id="typing-text">TaniBot sedang menganalisis gejala tanaman padi Anda...</span>
   </div>
@@ -70,13 +70,13 @@ import { url } from '../utils/paths';
   <!-- Bottom Input & Quick Action Dock -->
   <div class="p-3 sm:p-4 bg-white border-t border-soil-200 space-y-2.5">
     <!-- Quick Question Inspiration Chips -->
-    <div class="flex items-center gap-1.5 overflow-x-auto pb-1 text-[11px] no-scrollbar">
-      <span class="text-soil-500 font-semibold shrink-0">Tanya Cepat:</span>
-      <button type="button" class="quick-chip shrink-0 px-3 py-1 rounded-full bg-soil-100 hover:bg-agro-50 hover:border-agro-400 border border-soil-200 text-soil-700 transition-all font-medium" data-query="Daun padi saya bercak belah ketupat abu-abu, kenapa ya Pak?"><i class="bi bi-patch-exclamation mr-1 text-amber-600"></i> Bercak Belah Ketupat</button>
-      <button type="button" class="quick-chip shrink-0 px-3 py-1 rounded-full bg-soil-100 hover:bg-agro-50 hover:border-agro-400 border border-soil-200 text-soil-700 transition-all font-medium" data-query="Bagaimana cara mengatasi wereng batang coklat yang mulai banyak?"><i class="bi bi-bug mr-1 text-amber-800"></i> Atasi Wereng</button>
-      <button type="button" class="quick-chip shrink-0 px-3 py-1 rounded-full bg-soil-100 hover:bg-agro-50 hover:border-agro-400 border border-soil-200 text-soil-700 transition-all font-medium" data-query="Kapan jadwal dan dosis pemupukan Urea yang tepat agar tidak kena blast?"><i class="bi bi-droplet-half mr-1 text-blue-600"></i> Jadwal Pemupukan</button>
-      <button type="button" class="quick-chip shrink-0 px-3 py-1 rounded-full bg-soil-100 hover:bg-agro-50 hover:border-agro-400 border border-soil-200 text-soil-700 transition-all font-medium" data-query="Varietas padi apa yang paling tahan penyakit hawar daun bakteri dan blas?"><i class="bi bi-award mr-1 text-emerald-600"></i> Varietas Tahan</button>
-      <button type="button" class="quick-chip shrink-0 px-3 py-1 rounded-full bg-soil-100 hover:bg-agro-50 hover:border-agro-400 border border-soil-200 text-soil-700 transition-all font-medium" data-query="Kenapa pucuk padi saya layu dan mudah dicabut?"><i class="bi bi-scissors mr-1 text-rose-600"></i> Pucuk Mati (Sundep)</button>
+    <div class="flex items-center gap-2 overflow-x-auto pb-1 text-xs no-scrollbar">
+      <span class="text-soil-600 font-bold shrink-0">Tanya Cepat:</span>
+      <button type="button" class="quick-chip shrink-0 px-3.5 py-1.5 rounded-full bg-soil-100 hover:bg-agro-50 hover:border-agro-400 border border-soil-200 text-soil-800 transition-all font-semibold min-h-[36px]" data-query="Daun padi saya bercak belah ketupat abu-abu, kenapa ya Pak?"><i class="bi bi-patch-exclamation mr-1 text-amber-600"></i> Bercak Belah Ketupat</button>
+      <button type="button" class="quick-chip shrink-0 px-3.5 py-1.5 rounded-full bg-soil-100 hover:bg-agro-50 hover:border-agro-400 border border-soil-200 text-soil-800 transition-all font-semibold min-h-[36px]" data-query="Bagaimana cara mengatasi wereng batang coklat yang mulai banyak?"><i class="bi bi-bug mr-1 text-amber-800"></i> Atasi Wereng</button>
+      <button type="button" class="quick-chip shrink-0 px-3.5 py-1.5 rounded-full bg-soil-100 hover:bg-agro-50 hover:border-agro-400 border border-soil-200 text-soil-800 transition-all font-semibold min-h-[36px]" data-query="Kapan jadwal dan dosis pemupukan Urea yang tepat agar tidak kena blast?"><i class="bi bi-droplet-half mr-1 text-blue-600"></i> Jadwal Pemupukan</button>
+      <button type="button" class="quick-chip shrink-0 px-3.5 py-1.5 rounded-full bg-soil-100 hover:bg-agro-50 hover:border-agro-400 border border-soil-200 text-soil-800 transition-all font-semibold min-h-[36px]" data-query="Varietas padi apa yang paling tahan penyakit hawar daun bakteri dan blas?"><i class="bi bi-award mr-1 text-emerald-600"></i> Varietas Tahan</button>
+      <button type="button" class="quick-chip shrink-0 px-3.5 py-1.5 rounded-full bg-soil-100 hover:bg-agro-50 hover:border-agro-400 border border-soil-200 text-soil-800 transition-all font-semibold min-h-[36px]" data-query="Kenapa pucuk padi saya layu dan mudah dicabut?"><i class="bi bi-scissors mr-1 text-rose-600"></i> Pucuk Mati (Sundep)</button>
     </div>
 
     <!-- Conversational Input Bar -->
@@ -105,10 +105,10 @@ import { url } from '../utils/paths';
       <button 
         type="submit" 
         id="btn-tanibot-send" 
-        class="px-5 py-3 bg-agro-700 hover:bg-agro-800 active:scale-95 text-white text-xs sm:text-sm font-bold rounded-xl flex items-center gap-2 shadow-sm transition-all shrink-0"
+        class="px-5 py-3 bg-harvest-gold hover:bg-harvest-dark active:scale-95 text-agro-950 text-xs sm:text-sm font-black rounded-xl flex items-center gap-2 shadow-sm transition-all shrink-0 min-h-[44px]"
       >
         <span>Kirim</span>
-        <svg class="w-4 h-4 text-emerald-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg class="w-4 h-4 text-agro-950" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
         </svg>
       </button>
@@ -125,7 +125,7 @@ import { url } from '../utils/paths';
           </svg>
           <h4 class="font-bold text-sm">Setelan Mesin AI TaniBot</h4>
         </div>
-        <button type="button" id="btn-close-settings" class="text-agro-300 hover:text-white p-1 rounded-lg">
+        <button type="button" id="btn-close-settings" aria-label="Tutup setelan" class="text-agro-300 hover:text-white p-1 rounded-lg">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
           </svg>
@@ -302,7 +302,7 @@ Gunakan istilah sehari-hari petani padi, bila ada istilah latin sebutkan penjela
         actionChips.forEach(chip => {
           const btn = document.createElement('button');
           btn.type = 'button';
-          btn.className = "px-2.5 py-1 rounded-lg bg-agro-50 hover:bg-agro-700 hover:text-white text-agro-900 border border-agro-200 font-semibold text-[11px] transition-colors";
+          btn.className = "px-3 py-1.5 rounded-lg bg-agro-50 hover:bg-agro-800 hover:text-white text-agro-900 border border-agro-300 font-bold text-xs transition-colors min-h-[36px] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-agro-600";
           btn.innerHTML = chip.label;
           btn.addEventListener('click', chip.action);
           chipsBox.appendChild(btn);

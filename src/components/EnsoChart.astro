@@ -45,20 +45,20 @@ const isLaNina = lastPoint.anom <= -0.5;
     <!-- Telemetry & Performance Row (Clean Flat Stats, No Nested Boxes) -->
     <div class="mt-6 pt-5 border-t border-soil-100 grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs">
       <div class="space-y-0.5">
-        <span class="text-soil-500 text-[11px] block font-medium">Metode Analisis:</span>
-        <p class="text-soil-800 text-sm font-bold">{oniMetrics.method}</p>
+        <span class="text-soil-700 text-xs block font-semibold">Metode Analisis:</span>
+        <p class="text-soil-900 text-sm font-bold">{oniMetrics.method}</p>
       </div>
       <div class="space-y-0.5">
-        <span class="text-soil-500 text-[11px] block font-medium">Determinasi (R²):</span>
+        <span class="text-soil-700 text-xs block font-semibold">Determinasi (R²):</span>
         <p class="text-agro-800 text-sm font-bold">{(oniMetrics.r2 * 100).toFixed(1)}%</p>
       </div>
       <div class="space-y-0.5">
-        <span class="text-soil-500 text-[11px] block font-medium">Akurasi Fase:</span>
+        <span class="text-soil-700 text-xs block font-semibold">Akurasi Fase:</span>
         <p class="text-agro-800 text-sm font-bold">{(oniMetrics.acc * 100).toFixed(2)}%</p>
       </div>
       <div class="space-y-0.5">
-        <span class="text-soil-500 text-[11px] block font-medium">Mean Absolute Error:</span>
-        <p class="text-soil-800 text-sm font-bold">{oniMetrics.mae.toFixed(4)} °C</p>
+        <span class="text-soil-700 text-xs block font-semibold">Mean Absolute Error:</span>
+        <p class="text-soil-900 text-sm font-bold">{oniMetrics.mae.toFixed(4)} °C</p>
       </div>
     </div>
   </div>

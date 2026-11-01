@@ -68,9 +68,9 @@ import { url } from '../utils/paths';
             <button 
               type="button" 
               id="btn-trigger-camera" 
-              class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-agro-700 hover:bg-agro-800 active:scale-95 text-white text-xs font-bold shadow-sm transition-all"
+              class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-harvest-gold hover:bg-harvest-dark active:scale-95 text-agro-950 text-xs font-black shadow-sm transition-all min-h-[44px]"
             >
-              <svg class="w-4 h-4 text-emerald-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="w-4 h-4 text-agro-950" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg>
@@ -80,9 +80,9 @@ import { url } from '../utils/paths';
             <button 
               type="button" 
               id="btn-trigger-gallery" 
-              class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-white hover:bg-soil-100 active:scale-95 text-soil-800 text-xs font-bold border border-soil-300 shadow-xs transition-all"
+              class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-white hover:bg-soil-100 active:scale-95 text-soil-900 text-xs font-bold border border-soil-300 shadow-xs transition-all min-h-[44px]"
             >
-              <svg class="w-4 h-4 text-soil-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="w-4 h-4 text-soil-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
               </svg>
               <span>Buka Galeri Foto</span>
@@ -94,16 +94,16 @@ import { url } from '../utils/paths';
 
         <!-- Preview Container with Retake / Change Actions -->
         <div id="preview-container" class="hidden w-full flex-col items-center">
-          <img id="preview-image" src="" alt="Pratinjau Daun" class="max-h-64 rounded-xl shadow-md object-contain border border-soil-300 bg-black/5" />
+          <img id="preview-image" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="Pratinjau Daun" class="max-h-64 rounded-xl shadow-md object-contain border border-soil-300 bg-black/5" />
           <p id="image-filename" class="text-xs text-soil-600 mt-2 font-mono truncate max-w-xs"></p>
 
           <div class="flex items-center gap-2 mt-3">
             <button 
               type="button" 
               id="btn-retake-camera" 
-              class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-agro-700 hover:bg-agro-800 text-white text-xs font-semibold shadow-xs"
+              class="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-lg bg-harvest-gold hover:bg-harvest-dark text-agro-950 text-xs font-bold shadow-xs min-h-[44px]"
             >
-              <svg class="w-3.5 h-3.5 text-emerald-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="w-3.5 h-3.5 text-agro-950" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg>
@@ -112,9 +112,9 @@ import { url } from '../utils/paths';
             <button 
               type="button" 
               id="btn-retake-gallery" 
-              class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white hover:bg-soil-100 text-soil-700 text-xs font-semibold border border-soil-300 shadow-xs"
+              class="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-lg bg-white hover:bg-soil-100 text-soil-800 text-xs font-semibold border border-soil-300 shadow-xs min-h-[44px]"
             >
-              <svg class="w-3.5 h-3.5 text-soil-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="w-3.5 h-3.5 text-soil-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
               </svg>
               Ganti dari Galeri
@@ -132,7 +132,7 @@ import { url } from '../utils/paths';
               <span class="w-2.5 h-2.5 rounded-full bg-red-500 animate-pulse"></span>
               <p class="font-bold text-sm">Bidik Daun Padi (Kamera Aktif)</p>
             </div>
-            <button type="button" id="btn-close-camera-modal" class="text-soil-400 hover:text-white p-1 rounded-lg hover:bg-soil-800">
+            <button type="button" id="btn-close-camera-modal" aria-label="Tutup jendela kamera" class="text-soil-400 hover:text-white p-1 rounded-lg hover:bg-soil-800">
               <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
               </svg>
@@ -284,6 +284,18 @@ import { url } from '../utils/paths';
         <p class="text-xs text-soil-500 mt-1">Ekstraksi fitur spektral HSV 4-layer dan inferensi tensor onnx on-device</p>
       </div>
 
+      <!-- Error State (No Blocking Alert) -->
+      <div id="state-error" class="hidden h-full flex flex-col items-center justify-center p-8 text-center bg-red-50/50 rounded-xl border border-red-200 space-y-3">
+        <div class="w-12 h-12 rounded-full bg-red-100 text-red-700 flex items-center justify-center">
+          <i class="bi bi-exclamation-triangle-fill text-xl"></i>
+        </div>
+        <p class="font-bold text-soil-900 text-sm">Gagal Menjalankan Model AI</p>
+        <p id="error-message-text" class="text-xs text-soil-700 max-w-sm">Model AI belum dapat dijalankan di peramban Anda. Silakan muat ulang halaman atau pilih foto daun lain yang lebih tajam.</p>
+        <button type="button" id="btn-retry-inference" class="px-4 py-2.5 rounded-lg bg-soil-900 hover:bg-soil-800 text-white text-xs font-bold min-h-[44px]">
+          Muat Ulang Halaman
+        </button>
+      </div>
+
       <!-- Result Card (Unified Clean Layout - No Box Soup) -->
       <div id="state-result" class="hidden p-5 sm:p-6 rounded-2xl border border-soil-200 bg-white shadow-xs space-y-5">
         <!-- Diagnosis Title & Confidence -->
@@ -291,10 +303,10 @@ import { url } from '../utils/paths';
           <div>
             <span id="result-status-tag" class="px-2.5 py-0.5 rounded-full text-xs font-bold uppercase tracking-wider"></span>
             <h3 id="result-nama" class="text-2xl font-black text-soil-900 mt-1 tracking-tight"></h3>
-            <p id="result-latin" class="text-xs italic text-soil-500 font-serif"></p>
+            <p id="result-latin" class="text-xs italic text-soil-600 font-serif"></p>
           </div>
           <div class="text-right">
-            <span class="text-xs text-soil-500 font-medium">Tingkat Keyakinan</span>
+            <span class="text-xs text-soil-600 font-medium">Tingkat Keyakinan</span>
             <p id="result-confidence" class="text-2xl font-black text-agro-800">0%</p>
           </div>
         </div>
@@ -307,34 +319,22 @@ import { url } from '../utils/paths';
         <!-- Visual Comparison: Scanned vs Reference Specimen (Flat Clean Side-by-Side) -->
         <div class="grid grid-cols-2 gap-4 pt-2 border-t border-soil-100">
           <div class="space-y-1">
-            <span class="text-[11px] font-semibold text-soil-600 block">Foto Daun Diperiksa</span>
+            <span class="text-[11px] font-semibold text-soil-700 block">Foto Daun Diperiksa</span>
             <div class="h-28 w-full rounded-xl overflow-hidden bg-soil-100 border border-soil-200/80">
-              <img id="comp-scan-img" src="" alt="Foto Scan" class="h-full w-full object-cover" />
+              <img id="comp-scan-img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="Foto Scan" class="h-full w-full object-cover" />
             </div>
           </div>
           <div class="space-y-1">
-            <span class="text-[11px] font-semibold text-soil-600 block">Spesimen Rujukan Resmi</span>
+            <span class="text-[11px] font-semibold text-soil-700 block">Spesimen Rujukan Resmi</span>
             <div class="h-28 w-full rounded-xl overflow-hidden bg-soil-100 border border-soil-200/80">
-              <img id="comp-ref-img" src="" alt="Spesimen Rujukan" class="h-full w-full object-cover" />
+              <img id="comp-ref-img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="Spesimen Rujukan" class="h-full w-full object-cover" />
             </div>
           </div>
         </div>
 
-        <!-- Single Clean Verification Status Bar -->
-        <div class="flex flex-wrap items-center justify-between text-xs text-soil-500 pt-3 border-t border-soil-100 gap-2">
-          <div class="flex items-center gap-1.5">
-            <i class="bi bi-shield-check text-agro-700"></i>
-            <span>Status Verifikasi: <strong id="result-gate-status" class="text-agro-800 font-bold">Lolos Sensor Lapangan</strong></span>
-          </div>
-          <div class="flex items-center gap-3 text-[11px] text-soil-400 font-mono">
-            <span>HSV: <strong id="result-veg-ratio" class="text-soil-600 font-semibold">0%</strong></span>
-            <span>Entropi: <strong id="result-entropy" class="text-soil-600 font-semibold">0.00</strong></span>
-          </div>
-        </div>
-
-        <!-- Actionable Field Recommendation (Unified Section, No Heavy Box) -->
+        <!-- Actionable Field Recommendation (Primary for Farmer) -->
         <div class="pt-4 border-t border-soil-100 space-y-2">
-          <h4 class="text-xs font-bold uppercase tracking-wider text-soil-700 flex items-center gap-1.5">
+          <h4 class="text-xs font-bold uppercase tracking-wider text-soil-800 flex items-center gap-1.5">
             <i class="bi bi-clipboard2-check text-agro-700"></i>
             Panduan Tindakan Pengendalian Lapangan:
           </h4>
@@ -345,31 +345,55 @@ import { url } from '../utils/paths';
               <a 
                 id="btn-goto-tanibot" 
                 href={url('/tanibot')} 
-                class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-agro-800 hover:bg-agro-900 text-white text-xs font-semibold transition-colors shadow-xs"
+                class="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-agro-800 hover:bg-agro-900 text-white text-xs font-bold transition-colors shadow-xs min-h-[44px]"
               >
-                <i class="bi bi-chat-quote-fill text-emerald-300"></i>
+                <i class="bi bi-chat-quote-fill text-harvest-gold"></i>
                 Konsultasikan ke TaniBot
               </a>
               <a 
                 id="btn-goto-pengaduan" 
                 href={url('/pengaduan')} 
-                class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-semibold transition-colors shadow-xs"
+                class="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-harvest-gold hover:bg-harvest-dark text-agro-950 text-xs font-black transition-colors shadow-xs min-h-[44px]"
               >
-                <i class="bi bi-send-fill text-emerald-200"></i>
+                <i class="bi bi-send-fill text-agro-950"></i>
                 Buat Laporan Pengaduan
               </a>
             </div>
-            <span class="text-[11px] text-soil-400">Rujukan: BBPOPT Ditjen Tanaman Pangan</span>
+            <span class="text-[11px] text-soil-600 font-medium">Rujukan: BBPOPT Ditjen Tanaman Pangan</span>
           </div>
         </div>
 
-        <!-- Class Probability Breakdown (Flat Minimalist Section) -->
-        <div class="pt-4 border-t border-soil-100 space-y-2">
-          <p class="text-xs font-semibold text-soil-700">Distribusi Probabilitas Model:</p>
-          <div class="space-y-1.5" id="prob-breakdown-container">
-            <!-- Dynamically populated -->
+        <!-- Progressive Disclosure: Technical Telemetry & Distribution for Jurors/Experts -->
+        <details class="group pt-3 border-t border-soil-100 text-xs">
+          <summary class="flex items-center justify-between font-bold text-soil-700 cursor-pointer list-none select-none hover:text-agro-800 py-1.5 px-2 rounded-lg hover:bg-soil-50 transition-colors">
+            <span class="flex items-center gap-1.5">
+              <i class="bi bi-cpu-fill text-agro-700"></i>
+              Verifikasi Spektral & Distribusi AI Model
+            </span>
+            <i class="bi bi-chevron-down group-open:rotate-180 transition-transform text-soil-500"></i>
+          </summary>
+          <div class="pt-3 space-y-3">
+            <!-- Single Clean Verification Status Bar -->
+            <div class="flex flex-wrap items-center justify-between text-xs text-soil-700 p-2.5 rounded-lg bg-soil-50 border border-soil-100 gap-2">
+              <div class="flex items-center gap-1.5">
+                <i class="bi bi-shield-check text-agro-700"></i>
+                <span>Status Verifikasi: <strong id="result-gate-status" class="text-agro-800 font-bold">Lolos Sensor Lapangan</strong></span>
+              </div>
+              <div class="flex items-center gap-3 text-[11px] text-soil-600 font-mono">
+                <span>HSV Daun: <strong id="result-veg-ratio" class="text-soil-800 font-semibold">0%</strong></span>
+                <span>Entropi: <strong id="result-entropy" class="text-soil-800 font-semibold">0.00</strong></span>
+              </div>
+            </div>
+
+            <!-- Class Probability Breakdown -->
+            <div class="space-y-1.5">
+              <p class="text-xs font-semibold text-soil-700">Distribusi Probabilitas Model:</p>
+              <div class="space-y-1.5" id="prob-breakdown-container">
+                <!-- Dynamically populated -->
+              </div>
+            </div>
           </div>
-        </div>
+        </details>
       </div>
     </div>
   </div>
@@ -613,7 +637,8 @@ import { url } from '../utils/paths';
     } catch (e) {
       console.error("Kesalahan inferensi model AI:", e);
       stateLoading?.classList.add('hidden');
-      alert("Model AI belum dapat dijalankan di peramban Anda. Silakan muat ulang halaman (refresh) dan pastikan koneksi internet stabil.");
+      const stateErr = document.getElementById('state-error');
+      stateErr?.classList.remove('hidden');
       return;
     }
 
@@ -683,9 +708,12 @@ import { url } from '../utils/paths';
   }) {
     const stateLoading = document.getElementById('state-loading');
     const stateResult = document.getElementById('state-result');
+    const stateError = document.getElementById('state-error');
 
     stateLoading?.classList.add('hidden');
+    stateError?.classList.add('hidden');
     stateResult?.classList.remove('hidden');
+    stateResult?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 
     const namaElem = document.getElementById('result-nama');
     const statusTag = document.getElementById('result-status-tag');
@@ -755,10 +783,15 @@ import { url } from '../utils/paths';
 
     const btnPengaduan = document.getElementById('btn-goto-pengaduan') as HTMLAnchorElement;
     if (btnPengaduan) {
-      const optName = NAMA_INDO[res.kelas] || res.kelas;
-      const confPct = (res.confidence * 100).toFixed(1);
-      const cleanBase = getCleanBase();
-      btnPengaduan.href = `${cleanBase}pengaduan?opt=${encodeURIComponent(optName)}&desc=${encodeURIComponent(`Terdeteksi oleh AI AgriAlert dengan keyakinan ${confPct}%. Gejala tampak pada sampel daun.`)}`;
+      if (res.kelas === 'healthy' || res.kelas === 'unknown') {
+        btnPengaduan.classList.add('hidden');
+      } else {
+        btnPengaduan.classList.remove('hidden');
+        const optName = NAMA_INDO[res.kelas] || res.kelas;
+        const confPct = (res.confidence * 100).toFixed(1);
+        const cleanBase = getCleanBase();
+        btnPengaduan.href = `${cleanBase}pengaduan?opt=${encodeURIComponent(optName)}&desc=${encodeURIComponent(`Terdeteksi oleh AI AgriAlert dengan keyakinan ${confPct}%. Gejala tampak pada sampel daun.`)}`;
+      }
     }
 
     // Populate Probabilities Breakdown
@@ -903,6 +936,12 @@ import { url } from '../utils/paths';
     btnFallbackNative?.addEventListener('click', () => {
       closeLiveCamera();
       cameraFileInput?.click();
+    });
+
+    // Retry Button on Inference Error
+    const btnRetry = document.getElementById('btn-retry-inference');
+    btnRetry?.addEventListener('click', () => {
+      window.location.reload();
     });
 
     // Close & Capture

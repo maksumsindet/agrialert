@@ -26,14 +26,14 @@ const latestSar = s1Data[s1Data.length - 1] || { vh: -15.2, vv: -9.8, tanggal: "
       <button 
         type="button" 
         id="btn-tab-ndvi" 
-        class="cursor-pointer px-3.5 py-1.5 rounded-md bg-white text-agro-900 font-bold shadow-xs transition-all border border-soil-200"
+        class="cursor-pointer px-3.5 py-1.5 rounded-md bg-white text-agro-950 font-bold shadow-xs transition-all border border-soil-200 min-h-[36px]"
       >
         Optik Sentinel-2 (NDVI)
       </button>
       <button 
         type="button" 
         id="btn-tab-sar" 
-        class="cursor-pointer px-3.5 py-1.5 rounded-md text-soil-600 hover:text-soil-900 font-semibold transition-all hover:bg-soil-200/60"
+        class="cursor-pointer px-3.5 py-1.5 rounded-md text-soil-700 hover:text-soil-950 font-semibold transition-all hover:bg-soil-200/60 min-h-[36px]"
       >
         Radar Sentinel-1 (SAR)
       </button>
@@ -49,7 +49,7 @@ const latestSar = s1Data[s1Data.length - 1] || { vh: -15.2, vv: -9.8, tanggal: "
     <!-- Interpretation Guide (Clean Flat Stats, No Nested Boxes) -->
     <div class="mt-6 pt-5 border-t border-soil-100 grid grid-cols-1 sm:grid-cols-3 gap-5 text-xs">
       <div class="space-y-0.5">
-        <span class="text-soil-500 text-[11px] block font-medium">Indeks NDVI Terkini:</span>
+        <span class="text-soil-700 text-xs block font-semibold">Indeks NDVI Terkini:</span>
         <div class="flex items-baseline gap-2">
           <strong class="text-agro-800 text-base font-bold">{latestNdvi.ndvi.toFixed(2)}</strong>
           <span class="text-agro-700 text-xs font-medium">(Kanopi Lebat & Subur)</span>
@@ -57,13 +57,13 @@ const latestSar = s1Data[s1Data.length - 1] || { vh: -15.2, vv: -9.8, tanggal: "
       </div>
 
       <div class="space-y-0.5">
-        <span class="text-soil-500 text-[11px] block font-medium">Backscatter SAR (VH / VV):</span>
-        <strong class="text-soil-800 text-base font-bold">{latestSar.vh.toFixed(1)} / {latestSar.vv.toFixed(1)} dB</strong>
+        <span class="text-soil-700 text-xs block font-semibold">Backscatter SAR (VH / VV):</span>
+        <strong class="text-soil-900 text-base font-bold">{latestSar.vh.toFixed(1)} / {latestSar.vv.toFixed(1)} dB</strong>
       </div>
 
       <div class="space-y-0.5">
-        <span class="text-soil-500 text-[11px] block font-medium">Fase Pertumbuhan Sawah:</span>
-        <p class="text-soil-800 font-bold text-sm">Fase Maksimum / Bunting</p>
+        <span class="text-soil-700 text-xs block font-semibold">Fase Pertumbuhan Sawah:</span>
+        <p class="text-soil-900 font-bold text-sm">Fase Maksimum / Bunting</p>
       </div>
     </div>
   </div>

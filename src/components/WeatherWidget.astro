@@ -26,13 +26,13 @@ import { url } from '../utils/paths';
     <button 
       type="button" 
       id="btn-activate-gps"
-      class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-harvest-gold hover:bg-harvest-dark active:scale-95 text-white text-xs font-semibold shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-harvest-amber cursor-pointer"
+      class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-harvest-gold hover:bg-harvest-dark active:scale-95 text-agro-950 text-xs font-black shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-harvest-amber cursor-pointer min-h-[44px]"
     >
-      <svg class="w-4 h-4 animate-spin hidden" id="gps-spinner" fill="none" viewBox="0 0 24 24">
+      <svg class="w-4 h-4 animate-spin hidden text-agro-950" id="gps-spinner" fill="none" viewBox="0 0 24 24">
         <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
         <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
       </svg>
-      <img src={url('/images/gps.png')} id="gps-icon" alt="GPS Icon" width="16" height="16" class="w-4 h-4 object-contain brightness-200" />
+      <img src={url('/images/gps.png')} id="gps-icon" alt="GPS Icon" width="16" height="16" class="w-4 h-4 object-contain brightness-0" />
       <span id="gps-btn-text">Perbarui dengan Lokasi Sawah Saya</span>
     </button>
   </div>
@@ -42,30 +42,30 @@ import { url } from '../utils/paths';
     <div class="p-4 rounded-xl bg-white border border-soil-200 shadow-xs relative overflow-hidden">
       <div class="flex items-start justify-between">
         <div>
-          <span class="text-xs text-soil-500 block">Suhu Udara</span>
-          <p id="cuaca-suhu" class="text-2xl font-black text-soil-900 mt-1">31.2<span class="text-sm font-semibold text-soil-500">°C</span></p>
-          <span id="cuaca-suhu-sub" class="text-[11px] text-soil-500 mt-0.5 block">Ideal padi: 24°–32°C</span>
+          <span class="text-xs text-soil-700 font-semibold block">Suhu Udara</span>
+          <p id="cuaca-suhu" class="text-2xl font-black text-soil-900 mt-1">31.2<span class="text-sm font-semibold text-soil-600">°C</span></p>
+          <span id="cuaca-suhu-sub" class="text-[11px] text-soil-600 font-medium mt-0.5 block">Ideal padi: 24°–32°C</span>
         </div>
         <img src={url('/images/sun.png')} alt="Matahari" width="40" height="40" class="w-10 h-10 object-contain drop-shadow-sm opacity-90" />
       </div>
     </div>
 
     <div class="p-4 rounded-xl bg-white border border-soil-200 shadow-xs">
-      <span class="text-xs text-soil-500 block">Curah Hujan Hari Ini</span>
-      <p id="cuaca-hujan" class="text-2xl font-black text-soil-900 mt-1">4.2<span class="text-sm font-semibold text-soil-500"> mm</span></p>
-      <span id="cuaca-hujan-label" class="text-[11px] text-agro-700 font-semibold block mt-0.5">Hujan Ringan</span>
+      <span class="text-xs text-soil-700 font-semibold block">Curah Hujan Hari Ini</span>
+      <p id="cuaca-hujan" class="text-2xl font-black text-soil-900 mt-1">4.2<span class="text-sm font-semibold text-soil-600"> mm</span></p>
+      <span id="cuaca-hujan-label" class="text-[11px] text-agro-800 font-bold block mt-0.5">Hujan Ringan</span>
     </div>
 
     <div class="p-4 rounded-xl bg-white border border-soil-200 shadow-xs">
-      <span class="text-xs text-soil-500 block">Kelembapan Udara (RH)</span>
-      <p id="cuaca-rh" class="text-2xl font-black text-soil-900 mt-1">79<span class="text-sm font-semibold text-soil-500">%</span></p>
-      <span id="cuaca-rh-sub" class="text-[11px] text-soil-500 mt-0.5 block">Optimal fotosintesis</span>
+      <span class="text-xs text-soil-700 font-semibold block">Kelembapan Udara (RH)</span>
+      <p id="cuaca-rh" class="text-2xl font-black text-soil-900 mt-1">79<span class="text-sm font-semibold text-soil-600">%</span></p>
+      <span id="cuaca-rh-sub" class="text-[11px] text-soil-600 font-medium mt-0.5 block">Optimal fotosintesis</span>
     </div>
 
     <div class="p-4 rounded-xl bg-white border border-soil-200 shadow-xs">
-      <span class="text-xs text-soil-500 block">Status Musim Tanam</span>
+      <span class="text-xs text-soil-700 font-semibold block">Status Musim Tanam</span>
       <p id="cuaca-musim" class="text-2xl font-black text-agro-800 mt-1">MT 1</p>
-      <span class="text-[11px] text-soil-500 mt-0.5 block">Musim Hujan Rendengan</span>
+      <span class="text-[11px] text-soil-600 font-medium mt-0.5 block">Musim Hujan Rendengan</span>
     </div>
   </div>
 
@@ -80,7 +80,7 @@ import { url } from '../utils/paths';
             Open-Meteo &bull; Live
           </span>
         </div>
-        <p class="text-xs text-soil-500 mt-0.5">Dinamika fluktuasi suhu, kelembapan spora, dan curah hujan per jam di sawah Anda</p>
+        <p class="text-xs text-soil-600 font-medium mt-0.5">Dinamika fluktuasi suhu, kelembapan spora, dan curah hujan per jam di sawah Anda</p>
       </div>
 
       <!-- Realtime Metric Mode Switcher Tabs with Bootstrap Icons -->
@@ -88,7 +88,7 @@ import { url } from '../utils/paths';
         <button 
           type="button" 
           id="btn-metric-temp" 
-          class="cursor-pointer px-3 py-1.5 rounded-md bg-white text-agro-900 font-bold shadow-xs transition-all border border-soil-200 inline-flex items-center gap-1.5"
+          class="cursor-pointer px-3 py-1.5 rounded-md bg-white text-agro-950 font-bold shadow-xs transition-all border border-soil-200 inline-flex items-center gap-1.5 min-h-[36px]"
         >
           <i class="bi bi-thermometer-half text-red-600 text-sm"></i>
           <span>Suhu (°C)</span>
@@ -96,7 +96,7 @@ import { url } from '../utils/paths';
         <button 
           type="button" 
           id="btn-metric-rh" 
-          class="cursor-pointer px-3 py-1.5 rounded-md text-soil-600 hover:text-soil-900 font-semibold transition-all hover:bg-soil-200/60 inline-flex items-center gap-1.5"
+          class="cursor-pointer px-3 py-1.5 rounded-md text-soil-700 hover:text-soil-950 font-semibold transition-all hover:bg-soil-200/60 inline-flex items-center gap-1.5 min-h-[36px]"
         >
           <i class="bi bi-droplet-half text-blue-600 text-sm"></i>
           <span>Kelembapan (%)</span>
@@ -104,7 +104,7 @@ import { url } from '../utils/paths';
         <button 
           type="button" 
           id="btn-metric-rain" 
-          class="cursor-pointer px-3 py-1.5 rounded-md text-soil-600 hover:text-soil-900 font-semibold transition-all hover:bg-soil-200/60 inline-flex items-center gap-1.5"
+          class="cursor-pointer px-3 py-1.5 rounded-md text-soil-700 hover:text-soil-950 font-semibold transition-all hover:bg-soil-200/60 inline-flex items-center gap-1.5 min-h-[36px]"
         >
           <i class="bi bi-cloud-rain-heavy text-sky-600 text-sm"></i>
           <span>Hujan (mm)</span>
